@@ -23,7 +23,7 @@ jobs:
             python -m venv /home/sig/env
             . /home/sig/env/bin/activate
             rm -rf dist
-            python -m install -r requirements.txt
+            python -m pip install -r requirements.txt
             python -m setup.py build
 
       - name: Run Tests
