@@ -1,50 +1,85 @@
+import logging
+from typing import Any, Dict, Optional, Set, Union
 from sigtech.api.client.client import Client
+
+logger = logging.getLogger(__name__)
 
 _GLOBAL_ENVIRONMENT = None
 
 
 class Environment:
+    """
+    Class to hold the environments data
+    """
 
-    def __init__(self, client, session_id):
+    def __init__(self, client: Client, session_id: str) -> None:
+        """
+        Initialize an environment with given client and session id.
+
+        :param client: Client object
+        :param session_id: String representing session id
+        """
         self.session_id = session_id
         self.client = client
-        self.object_register = {}
-        self.all_objects = set()
+        self.object_register: Dict[str, Any] = {}
+        self.all_objects: Set[Any] = set()
 
 
-def env():
+def env() -> Union[Environment, None]:
+    """
+    Retrieve the current global environment.
+
+    :return: Returns the global Environment object.
+    """
     global _GLOBAL_ENVIRONMENT
     return _GLOBAL_ENVIRONMENT
 
 
-def init():
+def init() -> Environment:
+    """
+    Initialize a global environment.
+    Creates a new API session if a global environment does not already exist.
+
+    :return: Returns the global Environment object.
+    """
     global _GLOBAL_ENVIRONMENT
 
     if _GLOBAL_ENVIRONMENT is None:
         client = Client()
 
-        # check service
-        print(client.status.get())
+        # check API service
+        logger.info(client.status.get())
+        if client.status.get().status != 'framework API is alive':
+            raise Exception('SigTech API can not be reached. ')
 
-        # if new init or _GLOBAL_SESSION is None
+        # create a new API session
         session = client.sessions.create()
 
-        # check status
-
-        #
         _GLOBAL_ENVIRONMENT = Environment(client, session.session_id)
 
     return _GLOBAL_ENVIRONMENT
 
 
 class obj:
+    """
+    A class used for handling objects.
+    """
 
     @staticmethod
-    def get(name):
-        if name in env().object_register:
-            return env().object_register[name]
+    def get(name: str) -> Optional[Any]:
+        """
+        Retrieve the object using the framework name from the environment.
 
-        for fa_obj in env().all_objects:
+        :param name: The name of the object.
+        :return: The object if it exists, else None.
+        """
+
+        # Retrieve the current environment
+        current_env = env()
+        if name in current_env.object_register:
+            return current_env.object_register[name]
+
+        for fa_obj in current_env.all_objects:
             if name == fa_obj.name:
                 return fa_obj
 

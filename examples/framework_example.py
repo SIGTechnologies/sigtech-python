@@ -1,8 +1,7 @@
 import sigtech.api as sig
 import datetime as dtm
 
-sig.ClientSettings.SIGTECH_API_URL = 'https://xmqdm2hbbb.execute-api.eu-west-1.amazonaws.com/prod'
-# sig.ClientSettings.SIGTECH_API_URL = 'https://ohgo61u4bh.execute-api.eu-west-1.amazonaws.com/dev'
+# sig.ClientSettings.SIGTECH_API_URL = ''
 sig.ClientSettings.SIGTECH_API_KEY = 'none'
 
 sig.init()

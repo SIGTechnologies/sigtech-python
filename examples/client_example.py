@@ -1,6 +1,6 @@
 import sigtech.api as sig
 
-sig.ClientSettings.SIGTECH_API_URL = 'https://xmqdm2hbbb.execute-api.eu-west-1.amazonaws.com/prod'
+# sig.ClientSettings.SIGTECH_API_URL = ''
 sig.ClientSettings.SIGTECH_API_KEY = 'none'
 sig.ClientSettings.SIGTECH_API_WAIT_TIMER = False
 
