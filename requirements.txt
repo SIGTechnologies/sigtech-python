@@ -1,0 +1,6 @@
+pytz
+requests
+pandas
+pytest
+pytest-mock
+tqdm

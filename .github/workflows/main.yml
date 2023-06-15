@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build_test:
+    name: Build & Test
+    runs-on: self-hosted
+    container:
+      image: public.ecr.aws/docker/library/python:3.9-buster
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python & Build # required again as virtualenv is too large to persist as an artifact
+        run: |
+            python -m venv /home/sig/env
+            . /home/sig/env/bin/activate
+            rm -rf dist
+            python -m install -r requirements.txt
+            python -m setup.py build
+
+      - name: Run Tests
+        run: |
+            . /home/sig/env/bin/activate
+            python -m pytest tests
