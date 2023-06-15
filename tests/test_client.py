@@ -1,9 +1,13 @@
 import requests
+import sigtech.api as sig
 
 
 def test_example():
     assert 1 + 1 == 2
 
+
+def test_client_setting_defaults():
+    assert sig.ClientSettings().SIGTECH_API_WAIT_TIMEOUT == 60
 
 # def test_my_client(mocker):
 #     # Create an instance of the client
