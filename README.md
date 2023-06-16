@@ -23,26 +23,12 @@ import os
 os.environ['SIGTECH_API_KEY'] = # YOUR API KEY #
 ```
 
-This can also be set on the client:
-
-```python
-import sigtech.api as sig
-sig.ClientSettings.SIGTECH_API_KEY = # YOUR API KEY #
-```
-
-There are also the following optional environment variables that can be specified:
- - `SIGTECH_API_URL` : URL for the API (defaults to 'api.framework.prod.sigtech.com')
- - `SIGTECH_API_WAIT_TIMEOUT` : Timeout for API object runs in seconds (defaults to 60 seconds)
- - `SIGTECH_API_WAIT_TIMER` : Toggle to show progress timer (defaults to `True`)
-
-Once the variables are set we can use the API python wrapper.
 
 There are two options for interacting with the objects.
 
 One option is a higher level object based interface. An example is given below.
 
 ```python
-# imports
 import sigtech.api as sig
 import datetime as dtm
 
@@ -50,7 +36,6 @@ import datetime as dtm
 sig.init()
 
 # create rolling future strategies
-
 vg_future = sig.RollingFutureStrategy(contract_code='VG', contract_sector='INDEX', rolling_rule='front',
                                       front_offset='-4:-1')
 es_future = sig.RollingFutureStrategy(contract_code='ES', contract_sector='INDEX')
