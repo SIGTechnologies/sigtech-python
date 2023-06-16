@@ -30,16 +30,16 @@ import sigtech.api as sig
 sig.ClientSettings.SIGTECH_API_KEY = # YOUR API KEY #
 ```
 
-There are also the following environment variables that can be specified:
+There are also the following optional environment variables that can be specified:
  - `SIGTECH_API_URL` : URL for the API (defaults to 'api.framework.prod.sigtech.com')
  - `SIGTECH_API_WAIT_TIMEOUT` : Timeout for API object runs in seconds (defaults to 60 seconds)
  - `SIGTECH_API_WAIT_TIMER` : Toggle to show progress timer (defaults to `True`)
 
-Once the variable are we can use the API python wrapper.
+Once the variables are set we can use the API python wrapper.
 
 There are two options for interacting with the objects.
 
-One is a higher level object based interface. An example is given below.
+One option is a higher level object based interface. An example is given below.
 
 ```python
 # imports
