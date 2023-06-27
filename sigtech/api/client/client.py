@@ -1,10 +1,10 @@
+import os
 import requests
 import time
 import logging
 import urllib.parse
 from typing import Optional, List
 from sigtech.api.client.utils import snake_to_camel, singular
-from sigtech.api.client.settings import ClientSettings
 from sigtech.api.client.response import Response
 
 logger = logging.getLogger(__name__)
@@ -16,7 +16,8 @@ class Client:
     """
 
     def __init__(self, api_key: Optional[str] = None, url: Optional[str] = None,
-                 session: Optional[requests.Session] = None, _base_url: Optional[str] = None):
+                 session: Optional[requests.Session] = None, _base_url: Optional[str] = None,
+                 wait_timeout=60, wait_timer=True):
         """
         Initialize a Client object.
 
@@ -25,9 +26,9 @@ class Client:
         :param session: The current session. Defaults to None.
         :param _base_url: The base URL of the API. Defaults to None.
         """
-        self._url = url or ClientSettings().SIGTECH_API_URL
+        self._url = url or os.environ.get('SIGTECH_API_URL', 'https://framework-api.prod.sigtech.com')
         self._base_url = _base_url or self._url
-        self._api_key = api_key or ClientSettings().SIGTECH_API_KEY
+        self._api_key = api_key or os.environ.get('SIGTECH_API_KEY', '')
 
         if self._api_key == '':
             raise ValueError('Please provide a SigTech API key.')
@@ -36,6 +37,9 @@ class Client:
         self._session.headers.update({
             "Authorization": f"Bearer {self._api_key}",
         })
+
+        self.wait_timeout = wait_timeout
+        self.wait_timer = wait_timer
 
     @property
     def namespace(self) -> str:
@@ -120,13 +124,13 @@ class Client:
         :param timeout: The maximum time to wait in seconds. Defaults to None.
         :return: A Response object representing the object.
         """
-        timeout = timeout or ClientSettings().SIGTECH_API_WAIT_TIMEOUT
+        timeout = timeout or self.wait_timeout
         t0 = time.monotonic()
         status = None
         sleep_count = 1
 
         pbar = None
-        if ClientSettings().SIGTECH_API_WAIT_TIMER:
+        if self.wait_timer:
             from tqdm.auto import tqdm
             waiting_for = property_name or 'task completion'
             pbar = tqdm(total=timeout, dynamic_ncols=True, leave=False)
