@@ -25,7 +25,7 @@ class SignalStrategy(StrategyBase):
         for fapi_obj in constituents:
             fapi_obj.creation_response.wait_for_object_status()
         signal_input.columns = [x.api_object_id for x in constituents]
-        signal_input.index = signal_input.index.strftime("%Y-%m-%d").tolist()
+        signal_input.index = signal_input.index.strftime('%Y-%m-%dT%H:%M:%S')
         signal_input.index.name = '$timestamp'
         signal_input_json = signal_input.reset_index().to_dict(orient='list')
         start_date = str(start_date) if isinstance(start_date, dtm.date) else start_date

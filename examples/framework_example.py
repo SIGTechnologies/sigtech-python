@@ -11,8 +11,8 @@ sig.init()
 vg_future = sig.RollingFutureStrategy(contract_code='VG', contract_sector='INDEX', rolling_rule='front',
                                       front_offset='-4:-1')
 es_future = sig.RollingFutureStrategy(contract_code='ES', contract_sector='INDEX')
-gc_future = sig.RollingFutureStrategy(contract_code='GC', contract_sector='COMDTY', start_date=dtm.date(2017, 2, 8))
-si_future = sig.RollingFutureStrategy(contract_code='SI', contract_sector='COMDTY', start_date=dtm.date(2017, 2, 8))
+gc_future = sig.RollingFutureStrategy(contract_code='GC', contract_sector='COMDTY')
+si_future = sig.RollingFutureStrategy(contract_code='SI', contract_sector='COMDTY')
 
 basket = sig.BasketStrategy(constituent_names=[vg_future.name, es_future.name], weights=[0.5, 0.5],
                             rebalance_frequency='EOM', currency='USD', start_date=dtm.date(2019, 2, 1))
