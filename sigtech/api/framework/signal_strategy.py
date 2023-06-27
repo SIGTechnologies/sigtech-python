@@ -1,38 +1,41 @@
-from typing import List, Union, Optional
+from typing import Union, Optional
 import datetime as dtm
 
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.strategy_base import StrategyBase
 
 
-class BasketStrategy(StrategyBase):
+class SignalStrategy(StrategyBase):
     """
-    BasketStrategy class implements a long-only basket strategy with fixed weights, rebalanced as per the rebalance frequency.
+    SignalStrategy class implements a basket of instruments that change through time based on a signal.
 
-    :param constituent_names: List of constituent tickers.
-    :param weights: List of constituents weights expressed as floats.
+    :param signal_input: DataFrame of weights through time.
     :param currency: Base strategy currency for initial cash and valuation, (optional) defaults to 'USD'.
     :param rebalance_frequency: Rebalance frequency. For example: '1BD', '2BD', '1W', '2W', '1M', '2M', '1W-WED', '1W-FRI',
                                 '3M_IMM', 'SOM', 'EOM', 'YEARLY', '1DOM', and variations of these, (optional) defaults to 'EOM'.
     :param start_date: Start of strategy (optional).
     """
 
-    def __init__(self, constituent_names: List[Union[str, object]], weights: List[float],
+    def __init__(self, signal_input,
                  currency: Optional[str] = 'USD', rebalance_frequency: str = 'EOM',
                  start_date: Optional[Union[str, dtm.date]] = None):
-        constituents = [obj.get(x) if isinstance(x, str) else x for x in constituent_names]
+        signal_input = signal_input.copy()
+        constituents = [obj.get(x) for x in signal_input.columns]
         for fapi_obj in constituents:
             fapi_obj.creation_response.wait_for_object_status()
-        constituent_ids = [x.api_object_id for x in constituents]
+        signal_input.columns = [x.api_object_id for x in constituents]
+        signal_input.index = signal_input.index.strftime("%Y-%m-%d").tolist()
+        signal_input.index.name = '$timestamp'
+        signal_input_json = signal_input.reset_index().to_dict(orient='list')
         start_date = str(start_date) if isinstance(start_date, dtm.date) else start_date
-        super().__init__(constituents=constituent_ids, weights=weights, currency=currency,
+        super().__init__(signal=signal_input_json, currency=currency,
                          rebalance_frequency=rebalance_frequency, start_date=start_date)
 
     def _get_strategy_obj(self, session_id: str, **inputs):
         """
-        Fetch basket strategy from API.
+        Fetch signal strategy from API.
         """
         api_inputs = {k: v for k, v in inputs.items() if v is not None}
-        return env().client.strategies.basket.create(
+        return env().client.strategies.signal.create(
             session_id=session_id, **api_inputs
         )

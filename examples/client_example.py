@@ -1,8 +1,7 @@
+import os
 import sigtech.api as sig
 
-# sig.ClientSettings.SIGTECH_API_URL = ''
-sig.ClientSettings.SIGTECH_API_KEY = 'none'
-sig.ClientSettings.SIGTECH_API_WAIT_TIMER = False
+os.environ['SIGTECH_API_KEY'] = '' #ENTER API KEY#
 
 # Setup Client
 
