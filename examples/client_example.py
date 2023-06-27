@@ -7,6 +7,10 @@ os.environ['SIGTECH_API_KEY'] = '' #ENTER API KEY#
 
 client = sig.Client()
 
+# List sessions
+
+print(client.sessions.list()[:2])
+
 # Create session
 
 session = client.sessions.create()

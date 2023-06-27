@@ -1,5 +1,6 @@
 from typing import Union, Optional
 import datetime as dtm
+import pandas as pd
 
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.strategy_base import StrategyBase
@@ -16,7 +17,7 @@ class SignalStrategy(StrategyBase):
     :param start_date: Start of strategy (optional).
     """
 
-    def __init__(self, signal_input,
+    def __init__(self, signal_input: pd.DataFrame,
                  currency: Optional[str] = 'USD', rebalance_frequency: str = 'EOM',
                  start_date: Optional[Union[str, dtm.date]] = None):
         signal_input = signal_input.copy()
