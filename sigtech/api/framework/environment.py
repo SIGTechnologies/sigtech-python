@@ -35,7 +35,7 @@ def env() -> Union[Environment, None]:
     return _GLOBAL_ENVIRONMENT
 
 
-def init() -> Environment:
+def init(api_client=None) -> Environment:
     """
     Initialize a global environment.
     Creates a new API session if a global environment does not already exist.
@@ -45,7 +45,7 @@ def init() -> Environment:
     global _GLOBAL_ENVIRONMENT
 
     if _GLOBAL_ENVIRONMENT is None:
-        client = Client()
+        client = api_client or Client()
 
         # check API service
         logger.info(client.status.get())
