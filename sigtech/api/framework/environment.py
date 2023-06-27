@@ -83,4 +83,11 @@ class obj:
             if name == fa_obj.name:
                 return fa_obj
 
-        return None
+            if name == fa_obj.api_object_id:
+                return fa_obj
+
+        from sigtech.api.framework.instrument_base import Instrument
+        new_instrument = Instrument(identifier=name)
+        new_instrument.creation_response.wait_for_object_status()
+
+        return new_instrument

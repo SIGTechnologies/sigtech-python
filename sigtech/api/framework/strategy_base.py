@@ -32,8 +32,8 @@ class StrategyBase(FrameworkApiObject):
             session_id=env().session_id,
             object_id=self.api_object_id,
         )
-        ts = pd.Series(api_response.history, name=self.name)
+        ts = pd.DataFrame(api_response.history).rename({'$timestamp': 'date', '$history': 'history'}, axis=1)
+        ts = ts.set_index('date')['history'].rename(self.name)
         ts.index = pd.to_datetime(ts.index)
-        ts.index = ts.index.tz_convert('UTC').tz_localize(None)
         self._history = ts.sort_index()
         return self._history
