@@ -35,7 +35,7 @@ def env() -> Union[Environment, None]:
     return _GLOBAL_ENVIRONMENT
 
 
-def init(api_client=None) -> Environment:
+def init(api_client: Optional[Client] = None) -> Environment:
     """
     Initialize a global environment.
     Creates a new API session if a global environment does not already exist.
