@@ -1,4 +1,3 @@
-pytz
 requests
 pandas
 pytest

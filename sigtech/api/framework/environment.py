@@ -32,6 +32,9 @@ def env() -> Union[Environment, None]:
     :return: Returns the global Environment object.
     """
     global _GLOBAL_ENVIRONMENT
+    if _GLOBAL_ENVIRONMENT is None:
+        raise Exception('Please initialize the environment by running the `init` method from `sigtech.api`')
+
     return _GLOBAL_ENVIRONMENT
 
 
@@ -40,6 +43,7 @@ def init(api_client: Optional[Client] = None) -> Environment:
     Initialize a global environment.
     Creates a new API session if a global environment does not already exist.
 
+    :param api_client: API client object. (Optional) Creates a default client if not provided.
     :return: Returns the global Environment object.
     """
     global _GLOBAL_ENVIRONMENT
