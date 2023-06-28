@@ -8,13 +8,13 @@ setup(
     version="0.1",
     description="SigTech API Python Interface",
     author="SigTech",
-    # author_email="",
-    # url="",
-    # keywords=["SigTech"],
-    # license='UNLICENSED',
+    author_email="support@sigtech.com",
+    url="https://github.com/SIGTechnologies/sigtech-python",
+    download_url="https://github.com/SIGTechnologies/sigtech-python",
+    keywords=["SIGTECH", "FINANCE", "TRADING", "BACKTEST", "QUANT"],
+    license='MIT',
     python_requires=">=3.6.0",
     install_requires=[
-        "pytz",
         "requests",
         "pandas",
         "tqdm"
@@ -29,7 +29,9 @@ setup(
     include_package_data=True,
 
     classifiers=[
+        "Development Status :: 3 - Alpha",
         "Operating System :: OS Independent",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
