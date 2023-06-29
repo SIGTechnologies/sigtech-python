@@ -58,8 +58,11 @@ def init(api_client: Optional[Client] = None) -> Environment:
 
         # create a new API session
         session = client.sessions.create()
+        logger.info(f'Session {session.session_id} created')
 
         _GLOBAL_ENVIRONMENT = Environment(client, session.session_id)
+
+    logger.info(f'Environment Initialized')
 
     return _GLOBAL_ENVIRONMENT
 

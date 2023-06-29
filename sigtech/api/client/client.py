@@ -17,7 +17,7 @@ class Client:
 
     def __init__(self, api_key: Optional[str] = None, url: Optional[str] = None,
                  session: Optional[requests.Session] = None, _base_url: Optional[str] = None,
-                 wait_timeout: Optional[int] = 60, wait_timer: Optional[bool] = True):
+                 wait_timeout: Optional[int] = 60):
         """
         Initialize a Client object.
 
@@ -26,7 +26,6 @@ class Client:
         :param session: The current session. Defaults to None.
         :param _base_url: The base URL of the API. Defaults to None.
         :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 60 seconds.
-        :param wait_timer: Bool flag to use progress from timeout when waiting for objects. Defaults to True.
         """
         self._url = url or os.environ.get('SIGTECH_API_URL', 'https://framework-api.prod.sigtech.com')
         self._base_url = _base_url or self._url
@@ -41,7 +40,6 @@ class Client:
         })
 
         self.wait_timeout = wait_timeout
-        self.wait_timer = wait_timer
 
     @property
     def namespace(self) -> str:
@@ -131,13 +129,6 @@ class Client:
         status = None
         sleep_count = 1
 
-        pbar = None
-        if self.wait_timer:
-            from tqdm.auto import tqdm
-            waiting_for = property_name or 'task completion'
-            pbar = tqdm(total=timeout, dynamic_ncols=True, leave=False)
-            pbar.set_description(f'Waiting for {waiting_for} (session_id: {session_id}, object_id: {object_id})')
-
         while status != "SUCCEEDED":
             resp = self.query_object(session_id, object_id)
 
@@ -147,8 +138,11 @@ class Client:
                 logger.debug(f"FAILED TASK {str(resp)}")
                 break
 
-            if property_name is not None and getattr(resp, property_name) is not None:
-                status = "SUCCEEDED"
+            if property_name is not None:
+                if getattr(resp, property_name) is not None:
+                    status = "SUCCEEDED"
+                else:
+                    status = 'RUNNING'
 
             time.sleep(sleep_count)
             t1 = time.monotonic()
@@ -156,12 +150,6 @@ class Client:
 
             if (t1 - t0) > timeout:
                 raise TimeoutError(f"Timeout waiting for object_id={object_id}")
-
-            if pbar is not None:
-                pbar.update(int(t1 - t0))
-
-        if pbar is not None:
-            pbar.close()
 
         return resp
 
