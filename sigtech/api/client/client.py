@@ -27,7 +27,7 @@ class Client:
         :param _base_url: The base URL of the API. Defaults to None.
         :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 60 seconds.
         """
-        self._url = url or os.environ.get('SIGTECH_API_URL', 'https://framework-api.prod.sigtech.com')
+        self._url = url or os.environ.get('SIGTECH_API_URL', 'https://api.sigtech.com')
         self._base_url = _base_url or self._url
         self._api_key = api_key or os.environ.get('SIGTECH_API_KEY', '')
 
