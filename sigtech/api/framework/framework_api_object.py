@@ -66,7 +66,8 @@ class FrameworkApiObject:
             latest_response = self.creation_response.wait_for_object_status(property_name="name")
             self._name = latest_response.name
             env().object_register[self._name] = self
-            return self._name
+
         except Exception as e:
-            logger.error(f"Error while getting the name: {str(e)}")
-            return None
+            raise Exception(f"Error while getting the name: {str(e)}")
+
+        return self._name

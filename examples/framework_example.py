@@ -4,12 +4,17 @@ import datetime as dtm
 import pandas as pd
 import numpy as np
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 os.environ['SIGTECH_API_KEY'] = '' #ENTER API KEY#
 
 sig.init()
 
 vg_future = sig.RollingFutureStrategy(contract_code='VG', contract_sector='INDEX', rolling_rule='front',
-                                      front_offset='-4:-1')
+                                      front_offset='-4:-3')
+print(vg_future.name)
+
 es_future = sig.RollingFutureStrategy(contract_code='ES', contract_sector='INDEX')
 gc_future = sig.RollingFutureStrategy(contract_code='GC', contract_sector='COMDTY')
 si_future = sig.RollingFutureStrategy(contract_code='SI', contract_sector='COMDTY')

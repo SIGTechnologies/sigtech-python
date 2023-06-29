@@ -17,7 +17,6 @@ setup(
     install_requires=[
         "requests",
         "pandas",
-        "tqdm"
     ],
     extras_require={
         'test': [
