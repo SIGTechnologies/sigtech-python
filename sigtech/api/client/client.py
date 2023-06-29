@@ -86,7 +86,7 @@ class Client:
         :param kwargs: The arguments for getting a resource.
         :return: A Response object representing the resource.
         """
-        url = f"{self._url}/{id}"
+        url = f"{self._url}/{id}".rstrip("/")
         if kwargs:
             d = {snake_to_camel(k): v for (k, v) in kwargs.items()}
             url += '?' + urllib.parse.urlencode(d)
