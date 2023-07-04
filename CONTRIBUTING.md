@@ -1,56 +1,64 @@
-# Contributing to SigTech Python SDK
-We appreciate and encourage user contributions to our SDK! We want to make contributing to this project as easy and transparent as possible, whether it's:
+# Contributing to SigTech Python SDK: A Guide
 
-- Reporting a problem (e.g. a bug)
-- Proposing a change to the code 
-- Proposing a new feature
-- Adding a new example strategy
+Welcome to SigTech Python SDK! We highly value and encourage user contributions to our SDK. We strive to make the contribution process easy, transparent, and efficient. Whether you're reporting a problem, proposing code changes, suggesting new features, or adding a new example strategy, your contributions are greatly appreciated.
 
->**Reminder!**\
->All users are expected to abide by the [Code of conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md) when interacting with other users, SigTech employees and this repository.
+Before you begin, please familiarize yourself with our [Code of Conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md). All users, including both external contributors and SigTech employees, are expected to adhere to these guidelines when interacting with others and this repository.
 
-### Github
-We use Github to host code, to track issues and feature requests, as well as accept pull requests. You will need a Github account to report
-### Licensing
-Please be aware that when you submit code changes, your submissions are understood to be under the same [License](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. Feel free to contact us over [Discord](https://discord.gg/XcVJDYV4k7) if that's a concern.
+## Using Github
 
-### Code style and linting
-Run black, flake8.
+To collaborate on this project, we utilize Github as our platform for hosting code, tracking issues and feature requests, and accepting pull requests. To participate, you will need to have a Github account.
 
-## Reporting a problem
-We use GitHub issues to track problems. Before reporting a problem, search our [open issues](https://github.com/SIGTechnologies/sigtech-python/issues/)to see if an issue already exists. If a related issue doesn't exist, you can open a new issue Report a problem by [raising a new issue](https://github.com/SIGTechnologies/sigtech-python/issues/new), it's that easy!
+## Licensing
 
-### How to write a good issue
-Please include:
-- A quick summary and/or background
-- Steps to reproduce
-  - Be specific!
-  - Include sample code if you can
-- What you expected would happen
-- What actually happens
-- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
+Kindly note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. If you have any concerns regarding licensing, please don't hesitate to reach out to us on [Discord](https://discord.gg/XcVJDYV4k7).
 
-The more thorough your issue report, the quicker we can fix it!
+## Code Style and Linting
 
-## Proposing a change to the code 
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+Before submitting your contributions, please ensure that your code adheres to the prescribed code style and linting standards. Run the following tools:
 
-1. Fork the repo and create your branch from `master`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
-6. Issue that pull request!
+- [black](https://github.com/psf/black) for code formatting.
+- [flake8](https://flake8.pycqa.org/en/latest/) for linting.
 
-## Submitting an example
-We are very excited to see what our users can accomplish with our API. If you come up with a strategy you are excited to share, please consider submitting it to be added as one of our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples).
+## Reporting a Problem
 
-### How to submit an example
-1. Fork the repo and create your branch from `master`.
-1. Add your example strategy to the `examples` folder as a `.py` or `.ipynb` file with the title `Draft_<Strategy_Name>`. Your example should:
-    1. Contain a short summary of the strategy you created at the top.
-    1. Have commented python code
-    1. Have a visualization of the strategy's performance 
+If you encounter any issues while using our SDK, we rely on GitHub issues to track and resolve them. Before reporting a problem, please search our [open issues](https://github.com/SIGTechnologies/sigtech-python/issues/) to check if a similar issue already exists. If you don't find a related problem, you can easily report it by [creating a new issue](https://github.com/SIGTechnologies/sigtech-python/issues/new). 
 
-## Proposing a new feature
-Discuss any new features you would like to see in our Discord channel. To see upcoming new features and endpoints, please refer to [Discord](https://discord.gg/XcVJDYV4k7).
+To ensure effective issue reporting, please include the following details:
+
+- A concise summary and any relevant background information.
+- Clear and specific steps to reproduce the problem.
+  - If possible, provide sample code.
+- Your expected outcome.
+- The actual behavior observed.
+- Any additional notes, such as your assumptions or failed attempts to resolve the problem.
+
+Providing a comprehensive issue report enables us to address the problem promptly.
+
+## Proposing Code Changes
+
+To propose changes to the codebase, we recommend submitting pull requests. We follow the [Github Flow](https://guides.github.com/introduction/flow/index.html) methodology and welcome your pull requests. Please follow these steps:
+
+1. Fork the repository and create a branch based on `master`.
+2. If your changes introduce new code that requires testing, include the necessary tests.
+3. If you modify any APIs, ensure that you update the documentation accordingly.
+4. Validate that the test suite passes successfully.
+5. Make sure your code complies with the defined code style and linting standards.
+6. Submit your pull request, and we'll handle the rest!
+
+## Submitting an Example Strategy
+
+We're excited to witness the innovative strategies our users can develop using our SDK. If you have an exciting strategy you'd like to share, consider submitting it as an example to be added to our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) directory.
+
+To submit an example, follow these steps:
+
+1. Fork the repository and create a branch based on `master`.
+2. Add your example strategy as a `.py` or `.ipynb` file in the `examples` folder. Ensure the file is named `Draft_<Strategy_Name>`. Your example should include:
+    - A brief summary of the strategy at the beginning.
+    - Clearly commented Python code.
+    - A visualization showcasing the strategy's performance.
+    
+## Proposing a New Feature
+
+If you have ideas for new features, we encourage you to discuss them in our Discord channel. To stay informed about upcoming features and endpoints, please refer to our [Discord](https://discord.gg/XcVJDYV4k7) platform.
+
+We appreciate your contributions and look forward to seeing the positive impact you make on the SigTech Python SDK!
