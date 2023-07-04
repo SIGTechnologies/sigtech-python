@@ -9,6 +9,7 @@ class StrategyBase(FrameworkApiObject):
 
     This is a base class for different strategy classes.
     """
+
     def __init__(self, **inputs):
         api_response = self._get_strategy_obj(env().session_id, **inputs)
         super().__init__(api_response)
@@ -32,8 +33,10 @@ class StrategyBase(FrameworkApiObject):
             session_id=env().session_id,
             object_id=self.api_object_id,
         )
-        ts = pd.DataFrame(api_response.history).rename({'$timestamp': 'date', '$history': 'history'}, axis=1)
-        ts = ts.set_index('date')['history'].rename(self.name)
+        ts = pd.DataFrame(api_response.history).rename(
+            {"$timestamp": "date", "$history": "history"}, axis=1
+        )
+        ts = ts.set_index("date")["history"].rename(self.name)
         ts.index = pd.to_datetime(ts.index)
         self._history = ts.sort_index()
         return self._history

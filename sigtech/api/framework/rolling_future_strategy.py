@@ -24,24 +24,39 @@ class RollingFutureStrategy(StrategyBase):
                               unless 'rici' rule is used.
     """
 
-    def __init__(self, contract_code: str, contract_sector: str,
-                 currency: Optional[str] = None, rolling_rule: Optional[str] = None,
-                 front_offset: Optional[str] = None, start_date: Optional[Union[str, dtm.date]] = None,
-                 monthly_roll_days: Optional[str] = None):
+    def __init__(
+        self,
+        contract_code: str,
+        contract_sector: str,
+        currency: Optional[str] = None,
+        rolling_rule: Optional[str] = None,
+        front_offset: Optional[str] = None,
+        start_date: Optional[Union[str, dtm.date]] = None,
+        monthly_roll_days: Optional[str] = None,
+    ):
         start_date = str(start_date) if isinstance(start_date, dtm.date) else start_date
-        super().__init__(contract_code=contract_code, contract_sector=contract_sector, currency=currency,
-                         rolling_rule=rolling_rule, front_offset=front_offset, start_date=start_date,
-                         monthly_roll_days=monthly_roll_days)
+        super().__init__(
+            contract_code=contract_code,
+            contract_sector=contract_sector,
+            currency=currency,
+            rolling_rule=rolling_rule,
+            front_offset=front_offset,
+            start_date=start_date,
+            monthly_roll_days=monthly_roll_days,
+        )
 
     def _get_strategy_obj(self, session_id: str, **inputs):
         """
         Fetch rolling future strategy from API.
         """
         api_inputs = {k: v for k, v in inputs.items() if v is not None}
-        api_inputs['identifier'] = api_inputs['contract_code'] + ' ' + api_inputs['contract_sector']
-        del api_inputs['contract_code']
-        del api_inputs['contract_sector']
+        api_inputs["identifier"] = (
+            api_inputs["contract_code"] + " " + api_inputs["contract_sector"]
+        )
+        del api_inputs["contract_code"]
+        del api_inputs["contract_sector"]
 
         return env().client.strategies.futures.rolling.create(
-            session_id=session_id, **api_inputs,
+            session_id=session_id,
+            **api_inputs,
         )

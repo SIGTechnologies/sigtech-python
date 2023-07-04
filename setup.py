@@ -12,21 +12,17 @@ setup(
     url="https://github.com/SIGTechnologies/sigtech-python",
     download_url="https://github.com/SIGTechnologies/sigtech-python",
     keywords=["SIGTECH", "FINANCE", "TRADING", "BACKTEST", "QUANT"],
-    license='MIT',
+    license="MIT",
     python_requires=">=3.6.0",
     install_requires=[
         "requests",
         "pandas",
     ],
     extras_require={
-        'test': [
-            'pytest',
-            'pytest-mock'
-        ],
+        "test": ["pytest", "pytest-mock"],
     },
     packages=find_packages(exclude=["tests", "tests.*", "examples", "examples.*"]),
     include_package_data=True,
-
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Operating System :: OS Independent",

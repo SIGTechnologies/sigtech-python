@@ -1,16 +1,16 @@
 # Contributing to SigTech Python SDK: A Guide
 
-Welcome to SigTech Python SDK! We highly value and encourage user contributions to our SDK. We strive to make the contribution process easy, transparent, and efficient. Whether you're reporting a problem, proposing code changes, suggesting new features, or adding a new example strategy, your contributions are greatly appreciated.
+Welcome to our SDK! We highly value and encourage user contributions and are striving to make the contribution process as easy, transparent, and efficient as possible. Whether you're reporting a problem, proposing code changes, suggesting new features, or adding a new example strategy, your contributions are greatly appreciated.
 
 Before you begin, please familiarize yourself with our [Code of Conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md). All users, including both external contributors and SigTech employees, are expected to adhere to these guidelines when interacting with others and this repository.
 
 ## Using Github
 
-To collaborate on this project, we utilize Github as our platform for hosting code, tracking issues and feature requests, and accepting pull requests. To participate, you will need to have a Github account.
+We utilize Github as our platform for hosting code, tracking issues and feature requests, and accepting pull requests. To participate, you will need to have a Github account.
 
 ## Licensing
 
-Kindly note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. If you have any concerns regarding licensing, please don't hesitate to reach out to us on [Discord](https://discord.gg/XcVJDYV4k7).
+Please note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. If you have any concerns regarding licensing, please reach out to us on [Discord](https://discord.gg/XcVJDYV4k7).
 
 ## Code Style and Linting
 
@@ -47,7 +47,7 @@ To propose changes to the codebase, we recommend submitting pull requests. We fo
 
 ## Submitting an Example Strategy
 
-We're excited to witness the innovative strategies our users can develop using our SDK. If you have an exciting strategy you'd like to share, consider submitting it as an example to be added to our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) directory.
+We're excited to see the innovative strategies our users can develop using our SDK. If you have an exciting strategy you'd like to share, consider submitting it as an example to be added to our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) directory.
 
 To submit an example, follow these steps:
 
