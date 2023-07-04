@@ -1,4 +1,5 @@
-![Sigtech Logo](https://sigtech.com/wp-content/uploads/2023/06/API_Documentation_Hub_Assets_SigTech_Logo_W.svg)
+![Logo Dark](https://sigtech.com/wp-content/uploads/2023/06/API_Documentation_Hub_Assets_SigTech_Logo_W.svg#gh-dark-mode-only)
+![Logo Light](https://8647283.fs1.hubspotusercontent-na1.net/hubfs/8647283/New%20SigTech%20Brand%20Assets/Logos%20and%20Favicons/st-logo-black-on-white.png#gh-light-mode-only)
 
 
 <p align="center" id="dummy">
@@ -43,21 +44,22 @@ python setup.py install
 1. Create a [SigTech API account](https://dashboard.sigtech.com).
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
 1. Copy the API key.
-1. Set the environment variable `'SIGTECH_API_KEY'` to your API key.
+1. Set the environment variable `'SIGTECH_API_KEY'` to your API key. 
 ```python
 import os
 os.environ['SIGTECH_API_KEY'] = <YOUR_API_KEY>
 ```
 
 >**Tip!**\
->if you are unfamiliar with creating environment variables, please see our detailed instructions (for both Windows and MacOS/Linux users) here - [Create an Environment Variable for your SigTech API key]((https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTION.md)).
+>If you are unfamiliar with creating environment variables, please see our detailed instructions (for both Windows and MacOS/Linux users) here - [Create an Environment Variable for your SigTech API key]((https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTION.md)).
 
-## Usage
+## Getting started
+Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code to see how quickly you can create, backtest and visualise the performance of a custom rolling futures strategy.
 
-Our SDK is designed to provide conveninent wrappers for boilerplate functions that are required to interact with our API.
-There are two options for interacting with the objects.
-For example is given below.
-### Object based interface 
+>**Tip!**\
+>You must complete the `Authentication` steps before trying this. 
+
+### Create a rolling futures strategy.
 ```python
 # Import the SigTech API and datetime python libraries
 import sigtech.api as sig
@@ -67,25 +69,21 @@ import datetime as dtm
 sig.init()
 
 # Create a Rolling Future Strategy
-
 es_future = sig.RollingFutureStrategy(
+    currency='USD',
+    start_date=dtm.date(2020, 1, 4),
     contract_code='ES', 
     contract_sector='INDEX',
-
+    rolling_rule='front',  
+    front_offset='-6:-4', 
     )
 
-# create baskets
-basket = sig.BasketStrategy(
-    constituent_names=[vg_future.name, es_future.name], 
-    weights=[0.5, 0.5],
-    rebalance_frequency='EOM', 
-    currency='USD', 
-    start_date=dtm.date(2020, 2, 1)
-    )
-
-# retrieve the strategy history
+# Retrieve the strategy history
 print(es_future.history())
 ```
+To learn more about the parameters used in the above strategy, please refer to [API Reference - Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.)
+
+To see how SigTech Python SDK can help you quickly create and backtest complex, real-world trading strategies refer to the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
 
 >**Tip!**\
 >If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction]() for more information.
