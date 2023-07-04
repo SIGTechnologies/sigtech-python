@@ -65,7 +65,7 @@ python setup.py install
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
 1. Copy the API key.
 1. Set the environment variable `'SIGTECH_API_KEY'` to your API key.
-    - To set the environment variable globally for your operating system, you need to set it outside of the Python script using system-specific methods. See our detailed instructions (for both Windows and MacOS/Linux users) here - [Create an Environment Variable for your SigTech API key]((https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTION.md)).
+    - To set the environment variable globally for your operating system, you need to set it outside of the Python script using system-specific methods. See our detailed instructions (for both Windows and MacOS/Linux users) here - [Create an Environment Variable for your SigTech API key](https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTION.md).
     - To set the environment variable for a particular Python environment, use the following commands at the top of your python file:
         ```python
         import os
