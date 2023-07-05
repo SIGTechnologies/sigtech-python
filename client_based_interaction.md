@@ -34,7 +34,7 @@ session = client.sessions.create()
 session_id = session.session_id
 print(f'session id : {session_id}')
 
-# Define the parameters of your Rolling Futures Strategy and generate an objectId
+# Define the parameters of your rolling futures strategy and generate an objectId
 rfs = client.strategies.futures.rolling.create(
     session_id=session_id, 
     identifier='ES INDEX',
@@ -46,14 +46,14 @@ rfs = client.strategies.futures.rolling.create(
 object_id = rfs.object_id
 print(f'object id : {object_id}')
 
-# Query the status of your Rolling Futures Strategy object using its objectId
+# Query the status of your rolling futures strategy object using its objectId
 object_state = client.query_object(session_id, object_id)
 print(f'object state : {object_state}')
 
 # Wait until the "status" of your objectId is "SUCCEEDED"
 rfs.wait_for_object_status()
 
-# Retrieve the history of your Rolling Futures Strategy 
+# Retrieve the history of your rolling futures strategy using its objectId
 history = client.data.history.get(
     session_id=session_id, 
     object_id=object_id).history
