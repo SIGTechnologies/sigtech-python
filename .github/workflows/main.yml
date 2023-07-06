@@ -11,7 +11,7 @@ on:
 jobs:
   build_test:
     name: Build & Test
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     container:
       image: public.ecr.aws/docker/library/python:3.9-buster
     steps:
