@@ -17,7 +17,7 @@ class Client:
 
     def __init__(self, api_key: Optional[str] = None, url: Optional[str] = None,
                  session: Optional[requests.Session] = None, _base_url: Optional[str] = None,
-                 wait_timeout: Optional[int] = 60):
+                 wait_timeout: Optional[int] = 300):
         """
         Initialize a Client object.
 
@@ -25,7 +25,7 @@ class Client:
         :param url: The URL of the API. Defaults to None.
         :param session: The current session. Defaults to None.
         :param _base_url: The base URL of the API. Defaults to None.
-        :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 60 seconds.
+        :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 300 seconds.
         """
         self._url = url or os.environ.get('SIGTECH_API_URL', 'https://api.sigtech.com')
         self._base_url = _base_url or self._url
