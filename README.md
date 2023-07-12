@@ -67,14 +67,13 @@ python setup.py install
 
 1. Create a SigTech account following the instructions in your welcome email.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
-1. (Recommended) Save your API key as an environment variable. See our instructions [here](https://learn.sigtech.com/docs/auth).
 
 ## Getting started with SigTech Python SDK
 Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code to quickly create, backtest and view the performance of a custom rolling futures strategy.
 
 ### Create a rolling futures strategy.
 ```python
-# Set the 'SIGTECH_API_KEY' environment variable, if you have not set it globally
+# Define your API key for this example
 import os
 os.environ['SIGTECH_API_KEY'] = '<YOUR_API_KEY>'
 
@@ -98,9 +97,12 @@ es_future = sig.RollingFutureStrategy(
 # Retrieve the strategy history
 print(es_future.history())
 ```
-To learn more about the parameters used in the above strategy and how you can tailor them for you own use, please refer to [API Reference - Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.).
+## Next steps
 
-To see how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies, read the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
+- To learn more about the parameters used in the above strategy and how you can tailor them for you own use, please refer to [API Reference - Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.).
+- To see how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies, read the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
+- To learn how to secure your API key and save it as an environment variable. See our instructions [here](https://learn.sigtech.com/docs/auth).
+
 
 >**Tip!**\
 >If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction](https://github.com/SIGTechnologies/sigtech-python/blob/master/client_based_interaction.md) for more information.
