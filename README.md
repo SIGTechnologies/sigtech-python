@@ -59,7 +59,7 @@ python setup.py install
 
 ### Requirements
 - Python 3.6+
-- See [requirements.text](https://github.com/SIGTechnologies/sigtech-python/blob/master/requirements.txt) for the Python libraries you must have installed.
+- See [requirements.txt](https://github.com/SIGTechnologies/sigtech-python/blob/master/requirements.txt) for the Python libraries you must have installed.
 
 ## Authentication
 >Note! \
