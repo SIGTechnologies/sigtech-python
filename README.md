@@ -42,10 +42,10 @@
 
 
 # SigTech Python SDK
-The SigTech Python SDK is designed to simplify the usage of the SigTech API for backtesting investment strategies by providing a higher-level, object-oriented method of interfacing with the API. With this SDK, you can easily test and view the performance of historical strategies.
+The SigTech Python SDK is designed to simplify the usage of the SigTech APIs for backtesting investment strategies by providing a higher-level, object-oriented method of interfacing with our APIs. With this SDK, you can easily test and view the performance of historical strategies.
 
 #### Key Features
-- Provides a higher-level object-based interface for convenient interaction with the SigTech API.
+- Provides a higher-level object-based interface for convenient interaction with the SigTech APIs.
 - Simplifies the creation of advanced trading strategies by providing methods which simulate rolling future strategies, basket strategies, and more.
 - Interfaces with SigTech's collection of historical performance data, enabling accurate backtesting and performance metrics for analysis and visualization.
 
@@ -58,32 +58,25 @@ python setup.py install
 ```
 
 ### Requirements
--   Python 3.6+
+- Python 3.6+
+- See [requirements.text](https://github.com/SIGTechnologies/sigtech-python/blob/master/requirements.txt) for the Python libraries you must have installed.
 
 ## Authentication
-1. Create a [SigTech API account](https://dashboard.sigtech.com).
+>Note! \
+>We are currently performing closed beta testing. Sign up to our [waitlist](https://get.sigtech.com/join-the-api-waitlist) to be notified of the public release.
+
+1. Create a SigTech account following the instructions in your welcome email.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
-1. Copy the API key.
-1. Set the environment variable `'SIGTECH_API_KEY'` to your API key.
-    - To set the environment variable globally for your operating system, you need to set it outside of the Python script using system-specific methods. See our detailed instructions (for both Windows and MacOS/Linux users) here - [Create an Environment Variable for your SigTech API key](https://github.com/SIGTechnologies/sigtech-python/blob/master/create_an_environment_variable.md).
-    - To set the environment variable for a particular Python environment, use the following commands at the top of your python file:
-        ```python
-        import os
-        os.environ['SIGTECH_API_KEY'] = <YOUR_API_KEY>
-        ```
+1. (Recommended) Save your API key as an environment variable. See our instructions [here](https://learn.sigtech.com/docs/auth).
 
-
-## Getting started
+## Getting started with SigTech Python SDK
 Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code to quickly create, backtest and view the performance of a custom rolling futures strategy.
-
->**Tip!**\
->You must complete the `Authentication` steps before trying this. 
 
 ### Create a rolling futures strategy.
 ```python
-# Set the `'SIGTECH_API_KEY'` environment variable, if you have not set it globally
+# Set the 'SIGTECH_API_KEY' environment variable, if you have not set it globally
 import os
-os.environ['SIGTECH_API_KEY'] = <YOUR_API_KEY>
+os.environ['SIGTECH_API_KEY'] = '<YOUR_API_KEY>'
 
 # Import the SigTech API and datetime python libraries
 import sigtech.api as sig
@@ -110,7 +103,7 @@ To learn more about the parameters used in the above strategy and how you can ta
 To see how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies, read the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
 
 >**Tip!**\
->If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction]() for more information.
+>If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction](https://github.com/SIGTechnologies/sigtech-python/blob/master/client_based_interaction.md) for more information.
 
 ## Logging
 Logs down to the `debug` log level are available for all API requests. They can be accessed using the python `logging` library. 
@@ -123,13 +116,12 @@ For more information, please refer to the `logging` library's [documentation](ht
 ## API Documentation
 For detailed information about the SigTech API, including usage guidelines and a detailed API reference, please refer to our official [API user guide](https://learn.sigtech.com/docs) and [API reference guide](https://learn.sigtech.com/reference). 
 
-If you have any questions or feedback regarding our documentation, please raise an issue on our [Documentation forum](https://learn.sigtech.com/discuss).
 
 ## Contributing to the SigTech Python SDK
 
 We appreciate and encourage your contributions to the SigTech Python SDK! If you are enjoying the SDK, please show your support by starring this repository and sharing it on social media channels. 
 
-To contribute an example, provide feedback, report a bug or otherwise bring an issue to our attention regarding this project, please follow the steps outlined in the [Contribution guidelines](https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTION.md). 
+To contribute an example, provide feedback, report a bug or otherwise bring an issue to our attention regarding this project, please follow the steps outlined in the [Contribution guidelines](https://github.com/SIGTechnologies/sigtech-python/blob/master/CONTRIBUTING.md). 
 
 Please remember that all contributors are expected to behave appropriately and abide by our [Code of conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md).
 
@@ -137,4 +129,4 @@ Please remember that all contributors are expected to behave appropriately and a
 If you encounter any issues or have any questions regarding our API or SDK, you can reach out to us via our [Discord channel](https://discord.gg/XcVJDYV4k7).
 
 ## License
-The SigTech Python SDK is released under the [MIT License](https://www.google.com).
+The SigTech Python SDK is released under the [MIT License](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE).
