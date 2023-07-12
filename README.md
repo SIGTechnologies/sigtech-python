@@ -99,9 +99,9 @@ print(es_future.history())
 ```
 ## Next steps
 
-- To learn more about the parameters used in the above strategy and how you can tailor them for you own use, please refer to [API Reference - Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.).
-- To see how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies, read the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
-- To learn how to secure your API key and save it as an environment variable. See our instructions [here](https://learn.sigtech.com/docs/auth).
+- Learn more about the parameters used in the above strategy and how you can tailor them for you own use by reading the documentation for our [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.) endpoint.
+- See how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies by folowing the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
+- Learn how to secure your API key and save it as an environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
 
 
 >**Tip!**\
