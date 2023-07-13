@@ -47,31 +47,30 @@ The SigTech Python SDK is designed to simplify the usage of the SigTech APIs for
 - Interfaces with SigTech's collection of historical performance data, enabling accurate backtesting and performance metrics for analysis and visualization.
 
 ## Installation
-`pip install sigtech`
+1. Open a terminal window.
+1. Change directory to where you would like to install the SDK.
+1. Enter the command: `pip install sigtech`
 
 ### Requirements
 - Python 3.6+
 - See [requirements.txt](https://github.com/SIGTechnologies/sigtech-python/blob/master/requirements.txt) for the Python libraries you must have installed.
 
-## Authentication
+## Getting started with SigTech Python SDK
+### Authentication
 >Note! \
 >We are currently performing closed beta testing. Sign up to our [waitlist](https://get.sigtech.com/join-the-api-waitlist) to be notified of the public release and for a chance to use all API functionality for free as one of our beta users! When we're ready to welcome you, we'll send an email with instructions for creating your SigTech account.
 
 1. Create a SigTech account following the instructions in your welcome email.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
+1. Secure your API key and save it as a global environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
 
-## Getting started with SigTech Python SDK
-Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code to quickly create, backtest and view the performance of a custom rolling futures strategy.
+### Creating your first strategy
+Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code into your IDE and run it to quickly create, backtest and view the performance of a custom rolling futures strategy.
 
-### Create a rolling futures strategy.
+>Note!\
+>The example below will only work if you have saved your API key as the global environment variable `SIGTECH_API_KEY`.
+
 ```python
-# Define your API key for this example
-import os
-os.environ['SIGTECH_API_KEY'] = '<YOUR_API_KEY>'
-
-# After you have set you SIGTECH_API_KEY as a global environment variable
-# the above commands are no longer required.
-
 # Import the SigTech API and datetime python libraries
 import sigtech.api as sig
 import datetime as dtm
@@ -93,8 +92,7 @@ es_future = sig.RollingFutureStrategy(
 print(es_future.history())
 ```
 ## Next steps
-
-1. Learn how to secure your API key and save it as a global environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
+1. Learn how to secure your API key 
 1. Learn more about the parameters used in the above strategy and how you can tailor them for you own use by reading the documentation for our [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.) endpoint.
 1. See how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies by folowing the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
 
