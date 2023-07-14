@@ -7,7 +7,7 @@
     <a href="https://discord.gg/XcVJDYV4k7">
         <img src="https://img.shields.io/badge/CHAT-DISCORD-blue?style=for-the-badge&logo=discord&labelColor=rgb(55,55,55)&color=blueviolet">
     </a>
-    <a href="https://learn.sigtech.com">
+    <a href="https://learn.sigtech.com/reference/">
         <img src="https://img.shields.io/badge/Docs-API_REFERENCE-1338be?&style=for-the-badge&logo=wiki&link=https://learn.sigtech.com/reference" alt="Docs" />
     </a>
      <a href="https://twitter.com/sigtechltd/">
@@ -33,7 +33,7 @@
 [issues-shield]: https://img.shields.io/github/issues/SIGTechnologies/sigtech-python.svg?style=for-the-badge
 [issues-url]: https://github.com/SIGTechnologies/sigtech-python/issues
 [license-shield]: https://img.shields.io/github/license/SIGTechnologies/sigtech-python.svg?style=for-the-badge
-[license-url]: https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE.txt
+[license-url]: https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE
 [repo_wiki_url]: https://www.learn.sigtech.com
 [repo_wiki_img]: https://img.shields.io/badge/docs-wiki_page-blue?style=for-the-badge&logo=none
 
@@ -93,7 +93,7 @@ es_future = sig.RollingFutureStrategy(
 print(es_future.history())
 ```
 ## Next steps
-1. Learn more about the parameters used in the above strategy and how you can tailor them for you own use by reading the documentation for our [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1.) endpoint.
+1. Learn more about the parameters used in the above strategy and how you can tailor them for you own use by reading the documentation for our [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1) endpoint.
 1. See how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies by folowing the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
 
 >**Tip!**\
