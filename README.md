@@ -39,16 +39,16 @@
 
 
 # SigTech Python SDK
-The SigTech Python SDK is designed to simplify the usage of the SigTech APIs for backtesting investment strategies by providing a higher-level, object-oriented method of interfacing with our APIs. With this SDK, you can easily test and view the performance of historical strategies.
+The SigTech Python SDK is designed to simplify the usage of the SigTech API for backtesting investment strategies by providing a higher-level, object-oriented method of interfacing with our API. With this SDK, you can easily test and view the performance of historical strategies.
 
 #### Key Features
-- Provides a higher-level object-based interface for convenient interaction with the SigTech APIs.
+- Provides a higher-level object-based interface for convenient interaction with the SigTech API.
 - Simplifies the creation of advanced trading strategies by providing methods which simulate rolling future strategies, basket strategies, and more.
 - Interfaces with SigTech's collection of historical performance data facilitating accurate backtesting. Explore the [SigTech API data catalog](https://sigtechapi.streamlit.app/) to see the library of instruments available.
 
 
 ## Installation
-1. Open a terminal window.
+1. Open a terminal window (or command prompt if you are using Windows).
 1. Change directory to where you would like to install the SDK.
 1. Enter the command: `pip install sigtech`
 1. Change directory to where you have installed the SDK.
