@@ -1,7 +1,6 @@
-<img src ="https://8647283.fs1.hubspotusercontent-na1.net/hubfs/8647283/Python%20SDK_github_856x268.png">
+![SigTech SDK Banner](https://8647283.fs1.hubspotusercontent-na1.net/hubfs/8647283/Python%20SDK_github_856x268-1.png "SigTech SDK Banner")
 
 &nbsp;
-
 
 <p align="center" id="dummy">
     <a href="https://discord.gg/XcVJDYV4k7">
@@ -14,6 +13,8 @@
         <img src="https://img.shields.io/badge/follow-%40sigtechltd-1DA1F2?logo=twitter&style=for-the-badge" />
     </a>
 <p>
+
+
 <div align="center">
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -48,11 +49,10 @@ The SigTech Python SDK is designed to simplify the usage of the SigTech API for 
 
 
 ## Installation
-1. Open a terminal window (or command prompt if you are using Windows).
-1. Change directory to where you would like to install the SDK.
-1. Enter the command: `pip install sigtech`
-1. Change directory to where you have installed the SDK.
-1. Enter the command: `pip install -r requirements.txt`
+
+```sh 
+pip install sigtech
+```
 
 ### Requirements
 - Python 3.6+
@@ -69,26 +69,25 @@ The SigTech Python SDK is designed to simplify the usage of the SigTech API for 
 ### Creating your first strategy
 Our SDK provides convenient wrappers for boilerplate functions that are required to interact with our API. Copy the following code into your IDE and run it to quickly create, backtest and view the performance of a custom rolling futures strategy.
 
->Note!\
+>**Note!**\
 >The example below will only work if you have saved your API key as the global environment variable `SIGTECH_API_KEY`.
 
 ```python
-# Import the SigTech API and datetime python libraries
+# Import the SigTech API
 import sigtech.api as sig
-import datetime as dtm
 
 # Initialize your session
 sig.init()
 
 # Create a Rolling Future Strategy
 es_future = sig.RollingFutureStrategy(
-    currency='USD',
-    start_date=dtm.date(2020, 1, 4),
-    contract_code='ES', 
-    contract_sector='INDEX',
-    rolling_rule='front',  
-    front_offset='-6:-4', 
-    )
+    currency="USD",
+    start_date="2020-01-04",
+    contract_code="ES", 
+    contract_sector="INDEX",
+    rolling_rule="front",  
+    front_offset="-6:-4", 
+)
 
 # Retrieve the strategy history
 print(es_future.history())
@@ -98,10 +97,10 @@ print(es_future.history())
 1. See how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies by folowing the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
 
 >**Tip!**\
->If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction](https://github.com/SIGTechnologies/sigtech-python/blob/master/client_based_interaction.md) for more information.
+>If you require more low level access to the API, our SDK also offers a **Client based** method of interaction. See [Client based interaction](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/client_based_interaction.md) for more information.
 
 ## Logging
-Logs down to the `debug` log level are available for all API requests. They can be accessed using the python `logging` library. 
+Logs down to the `debug` log level are available for all API requests. They can be accessed using the Python `logging` library. 
 ```python
 import logging
 logging.basicConfig(level=logging.DEBUG)

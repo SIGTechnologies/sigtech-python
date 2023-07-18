@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+.DS_Store
+__pycache__
+*.egg-info/
+.pytest_cache/
+.mypy_cache
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.so
