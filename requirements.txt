@@ -1,4 +1,0 @@
-requests
-pandas
-pytest
-pytest-mock
