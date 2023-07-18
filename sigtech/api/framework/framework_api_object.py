@@ -1,5 +1,5 @@
-from typing import Any, Optional
 import logging
+from typing import Any, Optional
 
 from sigtech.api.framework.environment import env
 
@@ -12,7 +12,7 @@ class FrameworkApiObject:
     """
 
     def __init__(self, creation_response: Any) -> None:
-        """ 
+        """
         Initialize a FrameworkApiObject with a given creation_response.
 
         :param creation_response: The creation_response to associate with the object.
@@ -29,7 +29,7 @@ class FrameworkApiObject:
 
         :return: The status of the API object.
         """
-        if self._status != 'SUCCEEDED':
+        if self._status != "SUCCEEDED":
             latest_response = self.creation_response.latest_object_response()
             self._status = latest_response.status
         return self._status
@@ -63,7 +63,9 @@ class FrameworkApiObject:
             return self._name
 
         try:
-            latest_response = self.creation_response.wait_for_object_status(property_name="name")
+            latest_response = self.creation_response.wait_for_object_status(
+                property_name="name"
+            )
             self._name = latest_response.name
             env().object_register[self._name] = self
 

@@ -1,11 +1,13 @@
-import os
-import requests
-import time
 import logging
+import os
+import time
 import urllib.parse
-from typing import Optional, List
-from sigtech.api.client.utils import snake_to_camel, singular
+from typing import List, Optional
+
+import requests
+
 from sigtech.api.client.response import Response
+from sigtech.api.client.utils import singular, snake_to_camel
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +17,14 @@ class Client:
     This is the Client class that represents an API client for SigTech.
     """
 
-    def __init__(self, api_key: Optional[str] = None, url: Optional[str] = None,
-                 session: Optional[requests.Session] = None, _base_url: Optional[str] = None,
-                 wait_timeout: Optional[int] = 300):
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        url: Optional[str] = None,
+        session: Optional[requests.Session] = None,
+        _base_url: Optional[str] = None,
+        wait_timeout: Optional[int] = 300,
+    ):
         """
         Initialize a Client object.
 
@@ -27,17 +34,19 @@ class Client:
         :param _base_url: The base URL of the API. Defaults to None.
         :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 300 seconds.
         """
-        self._url = url or os.environ.get('SIGTECH_API_URL', 'https://api.sigtech.com')
+        self._url = url or os.environ.get("SIGTECH_API_URL", "https://api.sigtech.com")
         self._base_url = _base_url or self._url
-        self._api_key = api_key or os.environ.get('SIGTECH_API_KEY', '')
+        self._api_key = api_key or os.environ.get("SIGTECH_API_KEY", "")
 
-        if self._api_key == '':
-            raise ValueError('Please provide a SigTech API key.')
+        if self._api_key == "":
+            raise ValueError("Please provide a SigTech API key.")
 
         self._session = session or requests.Session()
-        self._session.headers.update({
-            "Authorization": f"Bearer {self._api_key}",
-        })
+        self._session.headers.update(
+            {
+                "Authorization": f"Bearer {self._api_key}",
+            }
+        )
 
         self.wait_timeout = wait_timeout
 
@@ -63,7 +72,9 @@ class Client:
         if resp.status_code != 200:
             logger.error(f"API REQUEST ERROR - {resp.content}")
             resp.raise_for_status()
-        return Response(resp.json(), name=singular(self.namespace), client=self, kwargs=kwargs)
+        return Response(
+            resp.json(), name=singular(self.namespace), client=self, kwargs=kwargs
+        )
 
     def list(self) -> List[Response]:
         """
@@ -76,9 +87,12 @@ class Client:
         if resp.status_code != 200:
             logger.error(f"API REQUEST ERROR - {resp.content}")
             resp.raise_for_status()
-        return [Response(o, name=singular(self.namespace)) for o in resp.json()[self.namespace]]
+        return [
+            Response(o, name=singular(self.namespace))
+            for o in resp.json()[self.namespace]
+        ]
 
-    def get(self, id: Optional[str] = '', **kwargs) -> Response:
+    def get(self, id: Optional[str] = "", **kwargs) -> Response:
         """
         Get a specific resource.
 
@@ -89,7 +103,7 @@ class Client:
         url = f"{self._url}/{id}".rstrip("/")
         if kwargs:
             d = {snake_to_camel(k): v for (k, v) in kwargs.items()}
-            url += '?' + urllib.parse.urlencode(d)
+            url += "?" + urllib.parse.urlencode(d)
         logger.debug(f"GET {url}")
         resp = self._session.get(url)
 
@@ -110,11 +124,17 @@ class Client:
         resp = Client(
             api_key=self._api_key,
             url=f"{self._base_url}/sessions/{session_id}/objects/{object_id}",
-            session=self._session
+            session=self._session,
         ).get()
         return resp
 
-    def wait_for_object_status(self, session_id: str, object_id: str, property_name: Optional[str]=None, timeout: Optional[int]=None) -> Response:
+    def wait_for_object_status(
+        self,
+        session_id: str,
+        object_id: str,
+        property_name: Optional[str] = None,
+        timeout: Optional[int] = None,
+    ) -> Response:
         """
         Wait for a specific object in a session to reach a final status or to contain a property.
 
@@ -134,7 +154,7 @@ class Client:
 
             status = resp.status
 
-            if status == 'FAILED':
+            if status == "FAILED":
                 logger.debug(f"FAILED TASK {str(resp)}")
                 break
 
@@ -142,7 +162,7 @@ class Client:
                 if getattr(resp, property_name) is not None:
                     status = "SUCCEEDED"
                 else:
-                    status = 'RUNNING'
+                    status = "RUNNING"
 
             time.sleep(sleep_count)
             t1 = time.monotonic()
@@ -153,11 +173,13 @@ class Client:
 
         return resp
 
-    def __getattr__(self, item: str) -> 'Client':
+    def __getattr__(self, item: str) -> "Client":
         """
         Get an attribute of the Client.
 
         :param item: The name of the attribute.
         :return: The attribute.
         """
-        return Client(self._api_key, f"{self._url}/{item}", self._session, self._base_url)
+        return Client(
+            self._api_key, f"{self._url}/{item}", self._session, self._base_url
+        )
