@@ -1,5 +1,6 @@
 import logging
 from typing import Any, Dict, Optional, Set, Union
+
 from sigtech.api.client.client import Client
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,9 @@ def env() -> Union[Environment, None]:
     """
     global _GLOBAL_ENVIRONMENT
     if _GLOBAL_ENVIRONMENT is None:
-        raise Exception('Please initialize the environment by running the `init` method from `sigtech.api`')
+        raise Exception(
+            "Please initialize the environment by running the `init` method from `sigtech.api`"
+        )
 
     return _GLOBAL_ENVIRONMENT
 
@@ -53,16 +56,16 @@ def init(api_client: Optional[Client] = None) -> Environment:
 
         # check API service
         logger.info(client.status.get())
-        if client.status.get().status != 'framework API is alive':
-            raise Exception('SigTech API can not be reached. ')
+        if client.status.get().status != "framework API is alive":
+            raise Exception("SigTech API can not be reached. ")
 
         # create a new API session
         session = client.sessions.create()
-        logger.info(f'Session {session.session_id} created')
+        logger.info(f"Session {session.session_id} created")
 
         _GLOBAL_ENVIRONMENT = Environment(client, session.session_id)
 
-    logger.info(f'Environment Initialized')
+    logger.info("Environment Initialized")
 
     return _GLOBAL_ENVIRONMENT
 
@@ -94,6 +97,7 @@ class obj:
                 return fa_obj
 
         from sigtech.api.framework.instrument_base import Instrument
+
         new_instrument = Instrument(identifier=name)
         new_instrument.creation_response.wait_for_object_status()
 

@@ -28,7 +28,7 @@ class Response:
 
         :return: The latest object response.
         """
-        if not ('session_id' in self.kwargs and 'object_id' in self.d):
+        if not ("session_id" in self.kwargs and "object_id" in self.d):
             raise ValueError("Both 'session_id' and 'object_id' must be present.")
         return self.client.query_object(self.kwargs["session_id"], self.object_id)
 
@@ -40,7 +40,7 @@ class Response:
         :param timeout: The maximum amount of time to wait, (optional) defaults to client settings.
         :return: The response data for the final object status.
         """
-        if not ('session_id' in self.kwargs and 'object_id' in self.d):
+        if not ("session_id" in self.kwargs and "object_id" in self.d):
             raise ValueError("Both 'session_id' and 'object_id' must be present.")
 
         session_id = self.kwargs["session_id"]
@@ -49,15 +49,17 @@ class Response:
         if property_name is not None and property_name in self.__dict__:
             return self
 
-        if self.status == 'SUCCEEDED':
+        if self.status == "SUCCEEDED":
             return self
 
-        response = self.client.wait_for_object_status(session_id, object_id, property_name=property_name,
-                                                      timeout=timeout)
+        response = self.client.wait_for_object_status(
+            session_id, object_id, property_name=property_name, timeout=timeout
+        )
 
-        if response.status == 'FAILED':
-            error_message = response.d.get('error', '')
+        if response.status == "FAILED":
+            error_message = response.d.get("error", "")
             raise Exception(
-                f'SigTech API Error - session_id : {session_id} - object_id : {object_id} - Message : {error_message}')
+                f"SigTech API Error - session_id : {session_id} - object_id : {object_id} - Message : {error_message}"
+            )
 
         return response

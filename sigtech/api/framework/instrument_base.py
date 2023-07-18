@@ -19,5 +19,6 @@ class Instrument(FrameworkApiObject):
         """
 
         return env().client.instruments.create(
-            session_id=session_id, identifier=identifier,
+            session_id=session_id,
+            identifier=identifier,
         )
