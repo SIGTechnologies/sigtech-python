@@ -13,17 +13,20 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: self-hosted
     environment:
-      name: release
-    permissions:
-      contents: write
+      name: pypi
     env:
       GIT_COMMITTER_NAME: "sig-autobot"
       GIT_COMMITTER_EMAIL: "autobot@sigtech.com"
     steps:
+      - id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.SIGTECH_PYTHON_APP_ID }}
+          private_key: ${{ secrets.SIGTECH_PYTHON_PRIVATE_KEY }}
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}  # TODO: Use PAT
+          token: ${{ steps.generate_token.outputs.token }}
       - name: "Check commit messages match angular style"
         run: |
           ! git log origin/master..HEAD  --pretty=format:%s | \
@@ -40,25 +43,20 @@ jobs:
     outputs:
       release_sha: ${{ steps.release_sha.outputs.RELEASE_SHA }}
 
-
   build:
     runs-on: ubuntu-22.04
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [release]
-
-
-
     steps:
-      #- run: echo "RELEASE_SHA='${{ needs.release.outputs.release_sha }}' " >> $GITHUB_ENV
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: '${{ needs.release.outputs.release_sha }}'
-      #- name: "Check commit messages match angular style"
-      #  run: |
-      #    ! git log origin/master..HEAD  --pretty=format:%s | \
-      #      grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
+          ref: '${{ needs.release.outputs.release_sha || github.event.pull_request.head.sha }}'
+      - name: "Check commit messages match angular style"
+        run: |
+          ! git log origin/master..HEAD  --pretty=format:%s | \
+            grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
@@ -92,6 +90,7 @@ jobs:
 
   test:
     needs: [build]
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     env:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
     strategy:
@@ -144,7 +143,7 @@ jobs:
         working-directory: tests
 
   pypi-publish:
-    if: github.ref == 'refs/heads/master'
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-22.04
     needs: [ test ]
     environment:
@@ -164,7 +163,7 @@ jobs:
         print-hash: true
 
   pypi-test:
-    if: github.ref == 'refs/heads/master'
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-22.04
     needs: [ pypi-publish ]
     env:
