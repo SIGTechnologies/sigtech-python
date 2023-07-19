@@ -125,6 +125,12 @@ To contribute an example, provide feedback, report a bug or otherwise bring an i
 
 Please remember that all contributors are expected to behave appropriately and abide by our [Code of conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md).
 
+## Reporting security issues
+If you believe you have discovered a security vulnerability in our repository please report it to us immediately following the instructions [here](https://github.com/SIGTechnologies/sigtech-python/blob/master/SECURITY.md).
+
+>Attention!\
+>Please follow the instructions detailed. **Do not** publicly disclose the vulnerability in a Github Issue or on a public forum such as Discord or Twitter.
+
 ## Support
 If you encounter any issues or have any questions regarding our API or SDK, you can reach out to us via our [Discord](https://discord.gg/XcVJDYV4k7) or [Twitter](https://twitter.com/sigtechltd/).
 
