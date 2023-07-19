@@ -9,18 +9,21 @@ on:
       - master
 
 jobs:
-  build:
+  release:
+    if: github.ref == 'refs/heads/master'
     runs-on: self-hosted
+    environment:
+      name: release
+    permissions:
+      contents: write
     env:
       GIT_COMMITTER_NAME: "sig-autobot"
       GIT_COMMITTER_EMAIL: "autobot@sigtech.com"
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # TODO: Use PAT
       - name: "Check commit messages match angular style"
         run: |
           ! git log origin/master..HEAD  --pretty=format:%s | \
@@ -31,8 +34,37 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '.lockfiles/tools.txt'
       - run: pip install --no-dependencies -r .lockfiles/tools.txt
-      - if: github.ref == 'refs/heads/master'
-        run: make release
+      - run: make release
+      - run: echo "RELEASE_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        id: release_sha
+    outputs:
+      release_sha: ${{ steps.release_sha.outputs.RELEASE_SHA }}
+
+
+  build:
+    runs-on: ubuntu-22.04
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
+    needs: [release]
+
+
+
+    steps:
+      #- run: echo "RELEASE_SHA='${{ needs.release.outputs.release_sha }}' " >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: '${{ needs.release.outputs.release_sha }}'
+      #- name: "Check commit messages match angular style"
+      #  run: |
+      #    ! git log origin/master..HEAD  --pretty=format:%s | \
+      #      grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+          cache-dependency-path: '.lockfiles/tools.txt'
+      - run: pip install --no-dependencies -r .lockfiles/tools.txt
       - run: make lint
       - run: make build
       - uses: actions/upload-artifact@v3
