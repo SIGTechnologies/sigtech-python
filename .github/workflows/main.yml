@@ -7,19 +7,27 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
-  build:
+  release:
+    if: github.ref == 'refs/heads/master'
     runs-on: self-hosted
+    environment:
+      name: release
     env:
       GIT_COMMITTER_NAME: "sig-autobot"
       GIT_COMMITTER_EMAIL: "autobot@sigtech.com"
-    permissions:
-      contents: write
     steps:
+      - id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.SIGTECH_PYTHON_APP_ID }}
+          private_key: ${{ secrets.SIGTECH_PYTHON_PRIVATE_KEY }}
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
       - name: "Check commit messages match angular style"
         run: |
           ! git log origin/master..HEAD  --pretty=format:%s | \
@@ -30,8 +38,32 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '.lockfiles/tools.txt'
       - run: pip install --no-dependencies -r .lockfiles/tools.txt
-      - if: github.ref == 'refs/heads/master'
-        run: make release
+      - run: make release
+      - run: echo "RELEASE_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        id: release_sha
+    outputs:
+      release_sha: ${{ steps.release_sha.outputs.RELEASE_SHA }}
+
+  build:
+    runs-on: ubuntu-22.04
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
+    needs: [release]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: '${{ needs.release.outputs.release_sha || github.event.pull_request.head.sha }}'
+      - name: "Check commit messages match angular style"
+        run: |
+          ! git log origin/master..HEAD  --pretty=format:%s | \
+            grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+          cache-dependency-path: '.lockfiles/tools.txt'
+      - run: pip install --no-dependencies -r .lockfiles/tools.txt
       - run: make lint
       - run: make build
       - uses: actions/upload-artifact@v3
@@ -59,6 +91,7 @@ jobs:
 
   test:
     needs: [build]
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     env:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
     strategy:
@@ -111,7 +144,7 @@ jobs:
         working-directory: tests
 
   pypi-publish:
-    if: github.ref == 'refs/heads/master'
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-22.04
     needs: [ test ]
     environment:
@@ -123,6 +156,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: dist
+        path: dist
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@v1.8.8
       with:
@@ -131,7 +165,7 @@ jobs:
         print-hash: true
 
   pypi-test:
-    if: github.ref == 'refs/heads/master'
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-22.04
     needs: [ pypi-publish ]
     env:
@@ -141,4 +175,6 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: tests
+        path: tests
     - run: cd examples && for f in *.py; do python "$f"; done
+      working-directory: tests
