@@ -157,12 +157,13 @@ jobs:
       with:
         name: dist
         path: dist
-    - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@v1.8.8
-      with:
-        packages-dir: dist/
-        verbose: true
-        print-hash: true
+    # TMP!!!
+    #- name: Publish package distributions to PyPI
+    #  uses: pypa/gh-action-pypi-publish@v1.8.8
+    #  with:
+    #    packages-dir: dist/
+    #    verbose: true
+    #    print-hash: true
 
   pypi-test:
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
