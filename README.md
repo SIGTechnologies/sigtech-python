@@ -19,7 +19,7 @@
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+![Stargazers][stars-shield]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
@@ -30,7 +30,6 @@
 [forks-shield]: https://img.shields.io/github/forks/SIGTechnologies/sigtech-python.svg?style=for-the-badge
 [forks-url]: https://github.com/SIGTechnologies/sigtech-python/network/members
 [stars-shield]: https://img.shields.io/github/stars/SIGTechnologies/sigtech-python.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/SIGTechnologies/sigtech-python
 [issues-shield]: https://img.shields.io/github/issues/SIGTechnologies/sigtech-python.svg?style=for-the-badge
 [issues-url]: https://github.com/SIGTechnologies/sigtech-python/issues
 [license-shield]: https://img.shields.io/github/license/SIGTechnologies/sigtech-python.svg?style=for-the-badge
@@ -102,7 +101,7 @@ print(es_future.history())
 ## Google Colab
 We understand that getting started with backtesting and evaluating trading strategies can be a daunting task, especially for users new to financial data analysis and Python development. To make the process as seamless as possible, we've prepared a collection of real-world [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) in Jupyter Notebook format (.ipynb). 
 
-Why use [Google Colab]()?
+Why use [Google Colab](https://colab.research.google.com/)?
 - **No local setup required**: you can run the examples entirely in the cloud without any installation or configuration of your local environment.
 - **Free GPU and TPU support**: Work through computationally intensive examples faster.
 - **Seamless collaboration**: Colab integrates seamlessly with Google Drive, enabling you to share and collaborate your projects with others.
