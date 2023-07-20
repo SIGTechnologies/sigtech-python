@@ -101,39 +101,51 @@ jobs:
         include:
           - os: 'ubuntu-20.04'
             python: '3.6'
-            pandas: '1.0.5'
+            pip: 'pandas==1.0.5'
             timeout: 5
           - os: 'ubuntu-20.04'
             python: '3.7'
-            pandas: '1.0.5'
+            pip: 'pandas==1.0.5'
             timeout: 5
           - os: 'ubuntu-22.04'
             python: '3.8'
-            pandas: '1.4.1'
+            pip: 'pandas==1.4.1'
             timeout: 5
           - os: 'ubuntu-22.04'
             python: '3.9'
-            pandas: '1.4.1'
+            pip: 'pandas==1.4.1'
             timeout: 5
           - os: 'ubuntu-22.04'
             python: '3.9'
-            pandas: '2.0.3'
+            pip: 'pandas==2.0.3'
             timeout: 5
           - os: 'ubuntu-22.04'
             python: '3.10'
-            pandas: '2.0.3'
+            pip: 'pandas==2.0.3'
+            timeout: 5
+          - os: 'ubuntu-22.04'
+            python: '3.10'
+            # Google Colab
+            pip: >-
+              charset-normalizer==2.0.12
+              urllib3==1.26.16 
+              six==1.16.0
+              python-dateutil==2.8.2
+              requests==2.27.1
+              numpy==1.22.4
+              pandas==1.5.3
             timeout: 5
           - os: 'ubuntu-22.04'
             python: '3.11'
-            pandas: '2.0.3'
+            pip: 'pandas==2.0.3'
             timeout: 5
           - os: 'windows-latest'
             python: '3.11'
-            pandas: '2.0.3'
+            pip: 'pandas==2.0.3'
             timeout: 8
           - os: 'macos-latest'
             python: '3.11'
-            pandas: '2.0.3'
+            pip: 'pandas==2.0.3'
             timeout: 6
     runs-on: ${{ matrix.os }}
     timeout-minutes: ${{ matrix.timeout }}
@@ -145,7 +157,7 @@ jobs:
         with:
           name: dist
           path: dist
-      - run: 'pip install pandas==${{ matrix.pandas }}'
+      - run: 'pip install ${{ matrix.pip }}'
       - working-directory: dist
         run: "pip install ${{needs.build.outputs.wheel_filename}}[test]"
       - uses: actions/download-artifact@v3
