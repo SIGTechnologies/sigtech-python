@@ -62,7 +62,7 @@ pip install sigtech
 >We are currently performing closed beta testing. Sign up to our [waitlist](https://get.sigtech.com/join-the-api-waitlist) to be notified of the public release and for a chance to use all API functionality for free as one of our beta users! When we're ready to welcome you, we'll send an email with instructions for creating your SigTech account.
 
 1. Create a SigTech account following the instructions in your welcome email.
-1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api). 
+1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api-keys). 
 1. Secure your API key and save it as a global environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
 
 ### Creating your first strategy
