@@ -96,6 +96,7 @@ jobs:
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     env:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
     strategy:
       matrix:
         include:
