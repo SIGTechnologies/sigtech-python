@@ -146,7 +146,7 @@ jobs:
           - os: 'macos-latest'
             python: '3.11'
             pip: 'pandas==2.0.3'
-            timeout: 6
+            timeout: 12
     runs-on: ${{ matrix.os }}
     timeout-minutes: ${{ matrix.timeout }}
     steps:
