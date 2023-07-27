@@ -1,5 +1,19 @@
 <!--next-version-placeholder-->
 
+## v0.1.1 (2023-07-27)
+
+### Fix
+
+* Increase timeout for macOS tests ([`c626d7b`](https://github.com/SIGTechnologies/sigtech-python/commit/c626d7b0f0360c4632d4c899682c1c5a5a077384))
+
+### Documentation
+
+* Readme dashboard link update ([`0e797e2`](https://github.com/SIGTechnologies/sigtech-python/commit/0e797e26d4848988818b91d97ba68a519fe1470e))
+* Adding security policy ([`adb406f`](https://github.com/SIGTechnologies/sigtech-python/commit/adb406fb5af2d537e4e8364ef1740c6194089082))
+* Adding examples minus grain basket ([`189b0f0`](https://github.com/SIGTechnologies/sigtech-python/commit/189b0f06923bb819455aff7261ea72f96a23496f))
+* Answering comments ([`f7ee823`](https://github.com/SIGTechnologies/sigtech-python/commit/f7ee8234aa70bfd59eaee7909a8ba8c9b17f1990))
+* Readme and code of conduct updates ([`dc5265e`](https://github.com/SIGTechnologies/sigtech-python/commit/dc5265e0bc1c49a23c1967f489463cfe37b58ea2))
+
 ## v0.1.0 (2023-07-19)
 
 ### Feature
