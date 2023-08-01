@@ -3,7 +3,7 @@
 &nbsp;
 
 <p align="center" id="dummy">
-    <a href="https://discord.gg/XcVJDYV4k7">
+    <a href="https://discord.gg/ZcFeutSrWM">
         <img src="https://img.shields.io/badge/CHAT-DISCORD-blue?style=for-the-badge&logo=discord&labelColor=rgb(55,55,55)&color=blueviolet">
     </a>
     <a href="https://learn.sigtech.com/reference/">
@@ -58,10 +58,7 @@ pip install sigtech
 
 ## Getting started with SigTech Python SDK
 ### Authentication
->Note! \
->We are currently performing closed beta testing. Sign up to our [waitlist](https://get.sigtech.com/join-the-api-waitlist) to be notified of the public release and for a chance to use all API functionality for free as one of our beta users! When we're ready to welcome you, we'll send an email with instructions for creating your SigTech account.
-
-1. Create a SigTech account following the instructions in your welcome email.
+1. [Sign-up](https://dashboard.sigtech.com/register) for our API.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api-keys). 
 1. Secure your API key and save it as a global environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
 
@@ -92,20 +89,14 @@ es_future = sig.RollingFutureStrategy(
 print(es_future.history())
 ```
 ## Next steps
-1. Learn more about the parameters used in the above strategy and how you can tailor them to your own use-case by by reading the documentation for our [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1) endpoint.
-1. See how our Python SDK can help you quickly create and backtest more complex, real-world trading strategies by folowing the detailed walkthroughs in the [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) folder.
+1. Learn more about the [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1) endpoint in our API reference guide.
+1. Follow some of our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) to see how you can replicate and backtest more complex, real-world trading strategies.
 
 >**Tip!**\
 >If you require more low level access to the API, our SDK also offers a **client based** method of interaction. See [Client based interaction](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/client_based_interaction.md) for more information.
 
 ## Google Colab
-We understand that getting started with backtesting and evaluating trading strategies can be a daunting task, especially for users new to financial data analysis and Python development. To make the process as seamless as possible, we've prepared a collection of real-world [Examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) in Jupyter Notebook format (.ipynb). 
-
-Why use [Google Colab](https://colab.research.google.com/)?
-- **No local setup required**: you can run the examples entirely in the cloud without any installation or configuration of your local environment.
-- **Free GPU and TPU support**: Work through computationally intensive examples faster.
-- **Seamless collaboration**: Colab integrates seamlessly with Google Drive, enabling you to share and collaborate your projects with others.
-- **Built-in libraries and dependencies**: Colab comes pre-installed with essential libraries like Pandas, NumPy, and Matplotlib. 
+We understand that getting started with backtesting and evaluating trading strategies can be a daunting task, especially for users new to financial data analysis and Python development. To make the process as seamless as possible, we've prepared a collection of real-world [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) in Jupyter Notebook format (.ipynb). All you need to follow along is a SigTech API key.
 
 ## Logging
 Logs down to the `debug` log level are available for all API requests. They can be accessed using the Python `logging` library. 
@@ -132,7 +123,7 @@ If you believe you have discovered a security vulnerability in our repository pl
 >Please follow the instructions detailed. **Do not** publicly disclose the vulnerability in a Github Issue or on a public forum such as Discord or Twitter.
 
 ## Support
-If you encounter any issues or have any questions regarding our API or SDK, you can reach out to us via our [Discord](https://discord.gg/XcVJDYV4k7) or [Twitter](https://twitter.com/sigtechltd/).
+If you encounter any issues or have any questions regarding our API or SDK, you can reach out to us via our [Discord](https://discord.gg/ZcFeutSrWM) or [Twitter](https://twitter.com/sigtechltd/).
 
 ## License
 The SigTech Python SDK is released under the [MIT License](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE).

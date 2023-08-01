@@ -13,7 +13,7 @@ jobs:
   release:
     if: github.ref == 'refs/heads/master'
     runs-on: self-hosted
-    timeout-minutes: 5
+    timeout-minutes: 6
     environment:
       name: release
     env:
@@ -47,7 +47,7 @@ jobs:
 
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 5
+    timeout-minutes: 6
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [release]
     steps:
@@ -103,27 +103,27 @@ jobs:
           - os: 'ubuntu-20.04'
             python: '3.6'
             pip: 'pandas==1.0.5'
-            timeout: 5
+            timeout: 12
           - os: 'ubuntu-20.04'
             python: '3.7'
             pip: 'pandas==1.0.5'
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.8'
             pip: 'pandas==1.4.1'
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
             pip: 'pandas==1.4.1'
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
             pip: 'pandas==2.0.3'
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.10'
             pip: 'pandas==2.0.3'
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.10'
             # Google Colab
@@ -135,11 +135,11 @@ jobs:
               requests==2.27.1
               numpy==1.22.4
               pandas==1.5.3
-            timeout: 5
+            timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.11'
             pip: 'pandas==2.0.3'
-            timeout: 5
+            timeout: 12
           - os: 'windows-latest'
             python: '3.11'
             pip: 'pandas==2.0.3'

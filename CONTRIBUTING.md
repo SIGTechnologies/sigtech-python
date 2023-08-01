@@ -4,15 +4,15 @@ Welcome to our SDK! We highly value and encourage user contributions and are str
 
 Before you begin, please familiarize yourself with our [Code of Conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md). All users, including both external contributors and SigTech employees, are expected to adhere to these guidelines when interacting with others and this repository.
 
-## Using Github
+### Using Github
 
 We utilize Github as our platform for hosting code, tracking issues and feature requests, and accepting pull requests. To participate, you will need to have a Github account.
 
-## Licensing
+### Licensing
 
 Please note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. If you have any concerns regarding licensing, please reach out to us on [Discord](https://discord.gg/XcVJDYV4k7).
 
-## Code Style and Linting
+### Code Style and Linting
 
 Before submitting your contributions, please ensure that your code adheres to the prescribed code style and linting standards. Run the following tools:
 
@@ -59,6 +59,6 @@ To submit an example, follow these steps:
     
 ## Proposing a New Feature
 
-If you have ideas for new features, we encourage you to discuss them in our Discord channel. To stay informed about upcoming features and endpoints, please refer to our [Discord](https://discord.gg/XcVJDYV4k7) platform.
+If you have ideas for new features, we encourage you to discuss them in our Discord channel. To stay informed about upcoming features and endpoints, please refer to our [Discord](https://discord.gg/ZcFeutSrWM) platform.
 
 We appreciate your contributions and look forward to seeing the positive impact you make on the SigTech Python SDK!
