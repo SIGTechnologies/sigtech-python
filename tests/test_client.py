@@ -2,6 +2,7 @@ import pytest
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.response import Response
+from unittest.mock import Mock
 
 
 def test_client_init(monkeypatch):
@@ -13,20 +14,22 @@ def test_client_init(monkeypatch):
         _ = Client("")
 
 
-def test_create(mocker):
-    post_mock = mocker.patch("requests.Session.post", autospec=True)
+def test_create(monkeypatch):
+    post_mock = Mock()
     post_mock.return_value.status_code = 200
     post_mock.return_value.json.return_value = {"key": "value"}
+    monkeypatch.setattr("requests.Session.post", post_mock)
     c = Client("apikey", "http://test.url")
     r = c.create(key="value")
     assert isinstance(r, Response)
     assert r.key == "value"
 
 
-def test_list(mocker):
-    get_mock = mocker.patch("requests.Session.get", autospec=True)
+def test_list(monkeypatch):
+    get_mock = Mock()
     get_mock.return_value.status_code = 200
     get_mock.return_value.json.return_value = {"test.url": [{"key": "value"}]}
+    monkeypatch.setattr("requests.Session.get", get_mock)
     c = Client("apikey", "http://test.url")
     r = c.list()
     assert isinstance(r, list)
@@ -34,20 +37,22 @@ def test_list(mocker):
     assert r[0].key == "value"
 
 
-def test_get(mocker):
-    get_mock = mocker.patch("requests.Session.get", autospec=True)
+def test_get(monkeypatch):
+    get_mock = Mock()
     get_mock.return_value.status_code = 200
     get_mock.return_value.json.return_value = {"key": "value"}
+    monkeypatch.setattr("requests.Session.get", get_mock)
     c = Client("apikey", "http://test.url")
     r = c.get("id")
     assert isinstance(r, Response)
     assert r.key == "value"
 
 
-def test_query_object(mocker):
-    get_mock = mocker.patch("requests.Session.get", autospec=True)
+def test_query_object(monkeypatch):
+    get_mock = Mock()
     get_mock.return_value.status_code = 200
     get_mock.return_value.json.return_value = {"key": "value"}
+    monkeypatch.setattr("requests.Session.get", get_mock)
     c = Client("apikey", "http://test.url")
     r = c.query_object("sessid", "objid")
     assert isinstance(r, Response)

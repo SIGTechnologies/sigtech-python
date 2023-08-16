@@ -46,7 +46,6 @@ test = [
     "statsmodels",
     "matplotlib",
     "pytest",
-    "pytest-mock",
 ]
 
 

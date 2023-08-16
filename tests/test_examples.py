@@ -3,28 +3,33 @@ import re
 import subprocess
 import tempfile
 import textwrap
-
+from pathlib import Path
 import pytest
+from typing import List
 
 SIGTECH_API_KEY = os.environ["SIGTECH_API_KEY"]
 
-EXAMPLES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../examples")
-EXAMPLE_SCRIPTS = [
-    os.path.abspath(os.path.join(EXAMPLES_DIR, o)) for o in os.listdir(EXAMPLES_DIR)
-]
 
-README_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../README.md")
-with open(README_PATH, "r") as f:
-    README_BODY = f.read()
-SNIPPETS = re.findall(r"```python([\s\S]*?)```", README_BODY)
-SNIPPETS = [textwrap.dedent(o).strip() for o in SNIPPETS]
+def _get_code_snippets_from_readme() -> List[str]:
+    with open((Path(__file__).parents[1] / "README.md").absolute(), "r") as f:
+        snippets = re.findall(r"```python([\s\S]*?)```", f.read())
+        return [textwrap.dedent(o).strip() for o in snippets]
 
 
-@pytest.mark.parametrize("script", EXAMPLE_SCRIPTS)
-def test_examples(script):
-    if script.endswith(".py"):
+@pytest.mark.parametrize(
+    "script",
+    [
+        pytest.param(p, id=p.name)
+        for p in [
+            file.absolute()
+            for file in (Path(__file__).parents[1] / "examples").iterdir()
+        ]
+    ],
+)
+def test_examples(script: Path):
+    if script.suffix == ".py":
         cmd = "python {{path}}"
-    elif script.endswith(".ipynb"):
+    elif script.suffix == ".ipynb":
         cmd = "jupyter nbconvert --execute {{path}} --to notebook"
     else:
         raise NotImplementedError(f"Unknown file type {script}")
@@ -33,7 +38,7 @@ def test_examples(script):
     _run_script(body, cmd)
 
 
-@pytest.mark.parametrize("snippet", SNIPPETS)
+@pytest.mark.parametrize("snippet", _get_code_snippets_from_readme())
 def test_readme_snippets(snippet):
     print(f"Testing snippet: {snippet}")
     _run_script(snippet)
@@ -50,4 +55,4 @@ def _run_script(script: str, cmd: str = "python {{path}}"):
         stdout = subprocess.check_output(cmd, shell=True)
     finally:
         os.unlink(fp.name)
-    print(f"Output: \n{stdout}")
+    print(f"Output: \n{stdout.decode()}")
