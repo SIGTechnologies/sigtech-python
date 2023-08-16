@@ -35,11 +35,15 @@ dependencies = [
 
 [project.optional-dependencies]
 tools = [
+    "autoflake",
     "black",
     "flake8",
     "isort",
+    "mypy",
     "build",
     "python-semantic-release",
+    "pandas-stubs",
+    "types-requests",
 ]
 test = [
     "jupyter",
