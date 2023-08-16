@@ -1,7 +1,7 @@
 import pytest
 
 from sigtech.api.client.response import Response
-
+from unittest.mock import Mock
 
 def test_response_init():
     mock_data = {"object_id": "123", "status": "SUCCEEDED"}
@@ -22,20 +22,20 @@ def test_response_repr():
     assert repr(r) == "TestResponse({'object_id': '123', 'status': 'SUCCEEDED'})"
 
 
-def test_latest_object_response(mocker):
+def test_latest_object_response():
     mock_data = {"object_id": "123", "status": "SUCCEEDED"}
     mock_kwargs = {"session_id": "456"}
-    mock_client = mocker.Mock()
+    mock_client = Mock()
     r = Response(mock_data, "TestResponse", mock_client, mock_kwargs)
 
     r.latest_object_response()
     mock_client.query_object.assert_called_once_with("456", "123")
 
 
-def test_wait_for_object_status(mocker):
+def test_wait_for_object_status():
     mock_data = {"object_id": "123", "status": "SUCCEEDED"}
     mock_kwargs = {"session_id": "456"}
-    mock_client = mocker.Mock()
+    mock_client = Mock()
     r = Response(mock_data, "TestResponse", mock_client, mock_kwargs)
 
     assert r.wait_for_object_status() == r
