@@ -1,13 +1,17 @@
 .PHONY: fmt lint test release generate-lockfiles clean
 
 fmt:
+	python -m autoflake --in-place --remove-all-unused-imports --remove-unused-variables --recursive .
 	python -m isort .
 	python -m black .
 
 lint:
-	python -m flake8 . --max-line-length 200 --ignore F401,W503
+	python -m flake8 . --max-line-length 88 --ignore F401,W503
 	python -m isort . --check-only
 	python -m black . --check
+
+check:
+	python -m mypy .
 
 test:
 	python -m pytest tests

@@ -67,6 +67,7 @@ jobs:
           cache-dependency-path: '.lockfiles/tools.txt'
       - run: pip install --no-dependencies -r .lockfiles/tools.txt
       - run: make lint
+      - run: make check
       - run: make build
       - uses: actions/upload-artifact@v3
         with:
@@ -129,7 +130,7 @@ jobs:
             # Google Colab
             pip: >-
               charset-normalizer==2.0.12
-              urllib3==1.26.16 
+              urllib3==1.26.16
               six==1.16.0
               python-dateutil==2.8.2
               requests==2.27.1
@@ -203,7 +204,7 @@ jobs:
       with:
         name: tests
         path: tests
-    - run: | 
+    - run: |
         sed -i -- "s/<YOUR_API_KEY>/${SIGTECH_API_KEY}/g" * && \
         for f in *.py; do python "$f"; done
       working-directory: tests/examples
