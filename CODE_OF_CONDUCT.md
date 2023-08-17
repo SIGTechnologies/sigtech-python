@@ -60,7 +60,7 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement on our 
+reported to the community leaders responsible for enforcement on our
 [Discord](https://discord.gg/XcVJDYV4k7).
 All complaints will be reviewed and investigated promptly and fairly.
 

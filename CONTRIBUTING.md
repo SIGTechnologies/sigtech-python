@@ -21,7 +21,7 @@ Before submitting your contributions, please ensure that your code adheres to th
 
 ## Reporting a Problem
 
-If you encounter any issues while using our SDK, we rely on GitHub issues to track and resolve them. Before reporting a problem, please search our [open issues](https://github.com/SIGTechnologies/sigtech-python/issues/) to check if a similar issue already exists. If you don't find a related problem, you can easily report it by [creating a new issue](https://github.com/SIGTechnologies/sigtech-python/issues/new). 
+If you encounter any issues while using our SDK, we rely on GitHub issues to track and resolve them. Before reporting a problem, please search our [open issues](https://github.com/SIGTechnologies/sigtech-python/issues/) to check if a similar issue already exists. If you don't find a related problem, you can easily report it by [creating a new issue](https://github.com/SIGTechnologies/sigtech-python/issues/new).
 
 To ensure effective issue reporting, please include the following details:
 
@@ -56,7 +56,7 @@ To submit an example, follow these steps:
     - A brief summary of the strategy at the beginning.
     - Clearly commented Python code.
     - A visualization showcasing the strategy's performance.
-    
+
 ## Proposing a New Feature
 
 If you have ideas for new features, we encourage you to discuss them in our Discord channel. To stay informed about upcoming features and endpoints, please refer to our [Discord](https://discord.gg/ZcFeutSrWM) platform.
