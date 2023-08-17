@@ -2,9 +2,11 @@ import pandas as pd
 
 from sigtech.api.framework.environment import env
 from sigtech.api.framework.framework_api_object import FrameworkApiObject
+from abc import ABC, abstractmethod
+from sigtech.api.client.response import Response
+from typing import Optional
 
-
-class StrategyBase(FrameworkApiObject):
+class StrategyBase(FrameworkApiObject, ABC):
     """
     StrategyBase class.
 
@@ -14,9 +16,10 @@ class StrategyBase(FrameworkApiObject):
     def __init__(self, **inputs):
         api_response = self._get_strategy_obj(env().session_id, **inputs)
         super().__init__(api_response)
-        self._history = None
+        self._history: Optional[pd.Series] = None
 
-    def _get_strategy_obj(self, session_id: str, **inputs) -> None:
+    @abstractmethod
+    def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
         This method is intended to be overridden in subclasses to fetch the strategy from the API.
         """

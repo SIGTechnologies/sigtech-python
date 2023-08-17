@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.strategy_base import StrategyBase
-
+from sigtech.api.client.response import Response
 
 class BasketStrategy(StrategyBase):
     """
@@ -40,7 +40,7 @@ class BasketStrategy(StrategyBase):
             start_date=start_date,
         )
 
-    def _get_strategy_obj(self, session_id: str, **inputs):
+    def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
         Fetch basket strategy from API.
         """
