@@ -5,7 +5,7 @@ import pandas as pd
 
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.strategy_base import StrategyBase
-
+from sigtech.api.client.response import Response
 
 class SignalStrategy(StrategyBase):
     """
@@ -41,7 +41,7 @@ class SignalStrategy(StrategyBase):
             start_date=start_date,
         )
 
-    def _get_strategy_obj(self, session_id: str, **inputs):
+    def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
         Fetch signal strategy from API.
         """

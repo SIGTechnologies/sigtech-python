@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 from sigtech.api.framework.environment import env
 from sigtech.api.framework.strategy_base import StrategyBase
-
+from sigtech.api.client.response import Response
 
 class RollingFutureStrategy(StrategyBase):
     """
@@ -45,7 +45,7 @@ class RollingFutureStrategy(StrategyBase):
             monthly_roll_days=monthly_roll_days,
         )
 
-    def _get_strategy_obj(self, session_id: str, **inputs):
+    def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
         Fetch rolling future strategy from API.
         """

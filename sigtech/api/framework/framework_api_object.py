@@ -1,7 +1,8 @@
 import logging
-from typing import Any, Optional
+from typing import Optional
 
 from sigtech.api.framework.environment import env
+from sigtech.api.client.response import Response
 
 logger = logging.getLogger(__name__)
 
@@ -11,13 +12,13 @@ class FrameworkApiObject:
     A class used to handle API objects within the framework.
     """
 
-    def __init__(self, creation_response: Any) -> None:
+    def __init__(self, creation_response: Response) -> None:
         """
         Initialize a FrameworkApiObject with a given creation_response.
 
         :param creation_response: The creation_response to associate with the object.
         """
-        self.creation_response = creation_response
+        self.creation_response: Response = creation_response
         self._status: Optional[str] = None
         self._name: Optional[str] = None
         env().all_objects.add(self)
