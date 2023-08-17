@@ -2,6 +2,7 @@ import logging
 from typing import Any, Dict, Optional, Set, Union
 
 from sigtech.api.client.client import Client
+from sigtech.api.client.utils import SigApiException
 
 logger = logging.getLogger(__name__)
 
@@ -32,10 +33,10 @@ def env() -> Union[Environment, None]:
 
     :return: Returns the global Environment object.
     """
-    global _GLOBAL_ENVIRONMENT
     if _GLOBAL_ENVIRONMENT is None:
-        raise Exception(
-            "Please initialize the environment by running the `init` method from `sigtech.api`"
+        raise SigApiException(
+            "Please initialize the environment by running the `init` method from"
+            " `sigtech.api`"
         )
 
     return _GLOBAL_ENVIRONMENT
