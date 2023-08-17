@@ -1,10 +1,9 @@
 import logging
 from typing import Optional
 
-from sigtech.api.framework.environment import env
 from sigtech.api.client.response import Response
 from sigtech.api.client.utils import SigApiException
-
+from sigtech.api.framework.environment import env
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +34,7 @@ class FrameworkApiObject:
         if self._status != "SUCCEEDED":
             latest_response = self.creation_response.latest_object_response()
             self._status = latest_response.status
+        assert isinstance(self._status, str)
         return self._status
 
     @property
@@ -44,6 +44,7 @@ class FrameworkApiObject:
 
         :return: The object id of the API object.
         """
+        assert isinstance(self.creation_response.object_id, str)
         return self.creation_response.object_id
 
     @property
@@ -53,6 +54,7 @@ class FrameworkApiObject:
 
         :return: The session id of the API object.
         """
+        assert isinstance(self.creation_response.session_id, str)
         return self.creation_response.session_id
 
     @property

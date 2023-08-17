@@ -1,8 +1,20 @@
-from sigtech.api.client.utils import camel_to_snake
+from typing import TYPE_CHECKING, Any, Dict, Optional
+
+from sigtech.api.client.utils import SigApiException, camel_to_snake
+
+if TYPE_CHECKING:
+    # Used at import time only, because of circular dependency
+    from sigtech.api.client.client import Client
 
 
 class Response:
-    def __init__(self, d: dict, name="Response", client=None, kwargs: dict = None):
+    def __init__(
+        self,
+        d: Dict[str, Any],
+        name="Response",
+        client: Optional["Client"] = None,
+        kwargs: Optional[Dict[str, Any]] = None,
+    ):
         """
         Initialize Response class to hold API response data.
 
@@ -28,19 +40,24 @@ class Response:
 
         :return: The latest object response.
         """
-        if not ("session_id" in self.kwargs and "object_id" in self.d):
+        if "session_id" not in self.kwargs or "object_id" not in self.d:
             raise ValueError("Both 'session_id' and 'object_id' must be present.")
         return self.client.query_object(self.kwargs["session_id"], self.object_id)
 
-    def wait_for_object_status(self, property_name: str = None, timeout: int = None):
+    def wait_for_object_status(
+        self, property_name: Optional[str] = None, timeout: Optional[int] = None
+    ):
         """
         Wait for the object status to be in a final state or a property to be available.
 
-        :param property_name: The name of the property to wait for, (optional) waits for final state if `None`.
-        :param timeout: The maximum amount of time to wait, (optional) defaults to client settings.
+        :param property_name: The name of the property to wait for.
+            (optional; waits for final state if `None`).
+        :param timeout: The maximum amount of time to wait.
+            (optional; defaults to client settings).
         :return: The response data for the final object status.
         """
-        if not ("session_id" in self.kwargs and "object_id" in self.d):
+        assert self.kwargs and self.d
+        if "session_id" not in self.kwargs or "object_id" not in self.d:
             raise ValueError("Both 'session_id' and 'object_id' must be present.")
 
         session_id = self.kwargs["session_id"]
@@ -52,6 +69,7 @@ class Response:
         if self.status == "SUCCEEDED":
             return self
 
+        assert self.client is not None
         response = self.client.wait_for_object_status(
             session_id, object_id, property_name=property_name, timeout=timeout
         )

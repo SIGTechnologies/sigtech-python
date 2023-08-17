@@ -1,12 +1,16 @@
 import logging
-from typing import Any, Dict, Optional, Set, Union
+from typing import TYPE_CHECKING, Dict, Optional, Set
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.utils import SigApiException
 
+if TYPE_CHECKING:
+    # Used at import time only, because of circular dependency
+    from sigtech.api.framework.framework_api_object import FrameworkApiObject
+
 logger = logging.getLogger(__name__)
 
-_GLOBAL_ENVIRONMENT = None
+_GLOBAL_ENVIRONMENT: Optional["Environment"] = None
 
 
 class Environment:
@@ -23,11 +27,11 @@ class Environment:
         """
         self.session_id = session_id
         self.client = client
-        self.object_register: Dict[str, Any] = {}
-        self.all_objects: Set[Any] = set()
+        self.object_register: Dict[str, "FrameworkApiObject"] = {}
+        self.all_objects: Set["FrameworkApiObject"] = set()
 
 
-def env() -> Union[Environment, None]:
+def env() -> Environment:
     """
     Retrieve the current global environment.
 
@@ -44,31 +48,33 @@ def env() -> Union[Environment, None]:
 
 def init(api_client: Optional[Client] = None) -> Environment:
     """
-    Initialize a global environment.
-    Creates a new API session if a global environment does not already exist.
+    Initialize a global environment. Creates a new API session if a global
+    environment does not already exist.
 
-    :param api_client: API client object. (Optional) Creates a default client if not provided.
+    :param api_client: API client object. (Optional) Creates a default client if
+        not provided.
     :return: Returns the global Environment object.
     """
+
     global _GLOBAL_ENVIRONMENT
-
-    if _GLOBAL_ENVIRONMENT is None:
-        client = api_client or Client()
-
-        # check API service
-        logger.info(client.status.get())
-        if client.status.get().status != "framework API is alive":
-            raise Exception("SigTech API can not be reached. ")
-
-        # create a new API session
-        session = client.sessions.create()
-        logger.info(f"Session {session.session_id} created")
-
-        _GLOBAL_ENVIRONMENT = Environment(client, session.session_id)
-
+    _GLOBAL_ENVIRONMENT = _GLOBAL_ENVIRONMENT or _initialise_environment(api_client)
     logger.info("Environment Initialized")
-
     return _GLOBAL_ENVIRONMENT
+
+
+def _initialise_environment(api_client) -> Environment:
+    client = api_client or Client()
+
+    # check API service
+    logger.info(client.status.get())
+    if client.status.get().status != "framework API is alive":
+        raise SigApiException("SigTech API can not be reached.")
+
+    # create a new API session
+    session = client.sessions.create()
+    logger.info(f"Session {session.session_id} created")
+
+    return Environment(client, session.session_id)
 
 
 class obj:
@@ -77,7 +83,7 @@ class obj:
     """
 
     @staticmethod
-    def get(name: str) -> Optional[Any]:
+    def get(name: str) -> "FrameworkApiObject":
         """
         Retrieve the object using the framework name from the environment.
 
@@ -97,6 +103,7 @@ class obj:
             if name == fa_obj.api_object_id:
                 return fa_obj
 
+        # pylint: disable=import-outside-toplevel
         from sigtech.api.framework.instrument_base import Instrument
 
         new_instrument = Instrument(identifier=name)

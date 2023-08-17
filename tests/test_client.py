@@ -1,8 +1,9 @@
+from unittest.mock import Mock
+
 import pytest
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.response import Response
-from unittest.mock import Mock
 
 
 def test_client_init(monkeypatch):

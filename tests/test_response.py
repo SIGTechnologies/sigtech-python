@@ -1,7 +1,9 @@
+from unittest.mock import Mock
+
 import pytest
 
 from sigtech.api.client.response import Response
-from unittest.mock import Mock
+
 
 def test_response_init():
     mock_data = {"object_id": "123", "status": "SUCCEEDED"}
@@ -51,5 +53,6 @@ def test_wait_for_object_status():
         r.wait_for_object_status()
     assert (
         str(e_info.value)
-        == "SigTech API Error - session_id : 456 - object_id : 123 - Message : Test error"
+        == "SigTech API Error - session_id : 456 - object_id : 123 - Message : Test"
+        " error"
     )

@@ -1,31 +1,36 @@
 import datetime as dtm
 from typing import List, Optional, Union
 
-from sigtech.api.framework.environment import env, obj
-from sigtech.api.framework.strategy_base import StrategyBase
 from sigtech.api.client.response import Response
+from sigtech.api.framework.environment import env, obj
+from sigtech.api.framework.framework_api_object import FrameworkApiObject
+from sigtech.api.framework.strategy_base import StrategyBase
+
 
 class BasketStrategy(StrategyBase):
     """
-    BasketStrategy class implements a long-only basket strategy with fixed weights, rebalanced as per the rebalance frequency.
+    BasketStrategy class implements a long-only basket strategy with fixed weights,
+    rebalanced as per the rebalance frequency.
 
     :param constituent_names: List of constituent tickers.
     :param weights: List of constituents weights expressed as floats.
-    :param currency: Base strategy currency for initial cash and valuation, (optional) defaults to 'USD'.
-    :param rebalance_frequency: Rebalance frequency. For example: '1BD', '2BD', '1W', '2W', '1M', '2M', '1W-WED', '1W-FRI',
-                                '3M_IMM', 'SOM', 'EOM', 'YEARLY', '1DOM', and variations of these, (optional) defaults to 'EOM'.
-    :param start_date: Start of strategy (optional).
+    :param currency: Base strategy currency for initial cash and valuation.
+        Defaults to 'USD'.
+    :param rebalance_frequency: Rebalance frequency. For example: '1BD', '2BD', '1W',
+        '2W', '1M', '2M', '1W-WED', '1W-FRI', '3M_IMM', 'SOM', 'EOM', 'YEARLY', '1DOM',
+        and variations of these. Defaults to 'EOM'.
+    :param start_date: Start of strategy. Optional.
     """
 
     def __init__(
         self,
-        constituent_names: List[Union[str, object]],
+        constituent_names: List[Union[str, FrameworkApiObject]],
         weights: List[float],
         currency: Optional[str] = "USD",
         rebalance_frequency: str = "EOM",
         start_date: Optional[Union[str, dtm.date]] = None,
     ):
-        constituents = [
+        constituents: List[FrameworkApiObject] = [
             obj.get(x) if isinstance(x, str) else x for x in constituent_names
         ]
         for fapi_obj in constituents:

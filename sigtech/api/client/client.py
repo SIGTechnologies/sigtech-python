@@ -32,9 +32,14 @@ class Client:
         :param url: The URL of the API. Defaults to None.
         :param session: The current session. Defaults to None.
         :param _base_url: The base URL of the API. Defaults to None.
-        :param wait_timeout: Timeout for waiting for final object status in seconds. Defaults to 300 seconds.
+        :param wait_timeout: Timeout for waiting for final object status in seconds.
+            Defaults to 300 seconds.
         """
-        self._url = url or os.environ.get("SIGTECH_API_URL", "https://api.sigtech.com")
+        self._url: str = (
+            url
+            if url is not None
+            else os.environ.get("SIGTECH_API_URL", "https://api.sigtech.com")
+        )
         self._base_url = _base_url or self._url
         self._api_key = api_key or os.environ.get("SIGTECH_API_KEY", "")
 
@@ -70,7 +75,7 @@ class Client:
         logger.debug(f"POST {self._url} {obj}")
         resp = self._session.post(self._url, json=obj)
         if resp.status_code != 200:
-            logger.error(f"API REQUEST ERROR - {resp.content}")
+            logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
         return Response(
             resp.json(), name=singular(self.namespace), client=self, kwargs=kwargs
@@ -85,7 +90,7 @@ class Client:
         logger.debug(f"GET {self._url}")
         resp = self._session.get(self._url)
         if resp.status_code != 200:
-            logger.error(f"API REQUEST ERROR - {resp.content}")
+            logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
         return [
             Response(o, name=singular(self.namespace))
@@ -108,7 +113,7 @@ class Client:
         resp = self._session.get(url)
 
         if resp.status_code != 200:
-            logger.error(f"API REQUEST ERROR - {resp.content}")
+            logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
 
         return Response(resp.json(), name=singular(self.namespace), client=self)
@@ -135,7 +140,8 @@ class Client:
         timeout: Optional[int] = None,
     ) -> Response:
         """
-        Wait for a specific object in a session to reach a final status or to contain a property.
+        Wait for a specific object in a session to reach a final status
+        or to contain a property.
 
         :param session_id: The ID of the session.
         :param object_id: The ID of the object.
@@ -144,9 +150,10 @@ class Client:
         :return: A Response object representing the object.
         """
         timeout = timeout or self.wait_timeout
-        t0 = time.monotonic()
-        status = None
-        sleep_count = 1
+        assert timeout is not None
+        t0: float = time.monotonic()
+        status: Optional[str] = None
+        sleep_count = 1.0
 
         while status != "SUCCEEDED":
             resp = self.query_object(session_id, object_id)
