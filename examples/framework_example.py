@@ -47,15 +47,22 @@ top_basket = sig.BasketStrategy(
 
 print(top_basket.history())
 
-signal_df = 0.5 * np.sign(
-    pd.concat([gc_future.history(), si_future.history()], axis=1)
-    .dropna()
-    .pct_change()
-    .rolling(window=252)
-    .mean()
-    .dropna()
+signal_df = pd.DataFrame(
+    0.5
+    * (
+        pd.concat(
+            [gc_future.history(), si_future.history()],
+            axis=1,
+            names=[gc_future.name, si_future.name],
+        )
+        .dropna()
+        .pct_change()
+        .rolling(window=252)
+        .mean()
+        .dropna()
+        .apply(np.sign, axis=1)
+    )
 )
-signal_df.columns = [gc_future.name, si_future.name]
 
 signal_strategy = sig.SignalStrategy(signal_input=signal_df, currency="USD")
 

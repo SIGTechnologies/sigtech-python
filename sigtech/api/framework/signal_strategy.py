@@ -3,18 +3,23 @@ from typing import Optional, Union
 
 import pandas as pd
 
+from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.strategy_base import StrategyBase
-from sigtech.api.client.response import Response
+
 
 class SignalStrategy(StrategyBase):
     """
-    SignalStrategy class implements a basket of instruments that change through time based on a signal.
+    SignalStrategy class implements a basket of instruments that change through time
+    based on a signal.
 
     :param signal_input: DataFrame of weights through time.
-    :param currency: Base strategy currency for initial cash and valuation, (optional) defaults to 'USD'.
-    :param rebalance_frequency: Rebalance frequency. For example: '1BD', '2BD', '1W', '2W', '1M', '2M', '1W-WED', '1W-FRI',
-                                '3M_IMM', 'SOM', 'EOM', 'YEARLY', '1DOM', and variations of these, (optional) defaults to 'EOM'.
+    :param currency: Base strategy currency for initial cash and valuation,
+                    (optional) defaults to 'USD'.
+    :param rebalance_frequency: Rebalance frequency. For example: '1BD', '2BD', '1W',
+                            '2W', '1M', '2M', '1W-WED', '1W-FRI', '3M_IMM', 'SOM',
+                            'EOM', 'YEARLY', '1DOM', and variations of these,
+                            (optional) defaults to 'EOM'.
     :param start_date: Start of strategy (optional).
     """
 
@@ -29,7 +34,8 @@ class SignalStrategy(StrategyBase):
         constituents = [obj.get(x) for x in signal_input.columns]
         for fapi_obj in constituents:
             fapi_obj.creation_response.wait_for_object_status()
-        signal_input.columns = [x.api_object_id for x in constituents]
+        signal_input.columns = pd.Index([x.api_object_id for x in constituents])
+        assert isinstance(signal_input.index, pd.DatetimeIndex)
         signal_input.index = signal_input.index.strftime("%Y-%m-%dT%H:%M:%S")
         signal_input.index.name = "$timestamp"
         signal_input_json = signal_input.reset_index().to_dict(orient="list")

@@ -4,8 +4,9 @@ import subprocess
 import tempfile
 import textwrap
 from pathlib import Path
-import pytest
 from typing import List
+
+import pytest
 
 SIGTECH_API_KEY = os.environ["SIGTECH_API_KEY"]
 

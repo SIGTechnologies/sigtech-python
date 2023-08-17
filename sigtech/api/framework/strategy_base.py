@@ -1,10 +1,12 @@
+from abc import ABC, abstractmethod
+from typing import Optional
+
 import pandas as pd
 
+from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env
 from sigtech.api.framework.framework_api_object import FrameworkApiObject
-from abc import ABC, abstractmethod
-from sigtech.api.client.response import Response
-from typing import Optional
+
 
 class StrategyBase(FrameworkApiObject, ABC):
     """
@@ -13,7 +15,7 @@ class StrategyBase(FrameworkApiObject, ABC):
     This is a base class for different strategy classes.
     """
 
-    def __init__(self, **inputs):
+    def __init__(self, **inputs) -> None:
         api_response = self._get_strategy_obj(env().session_id, **inputs)
         super().__init__(api_response)
         self._history: Optional[pd.Series] = None
@@ -21,7 +23,8 @@ class StrategyBase(FrameworkApiObject, ABC):
     @abstractmethod
     def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
-        This method is intended to be overridden in subclasses to fetch the strategy from the API.
+        This method is intended to be overridden in subclasses
+        to fetch the strategy from the API.
         """
         raise NotImplementedError
 
@@ -37,10 +40,10 @@ class StrategyBase(FrameworkApiObject, ABC):
             session_id=env().session_id,
             object_id=self.api_object_id,
         )
-        ts = pd.DataFrame(api_response.history).rename(
+        df = pd.DataFrame(api_response.history).rename(
             {"$timestamp": "date", "$history": "history"}, axis=1
         )
-        ts = ts.set_index("date")["history"].rename(self.name)
+        ts = df.set_index("date")["history"].rename(self.name)
         ts.index = pd.to_datetime(ts.index)
         self._history = ts.sort_index()
         return self._history
