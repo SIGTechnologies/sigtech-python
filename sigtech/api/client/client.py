@@ -92,7 +92,7 @@ class Client:
             for o in resp.json()[self.namespace]
         ]
 
-    def get(self, id: Optional[str] = "", **kwargs) -> Response:
+    def get(self, resource_id: Optional[str] = "", **kwargs) -> Response:
         """
         Get a specific resource.
 
@@ -100,10 +100,10 @@ class Client:
         :param kwargs: The arguments for getting a resource.
         :return: A Response object representing the resource.
         """
-        url = f"{self._url}/{id}".rstrip("/")
+        url = f"{self._url}/{resource_id}".rstrip("/")
         if kwargs:
             d = {snake_to_camel(k): v for (k, v) in kwargs.items()}
-            url += "?" + urllib.parse.urlencode(d)
+            url += f"?{urllib.parse.urlencode(d)}"
         logger.debug(f"GET {url}")
         resp = self._session.get(url)
 
@@ -121,12 +121,11 @@ class Client:
         :param object_id: The ID of the object.
         :return: A Response object representing the object.
         """
-        resp = Client(
+        return Client(
             api_key=self._api_key,
             url=f"{self._base_url}/sessions/{session_id}/objects/{object_id}",
             session=self._session,
         ).get()
-        return resp
 
     def wait_for_object_status(
         self,
