@@ -63,3 +63,8 @@ class Response:
             )
 
         return response
+
+    def __getattr__(self, name):
+        raise AttributeError(
+            f"'{repr(self)}' Response object has no attribute '{name}'"
+        )
