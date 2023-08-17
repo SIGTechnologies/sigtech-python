@@ -1,5 +1,7 @@
 import re
 
+class SigApiException(Exception):
+    pass
 
 def camel_to_snake(name: str) -> str:
     """

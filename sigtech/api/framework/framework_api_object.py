@@ -3,6 +3,8 @@ from typing import Optional
 
 from sigtech.api.framework.environment import env
 from sigtech.api.client.response import Response
+from sigtech.api.client.utils import SigApiException
+
 
 logger = logging.getLogger(__name__)
 
@@ -71,6 +73,6 @@ class FrameworkApiObject:
             env().object_register[self._name] = self
 
         except Exception as e:
-            raise Exception(f"Error while getting the name: {str(e)}")
+            raise SigApiException(f"Error while getting the name: {str(e)}")
 
         return self._name

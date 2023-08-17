@@ -58,8 +58,9 @@ class Response:
 
         if response.status == "FAILED":
             error_message = response.d.get("error", "")
-            raise Exception(
-                f"SigTech API Error - session_id : {session_id} - object_id : {object_id} - Message : {error_message}"
+            raise SigApiException(
+                f"SigTech API Error - session_id : {session_id} - object_id :"
+                f" {object_id} - Message : {error_message}"
             )
 
         return response
