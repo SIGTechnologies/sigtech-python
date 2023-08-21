@@ -37,19 +37,20 @@ dependencies = [
 tools = [
     "autoflake",
     "black",
+    "build",
     "flake8",
     "isort",
     "mypy",
-    "build",
-    "python-semantic-release",
     "pandas-stubs",
+    "pytest",
+    "python-semantic-release",
     "types-requests",
 ]
 test = [
     "jupyter",
-    "statsmodels",
     "matplotlib",
     "pytest",
+    "statsmodels",
 ]
 
 
