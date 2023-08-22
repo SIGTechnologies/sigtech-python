@@ -9,6 +9,9 @@ from typing import List
 import pytest
 
 SIGTECH_API_KEY = os.environ["SIGTECH_API_KEY"]
+SIGTECH_ROOT_DIR = str(Path(__file__).parents[1].absolute())
+
+EXAMPLES_DIR = Path(__file__).parents[1] / "examples"
 
 
 def _get_code_snippets_from_readme() -> List[str]:
@@ -17,17 +20,14 @@ def _get_code_snippets_from_readme() -> List[str]:
         return [textwrap.dedent(o).strip() for o in snippets]
 
 
-FILES_TO_IGNORE = ["7_Backtesting_SignalStrategy_Using_Own_Data.ipynb"]
-
-
 @pytest.mark.parametrize(
     "script",
     [
         pytest.param(p, id=p.name)
         for p in [
             file.absolute()
-            for file in (Path(__file__).parents[1] / "examples").iterdir()
-            if file.name not in FILES_TO_IGNORE
+            for file in list(EXAMPLES_DIR.rglob("*.py"))
+            + list(EXAMPLES_DIR.rglob("*.ipynb"))
         ]
     ],
 )
@@ -52,6 +52,7 @@ def test_readme_snippets(snippet):
 def _run_script(script: str, cmd: str = "python {{path}}"):
     print(f"Running script={script} cmd={cmd}")
     script = script.replace("<YOUR_API_KEY>", SIGTECH_API_KEY)
+    script = script.replace("<SIGTECH_ROOT_DIR>", SIGTECH_ROOT_DIR)
     fp = tempfile.NamedTemporaryFile(mode="w", delete=False)
     fp.write(script)
     fp.close()
