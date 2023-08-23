@@ -30,7 +30,7 @@ class StrategyBase(FrameworkApiObject):
             return self._history
 
         self.creation_response.wait_for_object_status()
-        api_response = env().client.data.history.get(
+        api_response = env().client.performance.history.get(
             session_id=env().session_id,
             object_id=self.api_object_id,
         )

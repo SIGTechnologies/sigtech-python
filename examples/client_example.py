@@ -37,5 +37,7 @@ print(f"object state : {object_state}")
 rfs_object.wait_for_object_status()
 
 # Retrieve history
-history = client.data.history.get(session_id=session_id, object_id=object_id).history
+history = client.performance.history.get(
+    session_id=session_id, object_id=object_id
+).history
 print(f"Rolling Future History : {history}")
