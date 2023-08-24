@@ -74,24 +74,30 @@ class Client:
         obj = {snake_to_camel(k): v for (k, v) in kwargs.items()}
         logger.debug(f"POST {self._url} {obj}")
         resp = self._session.post(self._url, json=obj)
-        if resp.status_code != 200:
+        if resp.status_code not in (200, 202):
             logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
         return Response(
             resp.json(), name=singular(self.namespace), client=self, kwargs=kwargs
         )
 
-    def list(self) -> List[Response]:
+    def list(self, **kwargs) -> List[Response]:
         """
         List all resources.
 
         :return: A list of Response objects representing the resources.
         """
-        logger.debug(f"GET {self._url}")
-        resp = self._session.get(self._url)
+        url = self._url
+        if kwargs:
+            d = {snake_to_camel(k): v for (k, v) in kwargs.items()}
+            url += f"?{urllib.parse.urlencode(d)}"
+        logger.debug(f"GET {url}")
+        resp = self._session.get(url)
+
         if resp.status_code != 200:
             logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
+
         return [
             Response(o, name=singular(self.namespace))
             for o in resp.json()[self.namespace]
@@ -116,6 +122,21 @@ class Client:
             logger.error(f"API REQUEST ERROR - {resp.text}")
             resp.raise_for_status()
 
+        return Response(resp.json(), name=singular(self.namespace), client=self)
+
+    def delete(self, resource_id: str) -> Response:
+        """
+        Delete an existing resource.
+
+        :param resource_id: The ID of the resource to delete.
+        :return: A Response object representing the result.
+        """
+        url = f"{self._url}/{resource_id}".rstrip("/")
+        logger.debug(f"DELETE {url}")
+        resp = self._session.delete(url)
+        if resp.status_code != 200:
+            logger.error(f"API REQUEST ERROR - {resp.text}")
+            resp.raise_for_status()
         return Response(resp.json(), name=singular(self.namespace), client=self)
 
     def query_object(self, session_id: str, object_id: str) -> Response:
@@ -188,4 +209,18 @@ class Client:
         """
         return Client(
             self._api_key, f"{self._url}/{item}", self._session, self._base_url
+        )
+
+    def with_path(self, resource_path: str) -> "Client":
+        """
+        Get a Client instance with a given resource path.
+
+        :param resource_path: The resource path to append to the base url.
+        :return: The attribute.
+        """
+        return Client(
+            self._api_key,
+            f"{self._base_url}/{resource_path.lstrip('/').rstrip('/')}",
+            self._session,
+            self._base_url,
         )
