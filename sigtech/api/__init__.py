@@ -1,3 +1,4 @@
+from sigtech.api import data
 from sigtech.api.client.client import Client
 from sigtech.api.framework.basket_strategy import BasketStrategy
 from sigtech.api.framework.environment import env, init, obj
@@ -14,6 +15,7 @@ __all__ = [
     "env",
     "init",
     "obj",
+    "data",
 ]
 
 __version__ = "0.1.1"
