@@ -1,3 +1,4 @@
+import json
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from sigtech.api.client.utils import SigApiException, camel_to_snake
@@ -33,6 +34,12 @@ class Response:
 
     def __repr__(self):
         return f"{self.api_name}({repr(self.d)})"
+
+    def __str__(self):
+        try:
+            return json.dumps(self.d, indent=2)
+        except TypeError as e:
+            return f"Error: Unable to serialize data ({str(e)})"
 
     def latest_object_response(self):
         """
