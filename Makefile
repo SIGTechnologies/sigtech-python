@@ -7,7 +7,7 @@ fmt:
 
 lint:
 	python -m flake8 . --max-line-length 88 --ignore F401,W503
-	python -m isort . --check-only
+	python -m isort . --profile=black --check-only
 	python -m black . --check
 
 check:
