@@ -39,6 +39,16 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '.lockfiles/tools.txt'
       - run: pip install --no-dependencies -r .lockfiles/tools.txt
+      - run: |
+          python ./scripts/generate_rule_classes.py
+          echo "RULES_CHANGED=$(git status --porcelain sigtech/api/data/transforms sigtech/api/data/rules)" >> $GITHUB_ENV
+      - name: Commit and push rules classes if updated
+        if: env.RULES_CHANGED != ''
+        run: |
+          git pull origin HEAD:master
+          git add sigtech/api/data/transforms sigtech/api/data/rules
+          git commit -m "🤖 Update validation rules via GitHub Actions [skip ci]"
+          git push origin HEAD:master
       - run: make release
       - run: echo "RELEASE_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
         id: release_sha
