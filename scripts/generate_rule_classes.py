@@ -1,3 +1,8 @@
+"""
+Intended to be triggered by CI to update rule classes
+given the response from the `GET /validation/rules` endpoint.
+"""
+
 import logging
 import shutil
 import textwrap
