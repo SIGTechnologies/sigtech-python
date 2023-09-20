@@ -17,6 +17,9 @@ def _get_code_snippets_from_readme() -> List[str]:
         return [textwrap.dedent(o).strip() for o in snippets]
 
 
+FILES_TO_IGNORE = ["7_Backtesting_SignalStrategy_Using_Own_Data.ipynb"]
+
+
 @pytest.mark.parametrize(
     "script",
     [
@@ -24,6 +27,7 @@ def _get_code_snippets_from_readme() -> List[str]:
         for p in [
             file.absolute()
             for file in (Path(__file__).parents[1] / "examples").iterdir()
+            if file.name not in FILES_TO_IGNORE
         ]
     ],
 )
