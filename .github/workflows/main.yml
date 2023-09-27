@@ -176,7 +176,7 @@ jobs:
         with:
           name: tests
           path: tests
-      - run: pytest .
+      - run: pytest --full-trace .
         working-directory: tests
 
   pypi-publish:
