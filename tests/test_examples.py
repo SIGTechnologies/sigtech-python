@@ -1,4 +1,5 @@
 import os
+import platform
 import re
 import subprocess
 import tempfile
@@ -10,6 +11,8 @@ import pytest
 
 SIGTECH_API_KEY = os.environ["SIGTECH_API_KEY"]
 SIGTECH_ROOT_DIR = str(Path(__file__).parents[1].absolute())
+if platform.system() == "Windows":
+    SIGTECH_ROOT_DIR = SIGTECH_ROOT_DIR.replace("\\", "\\\\\\\\")
 
 EXAMPLES_DIR = Path(__file__).parents[1] / "examples"
 
