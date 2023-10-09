@@ -4,6 +4,7 @@ import pytest
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.response import Response
+from sigtech.api.version import __version__
 
 
 def test_client_init(monkeypatch):
@@ -58,3 +59,11 @@ def test_query_object(monkeypatch):
     r = c.query_object("sessid", "objid")
     assert isinstance(r, Response)
     assert r.key == "value"
+
+
+def test_client_version_header():
+    c = Client("apikey", "http://test.url")
+    assert (
+        c._session.headers["Sig-Version"]  # pylint: disable=protected-access
+        == __version__
+    )

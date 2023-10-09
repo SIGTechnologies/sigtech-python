@@ -8,6 +8,7 @@ import requests
 
 from sigtech.api.client.response import Response
 from sigtech.api.client.utils import singular, snake_to_camel
+from sigtech.api.version import __version__
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +51,7 @@ class Client:
         self._session.headers.update(
             {
                 "Authorization": f"Bearer {self._api_key}",
+                "Sig-Version": __version__,
             }
         )
 
