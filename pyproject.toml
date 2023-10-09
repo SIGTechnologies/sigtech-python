@@ -74,7 +74,7 @@ testpaths = ["tests"]
 
 [tool.semantic_release]
 branch = "master"
-version_variable = "sigtech/api/__init__.py:__version__"
+version_variable = "sigtech/api/version.py:__version__"
 version_toml = "pyproject.toml:project.version"
 tag_commit = true
 commit_subject = "{version}"
