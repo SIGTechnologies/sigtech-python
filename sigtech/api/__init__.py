@@ -1,5 +1,6 @@
 from sigtech.api import data
 from sigtech.api.client.client import Client
+from sigtech.api.framework import config
 from sigtech.api.framework.basket_strategy import BasketStrategy
 from sigtech.api.framework.environment import env, init, obj
 from sigtech.api.framework.instrument_base import Instrument
@@ -16,4 +17,5 @@ __all__ = [
     "init",
     "obj",
     "data",
+    "config",
 ]

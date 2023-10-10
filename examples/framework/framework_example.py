@@ -11,13 +11,18 @@ logging.basicConfig(level=logging.DEBUG)
 
 os.environ["SIGTECH_API_KEY"] = "<YOUR_API_KEY>"
 
-sig.init()
+env = sig.init()
+
+sig.env()[sig.config.DISABLE_T_COST_NETTING] = False
+env[sig.config.EXCESS_RETURN_ONLY] = False
+env[sig.config.TM_TIMEZONE] = "Europe/London"
 
 vg_future = sig.RollingFutureStrategy(
     contract_code="VG",
     contract_sector="INDEX",
     rolling_rule="front",
     front_offset="-4:-3",
+    total_return=False,
 )
 print(vg_future.name)
 

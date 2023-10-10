@@ -33,6 +33,8 @@ class RollingFutureStrategy(StrategyBase):
                             'rolling_rule' is not set to 'front' or
                             'prev_month'. If None, will default to '5:9'
                             unless 'rici' rule is used.
+    :param total_return: Determines if interest is accrued on cash held within
+                         the strategy.
     """
 
     def __init__(
@@ -44,6 +46,7 @@ class RollingFutureStrategy(StrategyBase):
         front_offset: Optional[str] = None,
         start_date: Optional[Union[str, dtm.date]] = None,
         monthly_roll_days: Optional[str] = None,
+        total_return: Optional[bool] = None,
     ):
         start_date = str(start_date) if isinstance(start_date, dtm.date) else start_date
         super().__init__(
@@ -54,6 +57,7 @@ class RollingFutureStrategy(StrategyBase):
             front_offset=front_offset,
             start_date=start_date,
             monthly_roll_days=monthly_roll_days,
+            total_return=total_return,
         )
 
     def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
