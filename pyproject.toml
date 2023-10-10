@@ -43,8 +43,9 @@ tools = [
     "mypy",
     "pandas-stubs",
     "pytest",
-    "python-semantic-release",
+    "python-semantic-release<=7.34.6",
     "types-requests",
+    "types-jinja2",
 ]
 test = [
     "jupyter",
