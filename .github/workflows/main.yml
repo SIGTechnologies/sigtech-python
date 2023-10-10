@@ -204,7 +204,6 @@ jobs:
       with:
         name: tests
         path: tests
-    - run: |
-        sed -i -- "s/<YOUR_API_KEY>/${SIGTECH_API_KEY}/g" * && \
-        for f in *.py; do python "$f"; done
+    - run: find . -type f -name '*.py' -exec sed -i "s/<YOUR_API_KEY>/${SIGTECH_API_KEY}/g" {} + && \
+           find . -type f -name '*.py' -exec python {}
       working-directory: tests/examples
