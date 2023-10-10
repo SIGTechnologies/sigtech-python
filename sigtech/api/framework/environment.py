@@ -1,8 +1,9 @@
 import logging
-from typing import TYPE_CHECKING, Dict, Optional, Set
+from typing import TYPE_CHECKING, Any, Dict, Optional, Set
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.utils import SigApiException
+from sigtech.api.framework import config
 
 if TYPE_CHECKING:
     # Used at import time only, because of circular dependency
@@ -18,17 +19,54 @@ class Environment:
     Class to hold the environments data
     """
 
-    def __init__(self, client: Client, session_id: str) -> None:
+    def __init__(self, client: Client) -> None:
         """
         Initialize an environment with given client and session id.
 
         :param client: Client object
         :param session_id: String representing session id
         """
-        self.session_id = session_id
+        self._session_id = None
         self.client = client
         self.object_register: Dict[str, "FrameworkApiObject"] = {}
         self.all_objects: Set["FrameworkApiObject"] = set()
+        self.config: Dict[str, Any] = {}
+
+    def __getitem__(self, key: str) -> "FrameworkApiObject":
+        return self.config[key]
+
+    def __setitem__(self, key: str, value: Any):
+        if self._session_id is not None:
+            raise SigApiException("Cannot change environment config after using it.")
+        self.config[key] = value
+
+    @property
+    def session_id(self):
+        if self._session_id is not None:
+            return self._session_id
+        empty = object()
+        settings = {}
+
+        v = self.config.get(config.DISABLE_T_COST_NETTING, empty)
+        if v is not empty:
+            settings["transactionCostNetting"] = _invert(v)
+
+        v = self.config.get(config.IGNORE_T_COSTS, empty)
+        if v is not empty:
+            settings["transactionCosts"] = _invert(v)
+
+        v = self.config.get(config.TM_TIMEZONE, empty)
+        if v is not empty:
+            settings["timezone"] = v
+
+        v = self.config.get(config.EXCESS_RETURN_ONLY, empty)
+        if v is not empty:
+            settings["totalReturn"] = _invert(v)
+
+        session = self.client.sessions.create(settings=settings)
+        self._session_id = session.session_id
+        logger.info(f"Session {session.session_id} created")
+        return self._session_id
 
 
 def env() -> Environment:
@@ -70,11 +108,7 @@ def _initialise_environment(api_client) -> Environment:
     if client.status.get().status != "framework API is alive":
         raise SigApiException("SigTech API can not be reached.")
 
-    # create a new API session
-    session = client.sessions.create()
-    logger.info(f"Session {session.session_id} created")
-
-    return Environment(client, session.session_id)
+    return Environment(client)
 
 
 class obj:
@@ -110,3 +144,9 @@ class obj:
         new_instrument.creation_response.wait_for_object_status()
 
         return new_instrument
+
+
+def _invert(b: Optional[bool]):
+    if b is None:
+        return None
+    return not b
