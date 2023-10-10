@@ -1,5 +1,32 @@
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-10-10)
+
+### Feature
+
+* Sdk client to send Sig-Version header in requests ([`9776845`](https://github.com/SIGTechnologies/sigtech-python/commit/977684524cb063e695e5c41e2cec9693eb7948a8))
+* Add dave support ([`bb814af`](https://github.com/SIGTechnologies/sigtech-python/commit/bb814af451e10597b650b33eb61b3efe82ab2504))
+
+### Fix
+
+* Pin semantic release version ([`f04ffa7`](https://github.com/SIGTechnologies/sigtech-python/commit/f04ffa70ae53349f2b6d00a44ea70c721829d27e))
+* Make isort and black compatible ([`1f8715e`](https://github.com/SIGTechnologies/sigtech-python/commit/1f8715e8c7c61e48eadf05edadecd4580bfafb36))
+* Migrate to new /performance/history endpoint ([`644451c`](https://github.com/SIGTechnologies/sigtech-python/commit/644451c2cb478f59234eed57147d4cdceda46dc9))
+
+### Documentation
+
+* Link fixes ([`1a91c07`](https://github.com/SIGTechnologies/sigtech-python/commit/1a91c07752dac5d1ef0370e97caa06ef3c50efc6))
+* SDK examples 8 and 9 ([`514763c`](https://github.com/SIGTechnologies/sigtech-python/commit/514763c167b1c56d6225524c553d41c50dfd508e))
+* Adding new example 7 ([`5d3dcd2`](https://github.com/SIGTechnologies/sigtech-python/commit/5d3dcd2d2eb0b19b5dab67293f8d3754459c6888))
+* Typo fix ([`42f16f2`](https://github.com/SIGTechnologies/sigtech-python/commit/42f16f21ce4a1a97b480f0d5d024fd09cccdb9d8))
+* Updating examples 2 ([`460b9b9`](https://github.com/SIGTechnologies/sigtech-python/commit/460b9b9ddc128f7ccb18a014eb6a1247b7eeee1b))
+* Update to existing examples ([`8b66c66`](https://github.com/SIGTechnologies/sigtech-python/commit/8b66c661014ddf5bbf3b6e339d7e9770bb86f389))
+* Markdown formatting ([`0796bc9`](https://github.com/SIGTechnologies/sigtech-python/commit/0796bc9098f2320dfe54db5d1ba02d065686c3e6))
+* Url fixes ([`845d15b`](https://github.com/SIGTechnologies/sigtech-python/commit/845d15bb035d979884d8abeba51fd8a2026ddd2b))
+* Readme and examples update ([`c2ee738`](https://github.com/SIGTechnologies/sigtech-python/commit/c2ee7384cba4643d70d07afe3e6b268d29a4d4f8))
+* Improving example pre-req sections ([`b5c4942`](https://github.com/SIGTechnologies/sigtech-python/commit/b5c4942aa9191b1bd12b4019b133075ea8c5353e))
+* Re-wording existing examples and adding 3 new ones ([`9ac89d2`](https://github.com/SIGTechnologies/sigtech-python/commit/9ac89d2131d051817ab12cbd6b645a3efe0569f6))
+
 ## v0.1.1 (2023-07-27)
 
 ### Fix
