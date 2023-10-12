@@ -1,5 +1,16 @@
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-10-12)
+
+### Fix
+
+* Add support for environment flags & total_return for rolling-futures strategy ([`9552ae9`](https://github.com/SIGTechnologies/sigtech-python/commit/9552ae9739611d22857d2a7e69ec2f1dcd28b2a2))
+* Fix sed command to catch python files in new sub dirs ([`4228a36`](https://github.com/SIGTechnologies/sigtech-python/commit/4228a36d21ea42cc4c95ee550c5341f7a76e3670))
+
+### Documentation
+
+* Fix broken colab links ([`446d34e`](https://github.com/SIGTechnologies/sigtech-python/commit/446d34eea337844a6d3ee6768cf19131ffa1d8aa))
+
 ## v0.2.0 (2023-10-10)
 
 ### Feature
