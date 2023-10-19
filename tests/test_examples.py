@@ -24,24 +24,29 @@ def _get_code_snippets_from_readme() -> List[str]:
 
 
 @pytest.mark.parametrize(
-    "script",
+    "path",
     [
         pytest.param(p, id=p.name)
-        for p in [
-            file.absolute()
-            for file in list(EXAMPLES_DIR.rglob("*.py"))
-            + list(EXAMPLES_DIR.rglob("*.ipynb"))
-        ]
+        for p in [file.absolute() for file in sorted(EXAMPLES_DIR.rglob("*.ipynb"))]
     ],
 )
-def test_examples(script: Path):
-    if script.suffix == ".py":
-        cmd = "python {{path}}"
-    elif script.suffix == ".ipynb":
-        cmd = "jupyter nbconvert --execute {{path}} --to notebook"
-    else:
-        raise NotImplementedError(f"Unknown file type {script}")
-    with open(script, "r") as f:
+def test_notebooks(path: Path):
+    cmd = "jupyter nbconvert --execute {{path}} --to notebook"
+    with open(path, "r") as f:
+        body = f.read()
+    _run_script(body, cmd)
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        pytest.param(p, id=p.name)
+        for p in [file.absolute() for file in sorted(EXAMPLES_DIR.rglob("*.py"))]
+    ],
+)
+def test_scripts(path: Path):
+    cmd = "python {{path}}"
+    with open(path, "r") as f:
         body = f.read()
     _run_script(body, cmd)
 

@@ -5,21 +5,17 @@ import sigtech.api as sig
 os.environ["SIGTECH_API_KEY"] = "<YOUR_API_KEY>"
 
 # Setup Client
-
 client = sig.Client()
 
 # List sessions
-
 print(client.sessions.list()[:2])
 
 # Create session
-
 session = client.sessions.create()
 session_id = session.session_id
 print(f"session id : {session_id}")
 
 # New Rolling Future Strategy Object
-
 rfs_object = client.strategies.futures.rolling.create(
     session_id=session_id,
     identifier="ES INDEX",

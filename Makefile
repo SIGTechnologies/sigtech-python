@@ -14,7 +14,7 @@ check:
 	python -m mypy .
 
 test:
-	python -m pytest tests
+	python -m pytest tests -n auto
 
 dist:
 	python -m build
