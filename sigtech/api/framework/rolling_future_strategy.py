@@ -49,6 +49,7 @@ class RollingFutureStrategy(StrategyBase):
         total_return: Optional[bool] = None,
     ):
         start_date = str(start_date) if isinstance(start_date, dtm.date) else start_date
+        contract_code = contract_code.strip()
         super().__init__(
             contract_code=contract_code,
             contract_sector=contract_sector,
