@@ -1,4 +1,4 @@
-![SigTech SDK Banner](https://8647283.fs1.hubspotusercontent-na1.net/hubfs/8647283/Python%20SDK_github_856x268-1.png "SigTech SDK Banner")
+![SigTech SDK Banner](https://sigtech.com/wp-content/uploads/2023/08/Python-SDK_github_856x268-1.png "SigTech SDK Banner")
 
 &nbsp;
 
