@@ -6,6 +6,7 @@ import pandas as pd
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env
 from sigtech.api.framework.framework_api_object import FrameworkApiObject
+from sigtech.api.framework.plot_wrapper import PlotWrapper
 
 
 class StrategyBase(FrameworkApiObject, ABC):
@@ -47,3 +48,7 @@ class StrategyBase(FrameworkApiObject, ABC):
         ts.index = pd.to_datetime(ts.index)
         self._history = ts.sort_index()
         return self._history
+
+    @property
+    def plot(self):
+        return PlotWrapper(self)
