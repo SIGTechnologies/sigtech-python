@@ -68,7 +68,7 @@ build-backend = "setuptools.build_meta"
 version = {attr = "sigtech.api.VERSION"}
 
 [tool.setuptools.packages.find]
-exclude = ["tests", "tests.*", "examples", "examples.*"]
+include = ["sigtech", "sigtech.*"]
 
 [tool.pytest]
 testpaths = ["tests"]
