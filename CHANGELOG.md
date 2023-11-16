@@ -1,5 +1,20 @@
 <!--next-version-placeholder-->
 
+## v0.3.0 (2023-11-16)
+
+### Feature
+
+* SA-274 Add support for portfolio table ([`94a3e4e`](https://github.com/SIGTechnologies/sigtech-python/commit/94a3e4e24f854cc8e8acbcd8cbc6dc617a483521))
+
+### Fix
+
+* Bugfix for rolling futures contract code with trailing space (e.g. `Z `) ([`f9251ea`](https://github.com/SIGTechnologies/sigtech-python/commit/f9251eaf6ce17b73a3a5894874b3c91e1cb1fb7c))
+
+### Documentation
+
+* Replace hubspot img url with cms url [TW-380] ([`9d06327`](https://github.com/SIGTechnologies/sigtech-python/commit/9d0632748ee6c3531bb571d2d37deea5db9f177b))
+* Reorganise examples directory ([`68e69b0`](https://github.com/SIGTechnologies/sigtech-python/commit/68e69b0fd9b2b7f1b5eeb4669dbeb5323a679a99))
+
 ## v0.2.1 (2023-10-12)
 
 ### Fix
