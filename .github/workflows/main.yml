@@ -194,7 +194,7 @@ jobs:
 
   pypi-test:
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/master' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: [ pypi-publish ]
     env:
@@ -205,6 +205,8 @@ jobs:
       with:
         name: tests
         path: tests
-    - run: find . -type f -name '*.py' -exec sed -i "s/<YOUR_API_KEY>/${SIGTECH_API_KEY}/g" {} + && \
-           find . -type f -name '*.py' -exec python {}
-      working-directory: tests/examples
+    - run: |
+        for file in *.py; do
+          python "$file"
+        done
+      working-directory: tests/examples/scripts
