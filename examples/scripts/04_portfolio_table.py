@@ -5,7 +5,7 @@ import sigtech.api as sig
 
 logging.basicConfig(level=logging.DEBUG)
 
-os.environ["SIGTECH_API_KEY"] = "<YOUR_API_KEY>"
+assert "SIGTECH_API_KEY" in os.environ
 
 
 env = sig.init()
