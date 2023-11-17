@@ -2,7 +2,7 @@ import os
 
 import sigtech.api as sig
 
-os.environ["SIGTECH_API_KEY"] = "<YOUR_API_KEY>"
+assert "SIGTECH_API_KEY" in os.environ
 
 # Setup Client
 client = sig.Client()
