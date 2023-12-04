@@ -69,7 +69,7 @@ class PlotWrapper:
         history = page.history
         while "next_page_id" in page.d:
             logger.debug(
-                f"Fetching next history page for "
+                "Fetching next history page for "
                 f"portfolio analytics object: {page.next_page_id}."
             )
             page = env().client.performance.history.get(

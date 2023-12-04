@@ -24,13 +24,13 @@ class BasketStrategy(StrategyBase):
     """
 
     def __init__(
-            self,
-            constituent_names: List[Union[str, FrameworkApiObject]],
-            weights: List[float],
-            currency: Optional[str] = "USD",
-            rebalance_frequency: str = "EOM",
-            start_date: Optional[Union[str, dtm.date]] = None,
-            ticker: Optional[str] = None,
+        self,
+        constituent_names: List[Union[str, FrameworkApiObject]],
+        weights: List[float],
+        currency: Optional[str] = "USD",
+        rebalance_frequency: str = "EOM",
+        start_date: Optional[Union[str, dtm.date]] = None,
+        ticker: Optional[str] = None,
     ):
         constituents: List[FrameworkApiObject] = [
             obj.get(x) if isinstance(x, str) else x for x in constituent_names
