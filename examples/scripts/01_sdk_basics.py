@@ -43,7 +43,13 @@ print(gc_future.history())
 print(si_future.history())
 
 top_basket = sig.BasketStrategy(
-    constituent_names=[basket.name, gc_future.name, si_future.name, "EUR CASH", "GBPUSD CURNCY"],
+    constituent_names=[
+        basket.name,
+        gc_future.name,
+        si_future.name,
+        "EUR CASH",
+        "GBPUSD CURNCY",
+    ],
     weights=[0.5, 0.125, 0.125, 0.125, 0.125],
     rebalance_frequency="EOM",
     currency="USD",
