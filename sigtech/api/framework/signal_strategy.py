@@ -21,6 +21,7 @@ class SignalStrategy(StrategyBase):
                             'EOM', 'YEARLY', '1DOM', and variations of these,
                             (optional) defaults to 'EOM'.
     :param start_date: Start of strategy (optional).
+    :param ticker: Name of strategy (optional).
     """
 
     def __init__(
@@ -29,6 +30,7 @@ class SignalStrategy(StrategyBase):
         currency: Optional[str] = "USD",
         rebalance_frequency: str = "EOM",
         start_date: Optional[Union[str, dtm.date]] = None,
+        ticker: Optional[str] = None,
     ):
         signal_input = signal_input.copy()
         constituents = [obj.get(x) for x in signal_input.columns]
@@ -45,6 +47,7 @@ class SignalStrategy(StrategyBase):
             currency=currency,
             rebalance_frequency=rebalance_frequency,
             start_date=start_date,
+            ticker=ticker,
         )
 
     def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
@@ -52,6 +55,11 @@ class SignalStrategy(StrategyBase):
         Fetch signal strategy from API.
         """
         api_inputs = {k: v for k, v in inputs.items() if v is not None}
+
+        if "ticker" in api_inputs:
+            api_inputs["name"] = api_inputs["ticker"] + " STRATEGY"
+            del api_inputs["ticker"]
+
         return env().client.strategies.signal.create(
             session_id=session_id, **api_inputs
         )
