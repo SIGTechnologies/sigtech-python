@@ -20,15 +20,17 @@ class BasketStrategy(StrategyBase):
         '2W', '1M', '2M', '1W-WED', '1W-FRI', '3M_IMM', 'SOM', 'EOM', 'YEARLY', '1DOM',
         and variations of these. Defaults to 'EOM'.
     :param start_date: Start of strategy. Optional.
+    :param ticker: Name of strategy (optional).
     """
 
     def __init__(
-        self,
-        constituent_names: List[Union[str, FrameworkApiObject]],
-        weights: List[float],
-        currency: Optional[str] = "USD",
-        rebalance_frequency: str = "EOM",
-        start_date: Optional[Union[str, dtm.date]] = None,
+            self,
+            constituent_names: List[Union[str, FrameworkApiObject]],
+            weights: List[float],
+            currency: Optional[str] = "USD",
+            rebalance_frequency: str = "EOM",
+            start_date: Optional[Union[str, dtm.date]] = None,
+            ticker: Optional[str] = None,
     ):
         constituents: List[FrameworkApiObject] = [
             obj.get(x) if isinstance(x, str) else x for x in constituent_names
@@ -43,6 +45,7 @@ class BasketStrategy(StrategyBase):
             currency=currency,
             rebalance_frequency=rebalance_frequency,
             start_date=start_date,
+            ticker=ticker,
         )
 
     def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
@@ -50,6 +53,11 @@ class BasketStrategy(StrategyBase):
         Fetch basket strategy from API.
         """
         api_inputs = {k: v for k, v in inputs.items() if v is not None}
+
+        if "ticker" in api_inputs:
+            api_inputs["name"] = api_inputs["ticker"] + " STRATEGY"
+            del api_inputs["ticker"]
+
         return env().client.strategies.basket.create(
             session_id=session_id, **api_inputs
         )
