@@ -1,5 +1,22 @@
 <!--next-version-placeholder-->
 
+## v0.4.0 (2023-12-18)
+
+### Feature
+
+* Add ETF and single stock support with example script ([`b25fcfa`](https://github.com/SIGTechnologies/sigtech-python/commit/b25fcfaf453ec9f70c699d8b7b5786214f43a1df))
+* Add ticker input for named basket and signal strategies ([`89b3397`](https://github.com/SIGTechnologies/sigtech-python/commit/89b33978278333b4ac14db8e748d94a5b82f24c9))
+
+### Fix
+
+* Fix checks for pypi package release ([`664f692`](https://github.com/SIGTechnologies/sigtech-python/commit/664f6921e817b98b2fda0af6d4dc74d175662d7e))
+* Assert SIGTECH_API_KEY environment variable exists in scripts ([`5e4c83e`](https://github.com/SIGTechnologies/sigtech-python/commit/5e4c83eded44a15d0cf592ec1954947b67f08b2d))
+* Remove scripts from wheel and source-distribution ([`2119b9d`](https://github.com/SIGTechnologies/sigtech-python/commit/2119b9d9e58724cfcba0ce755dd82a7ed32d7031))
+
+### Documentation
+
+* Add FX spot trade example ([`aeb9332`](https://github.com/SIGTechnologies/sigtech-python/commit/aeb9332b5e39e0b6b5de817a01feaa61803b1521))
+
 ## v0.3.0 (2023-11-16)
 
 ### Feature
