@@ -61,6 +61,10 @@ class ReinvestmentStrategy(StrategyBase):
         """
         raise NotImplementedError("The total return history for stocks is restricted.")
 
+    @property
+    def currency(self) -> str:
+        return self._get_reference_data()["currency"]
+
 
 def get_single_stock_strategy(
     ticker: Optional[str] = None,
