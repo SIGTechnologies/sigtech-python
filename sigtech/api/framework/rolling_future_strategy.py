@@ -3,6 +3,7 @@ from typing import Optional, Union
 
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env
+from sigtech.api.framework.instruments.futures import FuturesContractGroup
 from sigtech.api.framework.strategy_base import StrategyBase
 
 
@@ -76,3 +77,23 @@ class RollingFutureStrategy(StrategyBase):
             session_id=session_id,
             **api_inputs,
         )
+
+    @property
+    def currency(self) -> str:
+        return self._get_reference_data()["currency"]
+
+    @property
+    def rolling_rule(self) -> str:
+        return self._get_reference_data()["rollingRule"]
+
+    @property
+    def front_offset(self) -> str:
+        return self._get_reference_data().get("frontOffset")
+
+    @property
+    def monthly_roll_days(self) -> str:
+        return self._get_reference_data().get("monthlyRollDays")
+
+    def group(self):
+        d = self._get_reference_data()["$group"]
+        return FuturesContractGroup(d)

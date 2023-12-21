@@ -1,5 +1,5 @@
 import logging
-from typing import TYPE_CHECKING, Any, Dict, Optional, Set
+from typing import TYPE_CHECKING, Any, Dict, Optional, Set, Union, cast
 
 from sigtech.api.client.client import Client
 from sigtech.api.client.utils import SigApiException
@@ -8,6 +8,12 @@ from sigtech.api.framework import config
 if TYPE_CHECKING:
     # Used at import time only, because of circular dependency
     from sigtech.api.framework.framework_api_object import FrameworkApiObject
+    from sigtech.api.framework.instruments.cash import Cash
+    from sigtech.api.framework.instruments.fixes import FXFix
+    from sigtech.api.framework.instruments.futures import Future
+    from sigtech.api.framework.instruments.indices import Index
+
+    InstrumentType = Union[Cash, FXFix, Future, Index]
 
 logger = logging.getLogger(__name__)
 
@@ -117,7 +123,7 @@ class obj:
     """
 
     @staticmethod
-    def get(name: str) -> "FrameworkApiObject":
+    def get(name: str) -> "InstrumentType":
         """
         Retrieve the object using the framework name from the environment.
 
@@ -125,25 +131,46 @@ class obj:
         :return: The object if it exists, else None.
         """
 
+        # pylint: disable=import-outside-toplevel
+        from sigtech.api.framework.instruments.cash import Cash
+        from sigtech.api.framework.instruments.fixes import FXFix
+        from sigtech.api.framework.instruments.futures import Future
+        from sigtech.api.framework.instruments.indices import Index
+
+        InstrumentType = Union[Cash, FXFix, Future, Index]
+
         # Retrieve the current environment
         current_env = env()
         if name in current_env.object_register:
-            return current_env.object_register[name]
+            return cast(InstrumentType, current_env.object_register[name])
 
         for fa_obj in current_env.all_objects:
             if name == fa_obj.name:
-                return fa_obj
+                return cast(InstrumentType, fa_obj)
 
             if name == fa_obj.api_object_id:
-                return fa_obj
+                return cast(InstrumentType, fa_obj)
 
-        # pylint: disable=import-outside-toplevel
-        from sigtech.api.framework.instrument_base import Instrument
+        instrument_response = current_env.client.instruments.create(
+            session_id=current_env.session_id,
+            identifier=name,
+        )
+        instrument_type = instrument_response.type
 
-        new_instrument = Instrument(identifier=name)
+        try:
+            instrument_cls = {
+                "Future": Future,
+                "FX": FXFix,
+                "Cash": Cash,
+                "Index": Index,
+            }[instrument_type]
+        except KeyError:
+            raise NotImplementedError(f"Unmapped class for type: {instrument_type}")
+
+        new_instrument = instrument_cls(instrument_response)
         new_instrument.creation_response.wait_for_object_status()
 
-        return new_instrument
+        return cast(InstrumentType, new_instrument)
 
 
 def _invert(b: Optional[bool]):

@@ -1,3 +1,4 @@
+import datetime as dtm
 import re
 
 
@@ -39,3 +40,17 @@ def snake_to_camel(name: str) -> str:
     words = [word.title() for word in name.split("_")]
     words[0] = words[0].lower()
     return "".join(words)
+
+
+def date_from_iso_format(s: str) -> dtm.date:
+    # Parse dates in ISO-8601 form. e.g. "2000-01-01"
+    # python3.6 and below do not have date.fromisoformat()
+    if not isinstance(s, str):
+        raise TypeError("argument must be str")
+    if not (len(s) == 10 and s[4] == "-" and s[7] == "-"):
+        raise ValueError(f"Invalid isoformat string: {repr(s)}")
+    try:
+        year, month, day = int(s[0:4]), int(s[5:7]), int(s[8:10])
+    except ValueError:
+        raise ValueError(f"Invalid isoformat string: {repr(s)}")
+    return dtm.date(year, month, day)

@@ -22,6 +22,7 @@ class FrameworkApiObject:
         self.creation_response: Response = creation_response
         self._status: Optional[str] = None
         self._name: Optional[str] = None
+        self._reference_data: Optional[dict] = None
         env().all_objects.add(self)
 
     @property
@@ -78,3 +79,22 @@ class FrameworkApiObject:
             raise SigApiException(f"Error while getting the name: {str(e)}")
 
         return self._name
+
+    def _get_reference_data(self):
+        """
+        Fetch reference data from API.
+        """
+        if self._reference_data is not None:
+            return self._reference_data
+        self.creation_response.wait_for_object_status()
+        reference_data = (
+            env()
+            .client.data.reference.get(
+                session_id=env().session_id,
+                object_id=self.api_object_id,
+            )
+            .reference
+        )
+        assert isinstance(reference_data, dict)
+        self._reference_data = reference_data
+        return self._reference_data
