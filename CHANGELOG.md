@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.4.1 (2024-01-02)
+
+### Fix
+
+* Add support for reference data on API objects ([`704785f`](https://github.com/SIGTechnologies/sigtech-python/commit/704785f64b7a7aa10d55ef1b7a5ae4e89dd929ef))
+
 ## v0.4.0 (2023-12-18)
 
 ### Feature
