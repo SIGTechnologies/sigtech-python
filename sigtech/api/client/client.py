@@ -52,6 +52,7 @@ class Client:
             {
                 "Authorization": f"Bearer {self._api_key}",
                 "Sig-Version": __version__,
+                "User-Agent": f"SDK-Python/{__version__}",
             }
         )
 
