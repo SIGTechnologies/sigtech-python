@@ -4,6 +4,7 @@ from sigtech.api.framework import config
 from sigtech.api.framework.basket_strategy import BasketStrategy
 from sigtech.api.framework.environment import env, init, obj
 from sigtech.api.framework.indices.tradable_index import TradableTSIndex
+from sigtech.api.framework.instruments.ois_swap import OISSwap
 from sigtech.api.framework.reinvestment_strategy import (
     ReinvestmentStrategy,
     get_single_stock_strategy,
@@ -18,6 +19,7 @@ __all__ = [
     "ReinvestmentStrategy",
     "RollingFutureStrategy",
     "TradableTSIndex",
+    "OISSwap",
     "env",
     "get_single_stock_strategy",
     "init",

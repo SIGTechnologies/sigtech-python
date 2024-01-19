@@ -210,6 +210,7 @@ class Client:
         :param item: The name of the attribute.
         :return: The attribute.
         """
+        item = item.replace("_", "-")
         return Client(
             self._api_key, f"{self._url}/{item}", self._session, self._base_url
         )
