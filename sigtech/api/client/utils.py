@@ -1,5 +1,9 @@
 import datetime as dtm
+import math
 import re
+
+import numpy as np
+import pandas as pd
 
 
 class SigApiException(Exception):
@@ -54,3 +58,14 @@ def date_from_iso_format(s: str) -> dtm.date:
     except ValueError:
         raise ValueError(f"Invalid isoformat string: {repr(s)}")
     return dtm.date(year, month, day)
+
+
+def series_to_dict(s: pd.Series) -> dict:
+    timestamps = np.datetime_as_string(
+        s.index.values,
+        unit="auto",
+    )
+    return {
+        "$timestamp": timestamps.tolist(),
+        "$history": [o if math.isfinite(o) else None for o in s.values.tolist()],
+    }
