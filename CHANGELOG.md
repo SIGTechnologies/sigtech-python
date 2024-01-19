@@ -1,5 +1,17 @@
 <!--next-version-placeholder-->
 
+## v0.4.2 (2024-01-19)
+
+### Fix
+
+* SA-224 Add SDK support for OISSwap ([`f9b64df`](https://github.com/SIGTechnologies/sigtech-python/commit/f9b64df4e876d4fa6ca4b0d101aa890aeefe74b1))
+* SA-353 Add SDK support for TradableTSIndex ([`ecf0273`](https://github.com/SIGTechnologies/sigtech-python/commit/ecf027393ee9c9a742107707867e333b6f3df178))
+* Add SDK-Python/<version> to the User-Agent header ([`89d5a6a`](https://github.com/SIGTechnologies/sigtech-python/commit/89d5a6a74f1394d88f91b5a463114e15d84eb47f))
+
+### Documentation
+
+* Update License ([`1c02b5d`](https://github.com/SIGTechnologies/sigtech-python/commit/1c02b5d12e2ccb54ceab5aa472c5820501bee2eb))
+
 ## v0.4.1 (2024-01-02)
 
 ### Fix
