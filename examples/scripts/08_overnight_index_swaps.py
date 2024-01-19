@@ -21,8 +21,8 @@ print(swap_fair.data_df())
 print(swap_fair.history())
 
 # Create USD 1-Year Overnight-Index Swap (OIS) with fixed rate:
-# - trade date on 5-July-2021 (when swap is agreed)
-# - start date on 10-July-2021 (when interest payments begin)
+# - trade date on 2021-07-05 (when swap is agreed)
+# - start date on 2021-10-05 (when interest payments begin)
 # - paying SOFR and receiving 1.32%
 swap = sig.OISSwap(
     currency="USD",
