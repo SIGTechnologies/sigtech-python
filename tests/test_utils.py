@@ -1,10 +1,12 @@
 import datetime as dtm
 
+import pandas as pd
 import pytest
 
 from sigtech.api.client.utils import (
     camel_to_snake,
     date_from_iso_format,
+    series_to_dict,
     singular,
     snake_to_camel,
 )
@@ -68,3 +70,22 @@ def test_date_from_iso_format_invalid():
     with pytest.raises(ValueError) as e:
         assert date_from_iso_format("YYYY-MM-DD")
     assert e.value.args == ("Invalid isoformat string: 'YYYY-MM-DD'",)
+
+
+def test_series_to_dict():
+    s = pd.Series(
+        data=[1.0, None, float("nan"), float("Inf"), float("+Inf"), float("-0.0")],
+        index=pd.date_range("2000-01-01", periods=6),
+    )
+    assert s.dtype.name == "float64"
+    assert series_to_dict(s) == {
+        "$timestamp": [
+            "2000-01-01",
+            "2000-01-02",
+            "2000-01-03",
+            "2000-01-04",
+            "2000-01-05",
+            "2000-01-06",
+        ],
+        "$history": [1.0, None, None, None, None, -0.0],
+    }
