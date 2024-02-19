@@ -142,13 +142,22 @@ jobs:
             python: '3.11'
             pip: 'pandas==2.0.3'
             timeout: 12
+          - os: 'ubuntu-22.04'
+            python: '3.12'
+            pip: 'pandas==2.2.0'
+            timeout: 12
+          # latest os/pandas
+          - os: 'ubuntu-latest'
+            python: '3.12'
+            pip: 'pandas'
+            timeout: 12
           - os: 'windows-latest'
-            python: '3.11'
-            pip: 'pandas==2.0.3'
+            python: '3.12'
+            pip: 'pandas'
             timeout: 12
           - os: 'macos-latest'
-            python: '3.11'
-            pip: 'pandas==2.0.3'
+            python: '3.12'
+            pip: 'pandas'
             timeout: 12
     runs-on: ${{ matrix.os }}
     timeout-minutes: ${{ matrix.timeout }}
