@@ -25,7 +25,7 @@ jobs:
         with:
           app_id: ${{ secrets.SIGTECH_PYTHON_APP_ID }}
           private_key: ${{ secrets.SIGTECH_PYTHON_PRIVATE_KEY }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ steps.generate_token.outputs.token }}
@@ -33,7 +33,7 @@ jobs:
         run: |
           ! git log origin/master..HEAD  --pretty=format:%s | \
             grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           cache: 'pip'
@@ -51,7 +51,7 @@ jobs:
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [release]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
         run: |
           ! git log origin/master..HEAD  --pretty=format:%s | \
             grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           cache: 'pip'
@@ -68,7 +68,7 @@ jobs:
       - run: pip install --no-dependencies -r .lockfiles/tools.txt
       - run: make lint
       - run: make check
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: tests
           path: |
@@ -77,7 +77,7 @@ jobs:
             README.md
       - run: rm -rf examples scripts tests
       - run: make build
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: |
@@ -153,17 +153,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: ${{ matrix.timeout }}
     steps:
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
             python-version: '${{ matrix.python }}'
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
       - run: 'pip install ${{ matrix.pip }}'
       - working-directory: dist
         run: "pip install ${{needs.build.outputs.wheel_filename}}[test]"
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: tests
           path: tests
@@ -181,7 +181,7 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dist
         path: dist
@@ -201,7 +201,7 @@ jobs:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
     steps:
     - run: pip install sigtech
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: tests
         path: tests
