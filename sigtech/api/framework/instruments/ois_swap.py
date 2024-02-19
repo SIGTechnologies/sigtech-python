@@ -63,12 +63,16 @@ class OISSwap(Instrument):
             session_id=env().session_id,
             currency=self._currency,
             tenor=self._tenor,
-            trade_date=self._trade_date.isoformat()
-            if isinstance(self._trade_date, dtm.date)
-            else self._trade_date,
-            start_date=self._start_date.isoformat()
-            if isinstance(self._start_date, dtm.date)
-            else self._start_date,
+            trade_date=(
+                self._trade_date.isoformat()
+                if isinstance(self._trade_date, dtm.date)
+                else self._trade_date
+            ),
+            start_date=(
+                self._start_date.isoformat()
+                if isinstance(self._start_date, dtm.date)
+                else self._start_date
+            ),
             fixed_rate=self._fixed_rate,
         )
         super().__init__(api_response)

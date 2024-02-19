@@ -3,7 +3,7 @@
 fmt:
 	python -m autoflake --in-place --remove-all-unused-imports --remove-unused-variables --recursive .
 	python -m isort . --profile=black
-	python -m black . --experimental-string-processing
+	python -m black .
 
 lint:
 	python -m flake8 . --max-line-length 88 --ignore F401,W503
