@@ -1,4 +1,3 @@
-from sigtech.api import data
 from sigtech.api.client.client import Client
 from sigtech.api.framework import config
 from sigtech.api.framework.basket_strategy import BasketStrategy
@@ -24,6 +23,5 @@ __all__ = [
     "get_single_stock_strategy",
     "init",
     "obj",
-    "data",
     "config",
 ]
