@@ -16,6 +16,7 @@ from sigtech.api.framework.strategies.rolling_future_strategy import (
 from sigtech.api.framework.strategies.rolling_fx_forward_strategy import (
     RollingFXForwardStrategy,
 )
+from sigtech.api.framework.strategies.rolling_swap_strategy import RollingSwapStrategy
 from sigtech.api.framework.strategies.signal_strategy import SignalStrategy
 
 __all__ = [
@@ -25,6 +26,7 @@ __all__ = [
     "ReinvestmentStrategy",
     "RollingFutureStrategy",
     "RollingFXForwardStrategy",
+    "RollingSwapStrategy",
     "TradableTSIndex",
     "OISSwap",
     "InterestRateSwap",
