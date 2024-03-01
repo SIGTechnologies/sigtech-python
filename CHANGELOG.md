@@ -1,5 +1,29 @@
 <!--next-version-placeholder-->
 
+## v0.5.0 (2024-03-01)
+
+### Feature
+
+* Remove data validation support from SDK ([`00b7b8e`](https://github.com/SIGTechnologies/sigtech-python/commit/00b7b8ed10ae0a5ec5a626082b377a31ff803190))
+
+### Fix
+
+* Fix broken link in README.md ([`472209e`](https://github.com/SIGTechnologies/sigtech-python/commit/472209e867be2fbcec2aa20865a14015451af363))
+* Add support for Rolling Swap strategy ([`fd732f9`](https://github.com/SIGTechnologies/sigtech-python/commit/fd732f96ed86bd3cd75d54480d4e2716b1865ea6))
+* Remove scikit-learn explicit dependency for train_test_split ([`e5faee2`](https://github.com/SIGTechnologies/sigtech-python/commit/e5faee2cdee5392fd95c0ac2f7cff34ec949bbe4))
+* Add support for FX Forwards ([`2f93026`](https://github.com/SIGTechnologies/sigtech-python/commit/2f930260e4c3cd7ac47235bebae5d96bdfa4bea8))
+* Add support for Interest-Rate Swaps ([`f899cbd`](https://github.com/SIGTechnologies/sigtech-python/commit/f899cbdcac8fd3a14889fad7fcb98ac6746f7aea))
+* Use new comma syntax change for front_offset & monthly_roll_days ([`e1b3786`](https://github.com/SIGTechnologies/sigtech-python/commit/e1b37862904efe52f4e9f710fbda6dec0b4da80b))
+* Remove empyrical dependency ([`9f7fda7`](https://github.com/SIGTechnologies/sigtech-python/commit/9f7fda766a90583b877d76c15dcc4753e7f73ab2))
+* Remove ta import ([`f7c2686`](https://github.com/SIGTechnologies/sigtech-python/commit/f7c268645ea280d8604a4c01bd8af44a1de36578))
+* Bump tools lockfile ([`ab59d19`](https://github.com/SIGTechnologies/sigtech-python/commit/ab59d19cab0eba6f32dce4d9b8ae48bb87647289))
+* Bump tests to use python3.12 ([`8152698`](https://github.com/SIGTechnologies/sigtech-python/commit/81526986a61e610cbc4dd8eef683dd3030bbe77c))
+* Bump versions of standard github actions ([`afcf155`](https://github.com/SIGTechnologies/sigtech-python/commit/afcf1559a8944653048cb35fb6faedec83b815d0))
+
+### Documentation
+
+* Fix typo in OIS example ([`e911659`](https://github.com/SIGTechnologies/sigtech-python/commit/e911659f38d83ddbead9a4e38430977fa3e1b93e))
+
 ## v0.4.2 (2024-01-19)
 
 ### Fix
