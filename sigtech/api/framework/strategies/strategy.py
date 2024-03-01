@@ -9,7 +9,7 @@ from sigtech.api.framework.framework_api_object import FrameworkApiObject
 from sigtech.api.framework.plot_wrapper import PlotWrapper
 
 
-class StrategyBase(FrameworkApiObject, ABC):
+class Strategy(FrameworkApiObject, ABC):
     """
     StrategyBase class.
 

@@ -4,10 +4,10 @@ from typing import Optional, Union
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env
 from sigtech.api.framework.instruments.futures import FuturesContractGroup
-from sigtech.api.framework.strategy_base import StrategyBase
+from sigtech.api.framework.strategies.strategy import Strategy
 
 
-class RollingFutureStrategy(StrategyBase):
+class RollingFutureStrategy(Strategy):
     """
     RollingFutureStrategy class implements rolling future strategies,
     potentially rolled over multiple days.

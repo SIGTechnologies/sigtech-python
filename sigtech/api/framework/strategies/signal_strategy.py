@@ -5,10 +5,10 @@ import pandas as pd
 
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env, obj
-from sigtech.api.framework.strategy_base import StrategyBase
+from sigtech.api.framework.strategies.strategy import Strategy
 
 
-class SignalStrategy(StrategyBase):
+class SignalStrategy(Strategy):
     """
     SignalStrategy class implements a basket of instruments that change through time
     based on a signal.
