@@ -92,7 +92,7 @@ print(es_future.history())
 
 ## Next steps
 
-1. Learn more about the [Rolling futures strategy](https://learn.sigtech.com/reference/api_post_strategy_rolling_futures_strategies_futures_rolling_post-1) endpoint in our API reference guide.
+1. Learn more about the API with the [reference guide](https://learn.sigtech.com/reference). 
 1. Follow some of our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) to see how you can replicate and backtest more complex, real-world trading strategies.
 
 ## Google Colab
