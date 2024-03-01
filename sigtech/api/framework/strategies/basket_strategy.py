@@ -4,10 +4,10 @@ from typing import List, Optional, Union
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env, obj
 from sigtech.api.framework.framework_api_object import FrameworkApiObject
-from sigtech.api.framework.strategy_base import StrategyBase
+from sigtech.api.framework.strategies.strategy import Strategy
 
 
-class BasketStrategy(StrategyBase):
+class BasketStrategy(Strategy):
     """
     BasketStrategy class implements a long-only basket strategy with fixed weights,
     rebalanced as per the rebalance frequency.

@@ -4,10 +4,10 @@ import pandas as pd
 
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env
-from sigtech.api.framework.strategy_base import StrategyBase
+from sigtech.api.framework.strategies.strategy import Strategy
 
 
-class ReinvestmentStrategy(StrategyBase):
+class ReinvestmentStrategy(Strategy):
     """
     ReinvestmentStrategy - Total return class for handling corporate actions for
     underlying stock/ETF.
