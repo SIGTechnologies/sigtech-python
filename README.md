@@ -83,7 +83,7 @@ es_future = sig.RollingFutureStrategy(
     contract_code="ES",
     contract_sector="INDEX",
     rolling_rule="front",
-    front_offset="-6:-4",
+    front_offset="-6,-5",
 )
 
 # Retrieve the strategy history
