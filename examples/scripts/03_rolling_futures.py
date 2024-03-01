@@ -18,10 +18,11 @@ vg_future = sig.RollingFutureStrategy(
     contract_code="VG",
     contract_sector="INDEX",
     rolling_rule="front",
-    front_offset="-4:-3",
+    front_offset="-4,-4",
     total_return=False,
 )
 print(vg_future.history())
+
 
 z_future = sig.RollingFutureStrategy(
     currency="GBP",
@@ -29,7 +30,7 @@ z_future = sig.RollingFutureStrategy(
     contract_sector="INDEX",
     start_date=dtm.date(2023, 1, 1),
     rolling_rule="front",
-    front_offset="-6:-4",
+    front_offset="-6,-5",
     total_return=False,
 )
 print(z_future.history())
@@ -39,7 +40,7 @@ z_future2 = sig.RollingFutureStrategy(
     contract_sector="INDEX",
     start_date=dtm.date(2023, 1, 1),
     rolling_rule="front",
-    front_offset="-6:-4",
+    front_offset="-6,-5",
     total_return=False,
 )
 print(z_future2.history())

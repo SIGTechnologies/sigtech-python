@@ -21,7 +21,7 @@ vg_future = sig.RollingFutureStrategy(
     contract_code="VG",
     contract_sector="INDEX",
     rolling_rule="front",
-    front_offset="-4:-3",
+    front_offset="-4,-4",
     total_return=False,
 )
 print(vg_future.name)

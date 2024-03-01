@@ -19,7 +19,7 @@ print(f"session id : {session_id}")
 rfs_object = client.strategies.futures.rolling.create(
     session_id=session_id,
     identifier="ES INDEX",
-    front_offset="-3:-1",
+    front_offset="-3,-2",
     rolling_rule="front",
 )
 object_id = rfs_object.object_id
