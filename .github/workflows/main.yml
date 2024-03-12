@@ -98,6 +98,7 @@ jobs:
     if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     env:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
+      SIGTECH_PLATFORM_TOKEN: ${{ secrets.SIGTECH_PLATFORM_TOKEN }}
       FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
     strategy:
       matrix:
@@ -208,6 +209,7 @@ jobs:
     needs: [ pypi-publish ]
     env:
       SIGTECH_API_KEY: ${{ secrets.SIGTECH_API_KEY }}
+      SIGTECH_PLATFORM_TOKEN: ${{ secrets.SIGTECH_PLATFORM_TOKEN }}
     steps:
     - run: pip install sigtech
     - uses: actions/download-artifact@v4
