@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.5.1 (2024-03-25)
+
+### Fix
+
+* Datasets & Jobs API wrappers ([`5f58e34`](https://github.com/SIGTechnologies/sigtech-python/commit/5f58e343dc2911305c927857bd63650b5ef39c7d))
+
 ## v0.5.0 (2024-03-01)
 
 ### Feature
