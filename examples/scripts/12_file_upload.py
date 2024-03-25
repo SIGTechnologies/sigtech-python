@@ -1,5 +1,4 @@
 import logging
-import os
 
 from sigtech.api.datasets import DatasetsApi
 
@@ -7,13 +6,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 api = DatasetsApi()
 
-# Path to the file to upload - replace with your own path
-path = os.path.join(
-    "<SIGTECH_ROOT_DIR>", "examples", "scripts", "data", "sample_data.csv"
-)
+# Create a sample data file to upload
+with open("sample_data.csv", "w") as f:
+    f.write("ticker,date,price\nEX1,2018-01-01,100.123\nEX1,2018-01-01,100.123\n")
+
 
 # Upload a file to a dataset - replace with your own dataset_id
-api.datasets.upload(path, "test_dataset_sdk")
+api.datasets.upload("sample_data.csv", "test_dataset_sdk")
 
 
 # Load the dataset in the Jupyter platform via:
