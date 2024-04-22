@@ -1,11 +1,14 @@
-# Security Policy for SigTechnologies repositories
+# Security Policy
 
 ## Reporting Security Vulnerabilities
 
-We take the security of our software seriously and appreciate the support of our users in identifying and responsibly disclosing vulnerabilities. To report a security vulnerability or exploit related one of our repositories, please contact us via email at <support@sigtech.com>.
+We take the security of our software seriously and appreciate the support of our 
+users in identifying and responsibly disclosing vulnerabilities. To report a 
+security vulnerability or exploit related one of our repositories, please 
+contact us via email at [support@sigtech.com](mailto:support@sigtech.com).
 
->Attention!\
->Do not publicly disclose the vulnerability in a Github Issue or on a public forum such as Discord or Twitter.
+>**Attention!**\
+>Do not publicly disclose the vulnerability in a Github Issue or on a public forum such as X/Twitter.
 
 ## Scope
 

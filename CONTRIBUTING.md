@@ -1,4 +1,4 @@
-# Contributing to SigTech Python SDK: A Guide
+# Contributing
 
 Welcome to our SDK! We highly value and encourage user contributions and are striving to make the contribution process as easy, transparent, and efficient as possible. Whether you're reporting a problem, proposing code changes, suggesting new features, or adding a new example strategy, your contributions are greatly appreciated.
 
@@ -10,7 +10,8 @@ We utilize Github as our platform for hosting code, tracking issues and feature 
 
 ### Licensing
 
-Please note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. If you have any concerns regarding licensing, please reach out to us on [Discord](https://discord.gg/XcVJDYV4k7).
+Please note that when you submit code changes, your contributions are automatically assumed to be under the same [MIT license](https://github.com/SIGTechnologies/sigtech-python/blob/master/LICENSE) that covers the project. 
+
 
 ### Code Style and Linting
 
@@ -59,6 +60,7 @@ To submit an example, follow these steps:
 
 ## Proposing a New Feature
 
-If you have ideas for new features, we encourage you to discuss them in our Discord channel. To stay informed about upcoming features and endpoints, please refer to our [Discord](https://discord.gg/ZcFeutSrWM) platform.
+If you have ideas for new features, we encourage you to create a GitHub Issue.
+
 
 We appreciate your contributions and look forward to seeing the positive impact you make on the SigTech Python SDK!
