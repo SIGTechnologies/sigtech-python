@@ -3,16 +3,13 @@
 &nbsp;
 
 <p align="center" id="dummy">
-    <a href="https://discord.gg/ZcFeutSrWM">
-        <img src="https://img.shields.io/badge/CHAT-DISCORD-blue?style=for-the-badge&logo=discord&labelColor=rgb(55,55,55)&color=blueviolet">
+    <a href="https://api.sigtech.com/docs">
+        <img src="https://img.shields.io/badge/Docs-API_REFERENCE-1338be?&style=for-the-badge&logo=wiki&link=https://api.sigtech.com/docs" alt="Docs" />
     </a>
-    <a href="https://learn.sigtech.com/reference/">
-        <img src="https://img.shields.io/badge/Docs-API_REFERENCE-1338be?&style=for-the-badge&logo=wiki&link=https://learn.sigtech.com/reference" alt="Docs" />
+     <a href="https://twitter.com/sigtech_ai/">
+        <img src="https://img.shields.io/badge/follow-%40sigtech_ai-1DA1F2?logo=twitter&style=for-the-badge" />
     </a>
-     <a href="https://twitter.com/sigtechltd/">
-        <img src="https://img.shields.io/badge/follow-%40sigtechltd-1DA1F2?logo=twitter&style=for-the-badge" />
-    </a>
-<p>
+</p>
 
 <div align="center">
 
@@ -42,7 +39,7 @@ The SigTech Python SDK is designed to simplify the usage of the SigTech API for 
 
 - Provides a higher-level object-based interface for convenient interaction with the SigTech API.
 - Simplifies the creation of advanced trading strategies by providing methods which simulate rolling future strategies, basket strategies, and more.
-- Interfaces with SigTech's collection of historical performance data facilitating accurate backtesting. Explore the [SigTech API data catalog](https://sigtechapi.streamlit.app/) to see the library of instruments available.
+- Interfaces with SigTech's historical market data facilitating accurate backtesting. Explore the [SigTech API data catalog](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/data.md) to see the list of instruments available.
 
 ## Installation
 
@@ -54,13 +51,13 @@ pip install sigtech
 
 - Python 3.6+
 
-## Getting started with SigTech Python SDK
+## Getting started
 
 ### Authentication
 
 1. [Sign-up](https://dashboard.sigtech.com/register) for our API.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api-keys).
-1. Secure your API key and save it as a global environment variable by following our instructions [here](https://learn.sigtech.com/docs/auth).
+1. Secure your API key and save it as a global environment variable by following our instructions [here](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/auth.md).
 
 ### Creating your first strategy
 
@@ -92,12 +89,16 @@ print(es_future.history())
 
 ## Next steps
 
-1. Learn more about the API with the [reference guide](https://learn.sigtech.com/reference). 
 1. Follow some of our [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) to see how you can replicate and backtest more complex, real-world trading strategies.
+1. Explore the full range of available instruments in the [API data catalog](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/data.md).
+1. Explore the full range of endpoints in the [API reference](https://api.sigtech.com/docs). 
+
+
+
 
 ## Google Colab
 
-We understand that getting started with backtesting and evaluating trading strategies can be a daunting task, especially for users new to financial data analysis and Python development. To make the process as seamless as possible, we've prepared a collection of real-world [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) in Jupyter Notebook format (.ipynb). All you need to follow along is a SigTech API key.
+We understand that getting started with backtesting and evaluating trading strategies can be a daunting task, especially for users new to financial data analysis and Python development. To make the process as seamless as possible, we've prepared a collection of real-world [examples](https://github.com/SIGTechnologies/sigtech-python/tree/master/examples) in Jupyter Notebook format (`.ipynb`). All you need to follow along is a SigTech API key.
 
 ## Logging
 
@@ -108,13 +109,10 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 ```
 
-For more information, please refer to the `logging` library's [documentation](https://docs.python.org/3/library/logging.html). See [Logging in Python](https://realpython.com/python-logging/) for a useful summary of the `logging` library's capabilities.
+For more information, please refer to the `logging` library's [documentation](https://docs.python.org/3/library/logging.html).
 
-## API Documentation
 
-For detailed information about the SigTech API, please refer to our official [API user guide](https://learn.sigtech.com/docs) and our interactive [API reference guide](https://learn.sigtech.com/reference).
-
-## Contributing to the SigTech Python SDK
+## Contributing
 
 We appreciate and encourage your contributions to the SigTech Python SDK! If you are enjoying the SDK, please show your support by starring this repository and sharing it on social media channels.
 
@@ -122,16 +120,17 @@ To contribute an example, provide feedback, report a bug or otherwise bring an i
 
 Please remember that all contributors are expected to behave appropriately and abide by our [Code of conduct](https://github.com/SIGTechnologies/sigtech-python/blob/master/CODE_OF_CONDUCT.md).
 
-## Reporting security issues
+## Security issues
 
 If you believe you have discovered a security vulnerability in our repository please report it to us immediately following the instructions [here](https://github.com/SIGTechnologies/sigtech-python/blob/master/SECURITY.md).
 
->Attention!\
->Please follow the instructions detailed. **Do not** publicly disclose the vulnerability in a Github Issue or on a public forum such as Discord or Twitter.
+>**Attention!**\
+>Do not publicly disclose the vulnerability in a Github Issue or on a public forum such as X/Twitter.
 
 ## Support
 
-If you encounter any issues or have any questions regarding our API or SDK, you can reach out to us via our [Discord](https://discord.gg/ZcFeutSrWM) or [Twitter](https://twitter.com/sigtechltd/).
+If you encounter any issues or have any questions regarding our API or SDK, 
+you can reach out to us via email at [support@sigtech.com](mailto:support@sigtech.com).
 
 ## License
 
