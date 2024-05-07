@@ -4,6 +4,7 @@ import json
 import logging
 import os
 from collections import defaultdict
+from functools import lru_cache
 
 import pandas as pd
 import requests
@@ -59,6 +60,10 @@ class RunDoesNotExist(Exception):
 
 
 class OutputDoesNotExist(Exception):
+    pass
+
+
+class OutputFormatDoesNotExist(Exception):
     pass
 
 
@@ -229,7 +234,7 @@ class OutputList(ApiObject):
             return self._obj
 
         self._obj = [
-            Output(o, self.session, f"{self.url}/{o['artifact_id']}")
+            Output(o, self.session, f"{self.url}/{o['artifact_name']}")
             for o in super().obj
         ]
         return self._obj
@@ -241,11 +246,7 @@ class OutputList(ApiObject):
         if resp.status_code == 200:
             return Output(resp.json(), self.session, f"{self.url}/{item}")
         assert resp.status_code == 404
-        try:
-            obj = get_list_by_keys(self.obj, ["id", "sha", "name"], item)
-        except KeyError:
-            raise OutputDoesNotExist(item)
-        return obj
+        raise OutputDoesNotExist(item)
 
     def get(self, output_id):
         return self[output_id]
@@ -255,38 +256,18 @@ class Output(ApiObject):
 
     def __init__(self, obj, session, url):
         super().__init__(obj, session, url)
-        self._content = None
-
-    @property
-    def id(self):
-        return self.obj["artifact_id"]
 
     @property
     def name(self):
         return self.obj["artifact_name"]
 
     @property
-    def sha(self):
-        return self.obj["sha"]
-
-    @property
     def created_at(self):
         return epoch_to_datetime(self.obj["ts_epoch"])
-
-    @property
-    def content(self):
-        if self._content is not None:
-            return self._content
-        resp = self.session.get(self.url)
-        resp.raise_for_status()
-        self._content = resp.content
-        return self._content
 
     def dict(self):
         return {
             "name": self.name,
-            "id": self.id,
-            "sha": self.sha,
             "created_at": self.created_at,
         }
 
@@ -294,37 +275,45 @@ class Output(ApiObject):
         items = (f"{k}={repr(v)}" for k, v in self.dict().items())
         return f"{type(self).__name__}({', '.join(items)})"
 
+    def _get_format_url(self, format):
+        assert self.url.endswith(self.name)
+        url = self.url.removesuffix(self.name)
+        return f"{url}_artifacts.{self.name}.{format}"
+
+    @lru_cache()
     def json(self):
-        if self.id.endswith(".gzip+json"):
-            return json.loads(self.content)
-        elif self.id.endswith(".parquet-snappy"):
-            import pyarrow.parquet  # type: ignore
-
-            t = pyarrow.parquet.read_table(
-                io.BytesIO(self.content),
-                use_pandas_metadata=False,
+        url = self._get_format_url("gzip+json")
+        resp = self.session.get(url)
+        if resp.status_code == 404:
+            raise OutputFormatDoesNotExist(
+                f"json format not available for output: {self.name}"
             )
-            return t.to_pydict()
-        raise NotImplementedError("unknown artifact format")
+        resp.raise_for_status()
+        return json.loads(resp.content)
 
+    @lru_cache()
     def df(self):
-        content = self.content
-        if self.id.endswith(".gzip+json"):
-            return pd.DataFrame(json.loads(content))
-        elif self.id.endswith(".parquet-snappy"):
-            try:
-                return pd.read_parquet(io.BytesIO(content))
-            except Exception as e:
-                logger.error(
-                    f"Error during pandas.read_parquet(): {e}. "
-                    f"Using pyarrow.parquet.read_table() instead."
-                )
-            import pyarrow.parquet
-
-            t = pyarrow.parquet.read_table(
-                io.BytesIO(content),
-                use_pandas_metadata=False,
+        url = self._get_format_url("parquet-snappy")
+        resp = self.session.get(url)
+        if resp.status_code == 404:
+            raise OutputFormatDoesNotExist(
+                f"parquet format not available for output: {self.name}"
             )
-            return pd.DataFrame(t.to_pydict())
-        else:
-            raise NotImplementedError("unknown artifact format")
+        resp.raise_for_status()
+        content = resp.content
+        f = io.BytesIO(content)
+
+        f.seek(0)
+        try:
+            return pd.read_parquet(f)
+        except Exception as e:
+            logger.error(
+                f"Error during pandas.read_parquet(): {e}. "
+                f"Using pyarrow.parquet.read_table() instead."
+            )
+
+        import pyarrow.parquet  # type: ignore
+
+        f.seek(0)
+        t = pyarrow.parquet.read_table(f, use_pandas_metadata=False)
+        return pd.DataFrame(t.to_pydict())
