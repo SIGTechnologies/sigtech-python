@@ -55,7 +55,6 @@ pip install sigtech
 
 ### Authentication
 
-1. [Sign-up](https://dashboard.sigtech.com/register) for our API.
 1. Generate an API key using our [dashboard](https://dashboard.sigtech.com/api-keys).
 1. Secure your API key and save it as a global environment variable by following our instructions [here](https://github.com/SIGTechnologies/sigtech-python/blob/master/docs/auth.md).
 
