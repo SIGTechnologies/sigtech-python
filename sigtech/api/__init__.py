@@ -10,6 +10,10 @@ from sigtech.api.framework.strategies.reinvestment_strategy import (
     ReinvestmentStrategy,
     get_single_stock_strategy,
 )
+from sigtech.api.framework.strategies.rolling_bond_strategy import (
+    RollingBondStrategy,
+    SingleBondStrategy,
+)
 from sigtech.api.framework.strategies.rolling_future_strategy import (
     RollingFutureStrategy,
 )
@@ -27,6 +31,8 @@ __all__ = [
     "RollingFutureStrategy",
     "RollingFXForwardStrategy",
     "RollingSwapStrategy",
+    "SingleBondStrategy",
+    "RollingBondStrategy",
     "TradableTSIndex",
     "OISSwap",
     "InterestRateSwap",
