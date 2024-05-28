@@ -1,5 +1,20 @@
 <!--next-version-placeholder-->
 
+## v0.6.0 (2024-05-28)
+
+### Feature
+
+* SA-421 Add SDK support for RollingBondStrategy & SingleBondStrategy ([`94d5260`](https://github.com/SIGTechnologies/sigtech-python/commit/94d52601e7ff1ca469c908b33c1350c2cdfb04fc))
+
+### Fix
+
+* Remove signup reference from readme ([`74f88f8`](https://github.com/SIGTechnologies/sigtech-python/commit/74f88f8f3d4a902efbc3957cd929f91ebba213bb))
+* SA-438 Bugfix for Jobs API output formats ([`1005ab3`](https://github.com/SIGTechnologies/sigtech-python/commit/1005ab3b4e39af4a7ea20de758d58994d09c99c6))
+
+### Documentation
+
+* SA-434 Documentation updates ([`afd4ed7`](https://github.com/SIGTechnologies/sigtech-python/commit/afd4ed7f0b5145d134980be69acbbcd8f2ebec6b))
+
 ## v0.5.1 (2024-03-25)
 
 ### Fix
