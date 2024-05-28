@@ -117,7 +117,9 @@ jobs:
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
-            pip: 'pandas==1.4.1'
+            pip: >-
+              pandas==1.4.1
+              matplotlib==3.7.5
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
