@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.6.1 (2024-05-28)
+
+### Fix
+
+* Pin matplotlib in colab test case ([`94b785e`](https://github.com/SIGTechnologies/sigtech-python/commit/94b785eb42c08a07df79aa0695c2f7c1f9448a1b))
+
 ## v0.6.0 (2024-05-28)
 
 ### Feature
