@@ -133,15 +133,15 @@ jobs:
             python: '3.10'
             # Google Colab
             pip: >-
-              charset-normalizer==2.0.12
+              charset-normalizer==3.3.2
               matplotlib==3.7.1
               matplotlib-inline==0.1.7
-              urllib3==1.26.16
+              urllib3==2.0.7
               six==1.16.0
               python-dateutil==2.8.2
-              requests==2.27.1
-              numpy==1.22.4
-              pandas==1.5.3
+              requests==2.31.0
+              numpy==1.25.2
+              pandas==2.0.3
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.11'
