@@ -12,8 +12,19 @@ if TYPE_CHECKING:
     from sigtech.api.framework.instruments.fixes import FXFix
     from sigtech.api.framework.instruments.futures import Future
     from sigtech.api.framework.instruments.indices import Index
+    from sigtech.api.framework.instruments.option_groups import (
+        EquityIndexOTCOptionsGroup,
+        FXOTCOptionsGroup,
+    )
 
-    InstrumentType = Union[Cash, FXFix, Future, Index]
+    InstrumentType = Union[
+        Cash,
+        FXFix,
+        Future,
+        Index,
+        EquityIndexOTCOptionsGroup,
+        FXOTCOptionsGroup,
+    ]
 
 logger = logging.getLogger(__name__)
 
@@ -132,12 +143,24 @@ class obj:
         """
 
         # pylint: disable=import-outside-toplevel
+        from sigtech.api.framework.fixtures import FIXTURES
         from sigtech.api.framework.instruments.cash import Cash
         from sigtech.api.framework.instruments.fixes import FXFix
         from sigtech.api.framework.instruments.futures import Future
         from sigtech.api.framework.instruments.indices import Index
+        from sigtech.api.framework.instruments.option_groups import (
+            EquityIndexOTCOptionsGroup,
+            FXOTCOptionsGroup,
+        )
 
-        InstrumentType = Union[Cash, FXFix, Future, Index]
+        InstrumentType = Union[
+            Cash,
+            FXFix,
+            Future,
+            Index,
+            EquityIndexOTCOptionsGroup,
+            FXOTCOptionsGroup,
+        ]
 
         # Retrieve the current environment
         current_env = env()
@@ -151,6 +174,12 @@ class obj:
             if name == fa_obj.api_object_id:
                 return cast(InstrumentType, fa_obj)
 
+        try:
+            return cast(InstrumentType, FIXTURES[name])
+        except KeyError:
+            pass
+
+        current_env = env()
         instrument_response = current_env.client.instruments.create(
             session_id=current_env.session_id,
             identifier=name,

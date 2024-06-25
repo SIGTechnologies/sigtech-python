@@ -6,6 +6,7 @@ import pytest
 from sigtech.api.client.utils import (
     camel_to_snake,
     date_from_iso_format,
+    removesuffix,
     series_to_dict,
     singular,
     snake_to_camel,
@@ -70,6 +71,14 @@ def test_date_from_iso_format_invalid():
     with pytest.raises(ValueError) as e:
         assert date_from_iso_format("YYYY-MM-DD")
     assert e.value.args == ("Invalid isoformat string: 'YYYY-MM-DD'",)
+
+
+def test_remove_suffix():
+    assert removesuffix("test_suffix", "_suffix") == "test"
+    assert removesuffix("test_suffix", "z") == "test_suffix"
+    assert removesuffix("test_suffix", "test") == "test_suffix"
+    assert removesuffix("test_suffix", "") == "test_suffix"
+    assert removesuffix("test_suffix", "test_suffix") == ""
 
 
 def test_series_to_dict():

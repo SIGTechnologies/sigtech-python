@@ -37,16 +37,16 @@ print(esh19_group.currency)  # type: ignore[union-attr]
 
 # Index
 spx_index = sig.obj.get("SPX INDEX")  # type: ignore[union-attr]
-print(spx_index.currency)
+print(spx_index.currency)  # type: ignore[union-attr]
 print(spx_index.description)  # type: ignore[union-attr]
 
 # FX
 usdjpy = sig.obj.get("USDJPY CURNCY")  # type: ignore[union-attr]
-print(usdjpy.currency)
+print(usdjpy.currency)  # type: ignore[union-attr]
 
 # Reinvestment strategy (Stock)
 apple_stock = sig.get_single_stock_strategy(exchange_ticker="AAPL")
-print(apple_stock.currency)
+print(apple_stock.currency)  # type: ignore[union-attr]
 
 # Reinvestment strategy (ETF)
 agg_etf = sig.get_single_stock_strategy(ticker="AGG UP EQUITY")
@@ -62,4 +62,4 @@ print(co_future.monthly_roll_days)
 
 # Cash
 chf_cash = sig.obj.get("CHF CASH")
-print(chf_cash.currency)
+print(chf_cash.currency)  # type: ignore[union-attr]

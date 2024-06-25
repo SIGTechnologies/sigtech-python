@@ -60,6 +60,13 @@ def date_from_iso_format(s: str) -> dtm.date:
     return dtm.date(year, month, day)
 
 
+def removesuffix(s: str, suffix: str) -> str:
+    # python3.8 and below do not have str.removesuffix()
+    if len(suffix) > 0 and s.endswith(suffix):
+        return s[: -len(suffix)]
+    return s
+
+
 def series_to_dict(s: pd.Series) -> dict:
     timestamps = np.datetime_as_string(
         s.index.values,
