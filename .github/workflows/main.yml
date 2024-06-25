@@ -106,21 +106,22 @@ jobs:
         include:
           - os: 'ubuntu-20.04'
             python: '3.8'
-            pip: 'pandas==1.4.1'
+            pip: 'pandas==1.4.1 numpy==1.24.4'
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
             pip: >-
               pandas==1.4.1
+              numpy==1.26.4
               matplotlib==3.7.5
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.9'
-            pip: 'pandas==2.0.3'
+            pip: 'pandas==2.0.3 numpy==1.25.0'
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.10'
-            pip: 'pandas==2.0.3'
+            pip: 'pandas==2.0.3 numpy==1.25.0'
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.10'
@@ -138,11 +139,11 @@ jobs:
             timeout: 6
           - os: 'ubuntu-22.04'
             python: '3.11'
-            pip: 'pandas==2.0.3'
+            pip: 'pandas==2.0.3 numpy==1.26.4'
             timeout: 12
           - os: 'ubuntu-24.04'
             python: '3.12'
-            pip: 'pandas==2.2.0'
+            pip: 'pandas==2.2.0 numpy==1.26.4'
             timeout: 12
           # latest os/pandas
           - os: 'ubuntu-latest'
