@@ -1,10 +1,11 @@
 import datetime as dtm
-from typing import Optional, Union
+from typing import Optional, Union, cast
 
 import pandas as pd
 
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env, obj
+from sigtech.api.framework.framework_api_object import FrameworkApiObject
 from sigtech.api.framework.strategies.strategy import Strategy
 
 
@@ -35,8 +36,12 @@ class SignalStrategy(Strategy):
         signal_input = signal_input.copy()
         constituents = [obj.get(x) for x in signal_input.columns]
         for fapi_obj in constituents:
-            fapi_obj.creation_response.wait_for_object_status()
-        signal_input.columns = pd.Index([x.api_object_id for x in constituents])
+            cast(
+                FrameworkApiObject, fapi_obj
+            ).creation_response.wait_for_object_status()
+        signal_input.columns = pd.Index(
+            [cast(FrameworkApiObject, x).api_object_id for x in constituents]
+        )
         assert isinstance(signal_input.index, pd.DatetimeIndex)
         signal_input.index = signal_input.index.strftime("%Y-%m-%dT%H:%M:%S")
         signal_input.index.name = "$timestamp"

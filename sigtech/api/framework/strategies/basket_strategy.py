@@ -1,5 +1,5 @@
 import datetime as dtm
-from typing import List, Optional, Union
+from typing import List, Optional, Union, cast
 
 from sigtech.api.client.response import Response
 from sigtech.api.framework.environment import env, obj
@@ -33,7 +33,8 @@ class BasketStrategy(Strategy):
         ticker: Optional[str] = None,
     ):
         constituents: List[FrameworkApiObject] = [
-            obj.get(x) if isinstance(x, str) else x for x in constituent_names
+            cast(FrameworkApiObject, obj.get(x) if isinstance(x, str) else x)
+            for x in constituent_names
         ]
         for fapi_obj in constituents:
             fapi_obj.creation_response.wait_for_object_status()
