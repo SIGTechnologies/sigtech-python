@@ -1,5 +1,17 @@
 <!--next-version-placeholder-->
 
+## v0.7.0 (2024-07-02)
+
+### Feature
+
+* SA-429 Add options support ([`087b1ac`](https://github.com/SIGTechnologies/sigtech-python/commit/087b1acb795dd70c931a3850c5c682ab724d9dcf))
+* Remove tests for end-of-life python3.6 & python3.7 ([`db2d809`](https://github.com/SIGTechnologies/sigtech-python/commit/db2d8093d63a508b608575a266d994316ed827e4))
+
+### Fix
+
+* Install libomp on macos ([`1da1c15`](https://github.com/SIGTechnologies/sigtech-python/commit/1da1c1577441ba2698e4f5fe4430d494361d5c9e))
+* Pin numpy in older tests ([`d43b1d8`](https://github.com/SIGTechnologies/sigtech-python/commit/d43b1d85a3843b2d23b80e646c6c1d9792cd1bcc))
+
 ## v0.6.1 (2024-05-28)
 
 ### Fix
