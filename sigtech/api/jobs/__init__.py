@@ -174,7 +174,7 @@ class RunList(ApiObject):
         url = f"{self.url}/{item}"
         resp = self.session.get(url)
         if resp.status_code == 200:
-            return Job(resp.json(), self.session, f"{self.url}/{item}")
+            return Run(resp.json(), self.session, f"{self.url}/{item}")
         assert resp.status_code == 404
         raise RunDoesNotExist(item)
 
