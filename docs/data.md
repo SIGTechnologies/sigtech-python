@@ -360,9 +360,9 @@ bonds, swaps, forwards, and options.
 | LN COMDTY      | Nickel                       | LME          | USD          |
 | LT COMDTY      | Tin                          | LME          | USD          |
 | LX COMDTY      | Zinc                         | LME          | USD          |
-| QC COMDTY      | Cocoa                        | ICE-EU       | GBP          |
 | QW COMDTY      | White Sugar #5               | ICE-EU       | USD          |
 | DF COMDTY      | Robusta Coffee               | ICE-EU       | USD          |
+| CC COMDTY      | Cocoa                        | ICE-US       | USD          |
 | KC COMDTY      | Coffee                       | ICE-US       | USD          |
 | CT COMDTY      | Cotton #2                    | ICE-US       | USD          |
 | JO COMDTY      | Orange Juice                 | ICE-US       | USD          |
