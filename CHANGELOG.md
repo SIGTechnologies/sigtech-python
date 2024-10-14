@@ -1,5 +1,19 @@
 <!--next-version-placeholder-->
 
+## v0.8.0 (2024-10-14)
+
+### Feature
+
+* SA-467 Add SDK support for `RollingFutureFXHedgedStrategy` ([#66](https://github.com/SIGTechnologies/sigtech-python/issues/66)) ([`dfb59c0`](https://github.com/SIGTechnologies/sigtech-python/commit/dfb59c0bf33c2f01fcafc76cd0ff5e33b7952a1b))
+
+### Fix
+
+* Bug fix for getting a specific run in the jobs API ([`8ad64ab`](https://github.com/SIGTechnologies/sigtech-python/commit/8ad64ab30cb5ca156cf9995e010c0063c19226a0))
+
+### Documentation
+
+* Change guidance to use  cocoa ICE-US contract ([`1d17e32`](https://github.com/SIGTechnologies/sigtech-python/commit/1d17e326b12c4ba68b1120ca75927fbe5778d171))
+
 ## v0.7.0 (2024-07-02)
 
 ### Feature
