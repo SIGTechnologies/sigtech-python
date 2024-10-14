@@ -31,6 +31,7 @@ from sigtech.api.framework.strategies.rolling_fx_forward_strategy import (
 )
 from sigtech.api.framework.strategies.rolling_swap_strategy import RollingSwapStrategy
 from sigtech.api.framework.strategies.signal_strategy import SignalStrategy
+from sigtech.api.framework.strategies.rolling_future_fx_hedged import RollingFutureFXHedgedStrategy
 
 __all__ = [
     "Client",
@@ -38,6 +39,7 @@ __all__ = [
     "BasketStrategy",
     "ReinvestmentStrategy",
     "RollingFutureStrategy",
+    "RollingFutureFXHedgedStrategy",
     "RollingFXForwardStrategy",
     "RollingSwapStrategy",
     "SingleBondStrategy",
