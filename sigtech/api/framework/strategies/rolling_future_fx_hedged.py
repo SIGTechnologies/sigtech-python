@@ -1,8 +1,11 @@
 import datetime as dtm
 from typing import Optional, Union
 
-from sigtech.api import RollingFutureStrategy, env
 from sigtech.api.client.response import Response
+from sigtech.api.framework.environment import env
+from sigtech.api.framework.strategies.rolling_future_strategy import (
+    RollingFutureStrategy,
+)
 
 
 class RollingFutureFXHedgedStrategy(RollingFutureStrategy):
