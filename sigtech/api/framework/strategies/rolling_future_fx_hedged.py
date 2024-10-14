@@ -56,7 +56,7 @@ class RollingFutureFXHedgedStrategy(RollingFutureStrategy):
 
     def _get_strategy_obj(self, session_id: str, **inputs) -> Response:
         """
-        Fetch rolling future strategy from API.
+        Fetch rolling future fx hedged strategy from API.
         """
         api_inputs = {k: v for k, v in inputs.items() if v is not None}
         api_inputs["identifier"] = (
