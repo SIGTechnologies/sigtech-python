@@ -1,5 +1,4 @@
 import datetime as dtm
-import logging
 from typing import Optional, Union
 
 from sigtech.api import RollingFutureStrategy, env
@@ -8,17 +7,22 @@ from sigtech.api.client.response import Response
 
 class RollingFutureFXHedgedStrategy(RollingFutureStrategy):
     """
-    An FX-aware version of ``RollingFutureStrategy``, maintaining proper foreign cash end exposure positions
-    through maintaining thresholds and rebalancing accordingly.
+    An FX-aware version of ``RollingFutureStrategy``, maintaining proper foreign cash
+    end exposure positions through maintaining thresholds and rebalancing accordingly.
 
-    In addition to the settings used for class ``RollingFutureStrategy``, ``exposure_rebalance_threshold`` and
-    ``cash_rebalance_threshold`` are used to control the FX hedging agenda.
+    In addition to the settings used for class ``RollingFutureStrategy``,
+    ``exposure_rebalance_threshold`` and ``cash_rebalance_threshold`` are used to
+    control the FX hedging agenda.
 
-    :param cash_rebalance_threshold: once the FX cash exposure breaches the threshold, the strategy will convert
-                                    the FX cash to the base currency.
-    :param exposure_rebalance_threshold: once the underlying future's FX exposure breaches the threshold, the strategy
-                                    will buy/sell certain amount of underlying future to control the exposure.
+    :param cash_rebalance_threshold: once the FX cash exposure breaches the threshold,
+                                    the strategy will convert the FX cash to the base
+                                    currency.
+    :param exposure_rebalance_threshold: once the underlying future's FX exposure
+                                    breaches the threshold, the strategy will buy/sell
+                                    certain amount of underlying future to control the
+                                    exposure.
     """
+
     def __init__(
         self,
         contract_code: str,

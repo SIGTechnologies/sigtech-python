@@ -11,14 +11,14 @@ assert "SIGTECH_API_KEY" in os.environ
 env = sig.init()
 
 vg_future_hedged = sig.RollingFutureFXHedgedStrategy(
-    currency='USD',
+    currency="USD",
     start_date=dtm.date(2018, 1, 4),
-    contract_code='VG',
-    contract_sector='INDEX',
-    rolling_rule='front',
-    front_offset='-3,-2',
+    contract_code="VG",
+    contract_sector="INDEX",
+    rolling_rule="front",
+    front_offset="-3,-2",
     cash_rebalance_threshold=0.02,
-    exposure_rebalance_threshold=0.02
+    exposure_rebalance_threshold=0.02,
 )
 
 print(vg_future_hedged.history())
