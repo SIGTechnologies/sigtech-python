@@ -4,6 +4,7 @@ import datetime as dtm
 import logging
 import math
 import os
+import re
 import time
 from typing import IO, List
 
@@ -188,6 +189,7 @@ def upload_part(
             "convert_options": {"column_types": {o["name"]: o["type"] for o in schema}},
         },
     )
+    resp.reason = resp.text
     resp.raise_for_status()
     assert resp.status_code in (200, 201)  # 200 if already exists (still overwritten)
     logger.info(f"Done upload of part #={part_index} sizeBytes={len(part)}")
@@ -204,6 +206,9 @@ def get_schema(path, encoding):
     except UnicodeDecodeError:
         logger.error("cannot decode the file. Might need to specify an encoding.")
         raise
+    # fix for blank column names
+    # https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.read_csv.html
+    columns = [re.sub(r"Unnamed: \d+", "", o) for o in columns]
     return [{"name": o, "type": "string"} for o in columns]
 
 
