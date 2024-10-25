@@ -211,6 +211,7 @@ def get_schema(path, encoding):
     columns = [re.sub(r"Unnamed: \d+", "", o) for o in columns]
     return [{"name": o, "type": "string"} for o in columns]
 
+
 def check_schema(schema_old, schema_new):
     s_old = {o["name"]: o["type"] for o in schema_old}
     s_new = {o["name"]: o["type"] for o in schema_new}
