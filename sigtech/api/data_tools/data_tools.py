@@ -52,7 +52,6 @@ class DataTools:
     _extraction_url = f'{_sd_url}/extraction/v2/deployments'
     _token = os.getenv('SIGTECH_PLATFORM_TOKEN')
     _headers = {'Authorization': f'Bearer {_token}'}
-
     _session = requests.Session()
 
     # Configure retry logic
