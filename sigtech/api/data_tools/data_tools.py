@@ -395,13 +395,13 @@ class DataTools:
         """
         exec_url = f'/{execution_id}/outputs' if execution_id is not None \
             else '/latest/outputs'
-        url = (f'{cls._extraction_url}/{deployment_id}/executions' + exec_url +
-               f'/{output_name}')
+        url = (f'{cls._extraction_url}/{deployment_id}/executions' + exec_url
+               + f'/{output_name}')
         data = cls._send('GET', url)
         try:
             df = pd.DataFrame(data)
-            if (df.index.dtype == 'object' and
-                    not isinstance(df.index, pd.MultiIndex)):
+            if (df.index.dtype == 'object'
+                    and not isinstance(df.index, pd.MultiIndex)):
                 df.index = pd.to_datetime(df.index, format="%Y-%m-%dT%H:%M:%S.%fZ",
                                           errors='ignore', utc=True)
             for col in df.columns:
