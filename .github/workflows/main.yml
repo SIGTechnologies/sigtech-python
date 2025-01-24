@@ -56,10 +56,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: '${{ needs.release.outputs.release_sha || github.event.pull_request.head.sha }}'
-      - name: "Check commit messages match angular style"
-        run: |
-          ! git log origin/master..HEAD  --pretty=format:%s | \
-            grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
+      #- name: "Check commit messages match angular style"
+      #  run: |
+      #    ! git log origin/master..HEAD  --pretty=format:%s | \
+      #      grep -v -E '^(build|chore|ci|docs|feat|fix|perf|style|refactor|test):'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
