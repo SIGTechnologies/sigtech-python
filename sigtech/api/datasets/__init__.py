@@ -1,5 +1,5 @@
-import fnmatch
 import os
+import fnmatch
 
 import pandas as pd
 import requests
@@ -10,6 +10,7 @@ from sigtech.api.datasets.delete import (
     delete_dataset_files,
 )
 from sigtech.api.datasets.upload import upload
+from sigtech.api.datasets.data_tools import DataTools
 
 
 def get_session():
@@ -221,3 +222,6 @@ class File(ApiObject):
 
     def delete(self, dry_run=False):
         delete_dataset_file(self.dataset_id, self.id, dry_run=dry_run)
+
+
+__all__ = ["DataTools"]
